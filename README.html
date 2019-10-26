@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="page-" class="article article-type-page" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="L¼"><a href="#L¼" class="headerlink" title="Ŀ¼"></a>Ŀ¼</h2><ul>
+<li><a href="#java">Java</a><ul>
+<li><a href="#����">����</a></li>
+<li><a href="#����">����</a></li>
+<li><a href="#����">����</a></li>
+<li><a href="#jvm">JVM</a></li>
+<li><a href="#io">I/O</a></li>
+<li><a href="#java-8">Java 8</a></li>
+<li><a href="#��̹淶">��̹淶</a></li>
+</ul>
+</li>
+<li><a href="#����">����</a></li>
+<li><a href="#����ϵͳ">����ϵͳ</a><ul>
+<li><a href="#linux���">Linux���</a></li>
+</ul>
+</li>
+<li><a href="#���ݽṹ���㷨">���ݽṹ���㷨</a><ul>
+<li><a href="#���ݽṹ">���ݽṹ</a></li>
+<li><a href="#�㷨">�㷨</a></li>
+</ul>
+</li>
+<li><a href="#���ݿ�">���ݿ�</a><ul>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#redis">Redis</a></li>
+</ul>
+</li>
+<li><a href="#ϵͳ���">ϵͳ���</a><ul>
+<li><a href="#���ÿ��">���ÿ��(Spring/SpringBoot��Zookeeper … )</a></li>
+<li><a href="#Ȩ����֤">Ȩ����֤</a></li>
+<li><a href="#���ģʽ">���ģʽ(����ģʽ������ģʽ … )</a></li>
+<li><a href="#����ͨ��">����ͨ��(��Ϣ���С�Dubbo … )</a></li>
+<li><a href="#��վ�ܹ�">��վ�ܹ�</a></li>
+</ul>
+</li>
+<li><a href="#����ָ��">����ָ��</a><ul>
+<li><a href="#��ս����">��ս����</a></li>
+<li><a href="#�����������ܽ�">�����������ܽ�</a></li>
+<li><a href="#�澭">�澭</a></li>
+</ul>
+</li>
+<li><a href="#����">����</a><ul>
+<li><a href="#git">Git</a></li>
+<li><a href="#Docker">Docker</a></li>
+</ul>
+</li>
+<li><a href="#��Դ">��Դ</a><ul>
+<li><a href="#�鵥">�鵥</a></li>
+<li><a href="#Github��">Github��</a></li>
+</ul>
+</li>
+<li><a href="#����">����</a></li>
+<li><a href="#˵��">˵��</a></li>
+</ul>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="����"><a href="#����" class="headerlink" title="����"></a>����</h3><ul>
+<li><strong><a href="docs/java/Java����֪ʶ.md">Java ����֪ʶ�ع�</a></strong></li>
+<li><strong><a href="docs/java/Java���ѵ�.md">Java ����֪ʶ���ѵ�/�״���</a></strong></li>
+<li><strong><a href="docs/java/Java���������.md">һЩ��Ҫ��Java���������</a></strong></li>
+<li><a href="docs/java/J2EE����֪ʶ.md">J2EE ����֪ʶ�ع�</a></li>
+</ul>
+<h3 id="����-1"><a href="#����-1" class="headerlink" title="����"></a>����</h3><ul>
+<li><strong><a href="docs/java/collection/Java���Ͽ�ܳ���������.md">Java��������������/֪ʶ���ܽ�</a></strong></li>
+<li><a href="docs/java/collection/ArrayList.md">ArrayList Դ��ѧϰ</a>  </li>
+<li><a href="docs/java/collection/LinkedList.md">LinkedList Դ��ѧϰ</a>   </li>
+<li><a href="docs/java/collection/HashMap.md">HashMap(JDK1.8)Դ��ѧϰ</a>  </li>
+</ul>
+<h3 id="����-2"><a href="#����-2" class="headerlink" title="����"></a>����</h3><ul>
+<li><strong><a href="docs/java/Multithread/JavaConcurrencyBasicsCommonInterviewQuestionsSummary.md">Java �������������������ܽ�</a></strong></li>
+<li><strong><a href="docs/java/Multithread/JavaConcurrencyAdvancedCommonInterviewQuestions.md">Java �������׳����������ܽ�</a></strong></li>
+<li><a href="docs/java/Multithread/���������ܽ�.md">���������ܽ�</a></li>
+<li><a href="docs/essential-content-for-interview/���Աر�֮�ֹ����뱯����.md">�ֹ����뱯����</a></li>
+<li><a href="docs/java/Multithread/Atomic.md">JUC �е� Atomic ԭ�����ܽ�</a></li>
+<li><a href="docs/java/Multithread/AQS.md">AQS ԭ���Լ� AQS ͬ������ܽ�</a></li>
+</ul>
+<h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><ul>
+<li><strong><a href="docs/java/jvm/Java�ڴ�����.md">һ Java�ڴ�����</a></strong></li>
+<li><strong><a href="docs/java/jvm/JVM��������.md">�� JVM��������</a></strong></li>
+<li><a href="docs/java/jvm/JDK��غ͹��ϴ��������ܽ�.md">�� JDK ��غ͹��ϴ�������</a></li>
+<li><a href="docs/java/jvm/���ļ��ṹ.md">�� ���ļ��ṹ</a></li>
+<li><strong><a href="docs/java/jvm/����ع���.md">�� ����ع���</a></strong></li>
+<li><a href="docs/java/jvm/�������.md">�� �������</a></li>
+</ul>
+<h3 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h3><ul>
+<li><a href="docs/java/BIO-NIO-AIO.md">BIO,NIO,AIO �ܽ� </a></li>
+<li><a href="docs/java/Java%20IO��NIO.md">Java IO �� NIOϵ������</a></li>
+</ul>
+<h3 id="Java-8"><a href="#Java-8" class="headerlink" title="Java 8"></a>Java 8</h3><ul>
+<li><a href="docs/java/What's%20New%20in%20JDK8/Java8Tutorial.md">Java 8 �������ܽ�</a></li>
+<li><a href="docs/java/What's%20New%20in%20JDK8/Java8�̳��Ƽ�.md">Java 8 ѧϰ��Դ�Ƽ�</a></li>
+<li><a href="docs/java/What's%20New%20in%20JDK8/Java8foreachָ��.md">Java8 forEach ָ��</a></li>
+</ul>
+<h3 id="��̹淶"><a href="#��̹淶" class="headerlink" title="��̹淶"></a>��̹淶</h3><ul>
+<li><a href="docs/java/Java��̹淶.md">Java ��̹淶</a></li>
+</ul>
+<h2 id="����-3"><a href="#����-3" class="headerlink" title="����"></a>����</h2><ul>
+<li><a href="docs/network/���������.md">��������糣��������</a></li>
+<li><a href="docs/network/�ɻ������������֪ʶ�ܽ�.md">������������֪ʶ�ܽ�</a></li>
+<li><a href="docs/network/HTTPS�е�TLS.md">HTTPS�е�TLS</a></li>
+</ul>
+<h2 id="����ϵͳ"><a href="#����ϵͳ" class="headerlink" title="����ϵͳ"></a>����ϵͳ</h2><h3 id="Linux���"><a href="#Linux���" class="headerlink" title="Linux���"></a>Linux���</h3><ul>
+<li><a href="docs/operating-system/��˳���Ա�ر���Linux����֪ʶ.md">��˳���Ա�ر��� Linux ����֪ʶ</a>  </li>
+<li><a href="docs/operating-system/Shell.md">Shell �������</a> </li>
+</ul>
+<h2 id="���ݽu���㷨"><a href="#���ݽu���㷨" class="headerlink" title="���ݽṹ���㷨"></a>���ݽṹ���㷨</h2><h3 id="���ݽu"><a href="#���ݽu" class="headerlink" title="���ݽṹ"></a>���ݽṹ</h3><ul>
+<li><a href="docs/dataStructures-algorithms/���ݽṹ.md">���ݽṹ֪ʶѧϰ������</a></li>
+</ul>
+<h3 id="�㷨"><a href="#�㷨" class="headerlink" title="�㷨"></a>�㷨</h3><ul>
+<li><a href="docs/dataStructures-algorithms/�㷨ѧϰ��Դ�Ƽ�.md">�㷨ѧϰ��Դ�Ƽ�</a>  </li>
+<li><a href="docs/dataStructures-algorithms/�����������ӷ����㷨��.md">�����������ַ����㷨���ܽ� </a></li>
+<li><a href="docs/dataStructures-algorithms/���������������㷨��.md">���������������㷨���ܽ� </a>   </li>
+<li><a href="docs/dataStructures-algorithms/��ָoffer���ֱ����.md">��ָoffer���ֱ����</a></li>
+<li><a href="docs/dataStructures-algorithms/��˾����.md">��˾����</a></li>
+<li><a href="docs/dataStructures-algorithms/Backtracking-NQueens.md">�����㷨���䰸��֮N�ʺ�����</a></li>
+</ul>
+<h2 id="���ݿ�"><a href="#���ݿ�" class="headerlink" title="���ݿ�"></a>���ݿ�</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><ul>
+<li><strong><a href="docs/database/MySQL.md">���Ƽ���MySQL/���ݿ� ֪ʶ���ܽ�</a></strong></li>
+<li><strong><a href="docs/database/����ͰͿ����ֲ����ݿⲿ�ֵ�һЩ���ʵ��.md">����ͰͿ����ֲ����ݿⲿ�ֵ�һЩ���ʵ��</a></strong></li>
+<li><strong><a href="docs/database/һǧ��MySQL����.md">һǧ��MySQLѧϰ�ʼ�</a></strong></li>
+<li><a href="docs/database/MySQL�������Ż��淶����.md">MySQL�������Ż��淶����</a></li>
+<li><a href="docs/database/MySQL%20Index.md">���ݿ������ܽ�</a></li>
+<li><a href="docs/database/������뼶��(ͼ�����).md">������뼶��(ͼ�����)</a></li>
+<li><a href="docs/database/һ��sql�����mysql�����ִ�е�.md">һ��SQL�����MySQL�����ִ�е�</a></li>
+</ul>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><ul>
+<li><a href="docs/database/Redis/Redis.md">Redis �ܽ�</a></li>
+<li><a href="docs/database/Redis/Redlock�ֲ�ʽ��.md">Redlock�ֲ�ʽ��</a></li>
+<li><a href="docs/database/Redis/������ɿ��ķֲ�ʽ����Redlock��Ŀ���ô.md">������ɿ��ķֲ�ʽ����Redlock��Ŀ���ô</a></li>
+</ul>
+<h2 id="ϵͳ���"><a href="#ϵͳ���" class="headerlink" title="ϵͳ���"></a>ϵͳ���</h2><h3 id="���y��"><a href="#���y��" class="headerlink" title="���ÿ��"></a>���ÿ��</h3><h4 id="Spring-SpringBoot"><a href="#Spring-SpringBoot" class="headerlink" title="Spring/SpringBoot"></a>Spring/SpringBoot</h4><ul>
+<li><a href="docs/system-design/framework/spring/Spring.md">Spring ѧϰ������</a></li>
+<li><strong><a href="docs/system-design/framework/spring/SpringInterviewQuestions.md">Spring ���������ܽ�</a></strong></li>
+<li><strong><a href="https://github.com/Snailclimb/springboot-guide" target="_blank" rel="noopener">SpringBoot ָ��/�����������ܽ�</a></strong></li>
+<li><a href="docs/system-design/framework/spring/SpringBean.md">Spring��bean������������������</a></li>
+<li><a href="docs/system-design/framework/spring/SpringMVC-Principle.md">SpringMVC ����ԭ�����</a></li>
+<li><a href="docs/system-design/framework/spring/Spring-Design-Patterns.md">Spring�ж��õ�����Щ���ģʽ?</a></li>
+</ul>
+<h4 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h4><ul>
+<li><a href="docs/system-design/framework/ZooKeeper.md">ZooKeeper ��ظ����ܽ�</a></li>
+<li><a href="docs/system-design/framework/ZooKeeper����ģ�ͺͳ�������.md">ZooKeeper ����ģ�ͺͳ�������</a></li>
+</ul>
+<h3 id="E����֤"><a href="#E����֤" class="headerlink" title="Ȩ����֤"></a>Ȩ����֤</h3><ul>
+<li><strong><a href="docs/system-design/authority-certification/basis-of-authority-certification.md">Ȩ����֤����:����Authentication,Authorization�Լ�Cookie��Session��Token</a></strong></li>
+<li><strong><a href="docs/system-design/authority-certification/JWT-advantages-and-disadvantages.md">JWT ��ȱ������Լ���������������</a></strong></li>
+<li><strong><a href="https://github.com/Snailclimb/spring-security-jwt-guide" target="_blank" rel="noopener">�ʺϳ�ѧ������ Spring Security With JWT �� Demo</a></strong></li>
+</ul>
+<h3 id="���gʽ"><a href="#���gʽ" class="headerlink" title="���ģʽ"></a>���ģʽ</h3><ul>
+<li><a href="docs/system-design/���ģʽ.md">���ģʽϵ������</a></li>
+</ul>
+<h3 id="����ͨ��"><a href="#����ͨ��" class="headerlink" title="����ͨ��"></a>����ͨ��</h3><ul>
+<li><a href="docs/system-design/data-communication/summary.md">����ͨ��(RESTful��RPC����Ϣ����)���֪ʶ���ܽ�</a></li>
+<li><a href="docs/system-design/data-communication/dubbo.md">Dubbo �ܽ᣺���� Dubbo ����Ҫ֪ʶ��</a></li>
+<li><a href="docs/system-design/data-communication/message-queue.md">��Ϣ�����ܽ�</a></li>
+<li><a href="docs/system-design/data-communication/rabbitmq.md">RabbitMQ ����</a></li>
+<li><a href="docs/system-design/data-communication/RocketMQ-Questions.md">RocketMQ�ļ������������</a></li>
+<li><a href="docs/system-design/data-communication/Kafka���ſ���һƪ�͹���.md">Kafka���ſ���һƪ�͹���</a></li>
+<li><a href="docs/system-design/data-communication/Kafkaϵͳ��ƿ�ƪ-���Կ���ƪ�͹���.md">Kafkaϵͳ��ƿ�ƪ-���Կ���ƪ�͹���</a></li>
+</ul>
+<h3 id="��վ�ܹ�"><a href="#��վ�ܹ�" class="headerlink" title="��վ�ܹ�"></a>��վ�ܹ�</h3><ul>
+<li><a href="docs/system-design/website-architecture/�ֲ�ʽ.md">һ�Ķ����ֲ�ʽӦ��ѧʲô</a></li>
+<li><a href="docs/system-design/website-architecture/8%20��ͼ����������վ�����ܹ�.md">8 ��ͼ����������վ�����ܹ�</a></li>
+<li><a href="docs/system-design/website-architecture/�����Ծ�ѡ�����ڴ�����վϵͳ�ܹ��㲻�ò�����10������.md">�����Ծ�ѡ�����ڴ�����վϵͳ�ܹ��㲻�ò�����10������</a></li>
+</ul>
+<h2 id="����ָ��"><a href="#����ָ��" class="headerlink" title="����ָ��"></a>����ָ��</h2><h3 id="��ս����"><a href="#��ս����" class="headerlink" title="��ս����"></a>��ս����</h3><ul>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/����Ա�ļ���֮��.md">����ս����1������Ա�ļ����͸�����д</a></strong></li>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/interviewPrepare.md">����ս����2������é®�ĳ���Ա�����׼�����ԣ�</a></strong></li>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/JavaProgrammerNeedKnow.md">����ս����3��7���󲿷ֳ���Ա������ǰ�ܹ��ĵ�����</a></strong></li>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/JavaInterviewLibrary.md">����ս����4��Github�Ͽ�Դ��Java����/ѧϰ��صĲֿ��Ƽ�</a></strong></li>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/������Թ�����"����ʲô����������"ʱ�������λش�.md">����ս����5��������Թ����㡰����ʲô���������𣿡�ʱ�������λش�</a></strong></li>
+<li><strong><a href="docs/essential-content-for-interview/PreparingForInterview/�������Գ��������ܽ�.md">����ս����6���������Գ��������ܽᣨ�����𰸣�</a></strong></li>
+<li><strong><a href="https://xiaozhuanlan.com/topic/9056431872" target="_blank" rel="noopener">����ս����7��һЩ���ѵ����������ܽ�</a></strong></li>
+</ul>
+<h3 id="�����������ܽ�"><a href="#�����������ܽ�" class="headerlink" title="�����������ܽ�"></a>�����������ܽ�</h3><ul>
+<li><a href="docs/essential-content-for-interview/MostCommonJavaInterviewQuestions/��һ�ܣ�2018-8-7��.md">��һ�ܣ�2018-8-7��</a> (Ϊʲô Java ��ֻ��ֵ���ݡ�==��equals�� hashCode��equals)</li>
+<li><a href="docs/essential-content-for-interview/MostCommonJavaInterviewQuestions/�ڶ���(2018-8-13).md">�ڶ��ܣ�2018-8-13��</a>(String��StringBuffer��StringBuilder��������ʲô��StringΪʲô�ǲ��ɱ�ģ���ʲô�Ƿ�����ƣ�������Ƶ�Ӧ�ó�������Щ��……)</li>
+<li><a href="docs/java/collection/Java���Ͽ�ܳ���������.md">�����ܣ�2018-08-22��</a> ��Arraylist �� LinkedList ��ͬ��ArrayList �� Vector ����HashMap�ĵײ�ʵ�֡�HashMap �� Hashtable ������HashMap �ĳ���Ϊʲô��2���ݴη���HashSet �� HashMap ����ConcurrentHashMap �� Hashtable ������ConcurrentHashMap�̰߳�ȫ�ľ���ʵ�ַ�ʽ/�ײ����ʵ�֡����Ͽ�ܵײ����ݽṹ�ܽᣩ</li>
+<li><a href="docs/essential-content-for-interview/MostCommonJavaInterviewQuestions/������(2018-8-30).md">������(2018-8-30).md</a> ����Ҫ�����Ǽ������Գ��ʵĶ��̻߳����⡣��</li>
+</ul>
+<h3 id="�澭"><a href="#�澭" class="headerlink" title="�澭"></a>�澭</h3><ul>
+<li><a href="docs/essential-content-for-interview/BATJrealInterviewExperience/5�氢��,�ջ�offer.md">5�氢��,�ջ�offer(2018������)</a></li>
+<li><a href="docs/essential-content-for-interview/BATJrealInterviewExperience/���Ͻ��ʵϰ���澭�ܽ�(���ÿ�ͷoffer).md">���Ͻ��2019ʵϰ���澭�ܽ�(���ÿ�ͷoffer)</a></li>
+<li><a href="docs/essential-content-for-interview/BATJrealInterviewExperience/2019alipay-pinduoduo-toutiao.md">2019�����Ͻ����ͷ����ƴ���������ܽ�</a></li>
+</ul>
+<h2 id="����-4"><a href="#����-4" class="headerlink" title="����"></a>����</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><ul>
+<li><a href="docs/tools/Git.md">Git����</a></li>
+</ul>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><ul>
+<li><a href="docs/tools/Docker.md">Docker ����</a></li>
+<li><a href="docs/tools/Docker-Image.md">һ�ĸ㶮 Docker ����ĳ��ò�����</a></li>
+</ul>
+<h2 id="��Դ"><a href="#��Դ" class="headerlink" title="��Դ"></a>��Դ</h2><h3 id="�鵥"><a href="#�鵥" class="headerlink" title="�鵥"></a>�鵥</h3><ul>
+<li><a href="docs/data/java-recommended-books.md">Java����Ա�ر��鵥</a></li>
+</ul>
+<h3 id="ʵս��L�Ƽ�"><a href="#ʵս��L�Ƽ�" class="headerlink" title="ʵս��Ŀ�Ƽ�"></a>ʵս��Ŀ�Ƽ�</h3><ul>
+<li><a href="docs/data/spring-boot-practical-projects.md">Github �����ŵ� Spring Boot ��Ŀʵս�Ƽ�</a></li>
+</ul>
+<h3 id="Github-��ʷ��"><a href="#Github-��ʷ��" class="headerlink" title="Github ��ʷ��"></a>Github ��ʷ��</h3><ul>
+<li><a href="docs/github-trending/JavaGithubTrending.md">Java ��Ŀ�°�</a></li>
+</ul>
+<hr>
+<h2 id="����-5"><a href="#����-5" class="headerlink" title="����"></a>����</h2><ul>
+<li><input disabled="" type="checkbox"> Java ���߳����֪ʶ�ع�(—���ڽ�����—)</li>
+<li><input disabled="" type="checkbox"> Netty �ܽ�(—���ڽ�����—)</li>
+<li><input disabled="" type="checkbox"> ���ݽṹ�ܽ��ع�(—���ڽ�����—)</li>
+</ul>
+<h2 id="˵��"><a href="#˵��" class="headerlink" title="˵��"></a>˵��</h2><h3 id="JavaGuide����"><a href="#JavaGuide����" class="headerlink" title="JavaGuide����"></a>JavaGuide����</h3><ul>
+<li><strong>���� Java ��ѧ����˵��</strong> ���ĵ������ڸ����ṩһ���Ƚ���ϸ��ѧϰ·�����������Java�����֪ʶ��ϵ��һ��������ʶ�����⣬���ĵ�һЩ����<br>Ҳ����ѧϰ�͸�ϰ Java ֪ʶ������ʵ����</li>
+<li><strong>���ڷ� Java ��ѧ����˵��</strong> ���ĵ����ʺϻع�֪ʶ��׼�����ԣ���������Ӧ�ð����ķ�����Щ�����ϡ�Ҫ����������������ǰ֪����Щ���Գ���������Ϊ�˱�����Ӧ�����ԣ�����Ϊ��������Ը�����Ե�ѧϰ�ص㡣</li>
+</ul>
+<p>Markdown ��ʽ�ο���<a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">Github Markdown��ʽ</a>�������ز����ԣ�<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">EMOJI CHEAT SHEET</a>��</p>
+<p>���� docsify �����ĵ������� Github pages: <a href="https://docsify.js.org/#/" target="_blank" rel="noopener">docsify ��������</a></p>
+<h3 id="���ߵ�������Դ��L�Ƽ�"><a href="#���ߵ�������Դ��L�Ƽ�" class="headerlink" title="���ߵ�������Դ��Ŀ�Ƽ�"></a>���ߵ�������Դ��Ŀ�Ƽ�</h3><ol>
+<li><a href="https://github.com/Snailclimb/springboot-guide" target="_blank" rel="noopener">springboot-guide</a> : �ʺ����������Լ��о���Ŀ�����Ա���ĵ� Spring Boot �̳̣�ҵ��ʱ��ά���У���ӭһ��ά������</li>
+<li><a href="https://github.com/Snailclimb/programmer-advancement" target="_blank" rel="noopener">programmer-advancement</a> : �Ҿ��ü�����ԱӦ���е�һЩ��ϰ�ߣ�</li>
+<li><a href="https://github.com/Snailclimb/spring-security-jwt-guide" target="_blank" rel="noopener">spring-security-jwt-guide</a> :�������� ��Spring Security With JWT����Ȩ����֤����˲��ִ��롣</li>
+</ol>
+<h3 id="����ת��"><a href="#����ת��" class="headerlink" title="����ת��"></a>����ת��</h3><p>�������Ҫת�ر��ֿ��һЩ���µ��Լ��Ĳ��͵Ļ����ǵ�ע��ԭ�ĵ�ַ�Ϳ����ˡ�</p>
+<h3 id="��ζԸy�Դ�j����й���"><a href="#��ζԸy�Դ�j����й���" class="headerlink" title="��ζԸÿ�Դ�ĵ����й���"></a>��ζԸÿ�Դ�ĵ����й���</h3><ol>
+<li>�ʼ����ݴ�������ã�����������б�������԰����Ҵ����֡�</li>
+<li>�ܶ�֪ʶ���ҿ���û���漰������������Զ�����֪ʶ����в��䡣</li>
+<li>���е�֪ʶ��������ڲ����ƻ��ߴ�����������Զ�����֪ʶ����޸�/���䡣</li>
+</ol>
+<h3 id="ΪʲoҪ�������Դ�j���"><a href="#ΪʲoҪ�������Դ�j���" class="headerlink" title="ΪʲôҪ�������Դ�ĵ���"></a>ΪʲôҪ�������Դ�ĵ���</h3><p>��ʼ�뷨Դ���Լ��ĸ�����һ�αȽ���ã��ѧϰ��������ҪĿ����Ϊ��ͨ�������Դƽ̨������һЩ��ѧϰ Java �������Թ��������������С��顣</p>
+<h3 id="Ͷ��"><a href="#Ͷ��" class="headerlink" title="Ͷ��"></a>Ͷ��</h3><p>�����Ҹ����������ޣ��ܶ�֪ʶ���ҿ���û���漰������������Զ�����֪ʶ����в��䡣���Ҳ���Զ��Լ������½����Լ������ڲ��������²������Գɹ��ڱ��ֿ�չʾ���������Ի�������ͳ��� 50 Ԫ���ҵ������鼮���н���(��Ȼ��Ҳ����ֱ������50Ԫ)��</p>
+<h3 id="��ϵ��"><a href="#��ϵ��" class="headerlink" title="��ϵ��"></a>��ϵ��</h3><p>�����ҵ�΢�ű�ע��Github��,�ظ��ؼ��� <strong>����Ⱥ��</strong> ������Ⱥ��</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/wechat3.jpeg" alt="����΢��"></p>
+<h3 id="Contributor"><a href="#Contributor" class="headerlink" title="Contributor"></a>Contributor</h3><p>�����Ǳ����ռ���һЩ�Ա��ֿ�����м�ֵ��pr����issue�����ѣ������϶࣬�����Ҳ�Ա��ֿ����������pr����issue�Ļ�������Լ��ҵ�΢��������ϵ����������������Ⱥ�</p>
+<a href="https://github.com/fanofxiaofeng" target="_blank" rel="noopener">
+    <img src="https://avatars0.githubusercontent.com/u/3983683?s=460&v=4" width="45px"></a>
+<a href="https://github.com/fanchenggang" target="_blank" rel="noopener">  
+    <img src="https://avatars2.githubusercontent.com/u/8225921?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/Rustin-Liu" target="_blank" rel="noopener">  
+    <img src="https://avatars2.githubusercontent.com/u/29879298?s=400&v=4" width="45px">
+</a>
+
+<a href="https://github.com/ipofss" target="_blank" rel="noopener">
+    <img src="https://avatars1.githubusercontent.com/u/5917359?s=460&v=4" width="45px"></a>
+<a href="https://github.com/Gene1994" target="_blank" rel="noopener">
+    <img src="https://avatars3.githubusercontent.com/u/24930369?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/spikesp" target="_blank" rel="noopener">
+    <img src="https://avatars0.githubusercontent.com/u/12581996?s=460&v=4" width="45px"></a>
+<a href="https://github.com/illusorycloud" target="_blank" rel="noopener">
+    <img src="https://avatars3.githubusercontent.com/u/31980412?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/LiWenGu" target="_blank" rel="noopener">
+    <img src="https://avatars0.githubusercontent.com/u/15909210?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/kinglaw1204" target="_blank" rel="noopener">
+    <img src="https://avatars1.githubusercontent.com/u/20039931?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/jun1st" target="_blank" rel="noopener">
+    <img src="https://avatars2.githubusercontent.com/u/14312378?s=460&v=4" width="45px">
+</a>"
+<a href="https://github.com/fantasygg" target="_blank" rel="noopener">  
+    <img src="https://avatars3.githubusercontent.com/u/13445354?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/debugjoker" target="_blank" rel="noopener">  
+    <img src="https://avatars3.githubusercontent.com/u/26218005?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/zhyank" target="_blank" rel="noopener">  
+    <img src="https://avatars0.githubusercontent.com/u/17696240?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/Goose9527" target="_blank" rel="noopener">  
+    <img src="https://avatars2.githubusercontent.com/u/43314997?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/yuechuanx" target="_blank" rel="noopener">  
+    <img src="https://avatars3.githubusercontent.com/u/19339293?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/cnLGMing" target="_blank" rel="noopener">  
+    <img src="https://avatars2.githubusercontent.com/u/15910705?s=460&v=4" width="45px">
+</a>
+<a href="https://github.com/fanchenggang" target="_blank" rel="noopener">  
+    <img src="https://avatars0.githubusercontent.com/u/20358122?s=460&v=4" width="45px">
+</a>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/README.html" data-id="ck27f73mq0000tgva8yy91p2e"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+
+  
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+  <aside class="sidebar">
+    
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

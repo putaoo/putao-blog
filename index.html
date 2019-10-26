@@ -63,6 +63,80 @@
       
         
 
+<article id="post-a" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/10/26/a/">a</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/26/a/" class="article-date">
+  <time datetime="2019-10-26T10:24:53.361Z" itemprop="datePublished">2019-10-26</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>�� Plumbr ���� GC ��ͣ�����ع��ܵĹ���ʱ���ұ������Լ��ķ�ʽ��ͨ���������¡��鼮���ݽ��������������Ĺ����������������У������� Minor��Major���� Full GC �¼���ʹ�øе�������Ҳ����д��ƪ���͵�ԭ����ϣ��������ؽ��������е�һЩ�ɻ�<br>����Ҫ�������Ϥ JVM ���õ�ͨ����������ԭ�򡣶��ڴ滮��Ϊ Eden��Survivor �� Tenured/Old �ռ䣬�������������ͬ�� GC �㷨�����˱������۵ķ�Χ��</p>
+<h3 id="Minor-GC"><a href="#Minor-GC" class="headerlink" title="Minor GC"></a>Minor GC</h3><p>��������ռ䣨���� Eden �� Survivor ���򣩻����ڴ汻��Ϊ Minor GC����һ������������������⡣���ǣ�������Minor GC�¼���ʱ����һЩ��Ȥ�ĵط���Ҫע�⵽��</p>
+<p>�� JVM �޷�Ϊһ���µĶ������ռ�ʱ�ᴥ�� Minor GC�����統 Eden �����ˡ����Է�����Խ�ߣ�ԽƵ��ִ�� Minor GC��<br>�ڴ�ر�������ʱ�����е�����ȫ���ᱻ���ƣ�ָ����0��ʼ���ٿ����ڴ档Eden �� Survivor �������˱�Ǻ͸��Ʋ�����ȡ���˾���ı�ǡ�ɨ�衢ѹ������������������ Eden �� Survivor ���������ڴ���Ƭ��дָ������ͣ������ʹ���ڴ�صĶ�����<br>ִ�� Minor GC ����ʱ������Ӱ�쵽���ô��������ô�������������ñ����� GC roots��������������ô��������ڱ�ǽ׶α�ֱ�Ӻ��Ե���<br>���ɳ������֪�����е� Minor GC ���ᴥ����ȫ�������ͣ��stop-the-world������ֹͣӦ�ó�����̡߳����ڴ󲿷�Ӧ�ó���ͣ�ٵ��µ��ӳٶ��ǿ��Ժ��Բ��Ƶġ����е������ �ǣ��󲿷� Eden ���еĶ����ܱ���Ϊ����������ԶҲ���ᱻ���Ƶ� Survivor ������������ռ䡣��������෴��Eden ���󲿷��������󲻷��� GC ������Minor GC ִ��ʱ��ͣ��ʱ�佫�᳤�ܶࡣ<br>���� Minor GC ��������൱����ˡ���ÿ�� Minor GC ��������������ڴ档</p>
+<h3 id="Major-GC-vs-Full-GC"><a href="#Major-GC-vs-Full-GC" class="headerlink" title="Major GC vs Full GC"></a>Major GC vs Full GC</h3><p>���Ӧ��ע�⵽��Ŀǰ����Щ������������ JVM �淶�����������ռ��о������ж�û����ʽ�Ķ��塣��������һ����֪����Щ�������Ѿ�֪���Ļ���֮�������Ķ�������ȷ�ģ�Minor GC ����������ڴ�Ӧ�ñ���Ƶü򵥣�<br><strong>Major GC ���������ô���</strong></p>
+<p>Full GC �����������ѿռ䡪��������������ô���<br>�ܲ��ң�ʵ���������е㸴���������������ȣ����� Major GC ���� Minor GC �����ģ����Ժܶ�����½������� GC �����ǲ�̫���ܵġ���һ���棬�����ִ������ռ����ƻ������������ô��ռ䣬����ʹ�á�cleaning��һ��ֻ�ǲ�����ȷ��<br>��ʹ�����ǲ���ȥ���ĵ����ǽ� Major GC ���� Full GC�����Ӧ�ù�ע��ǰ�� GC �Ƿ�ֹͣ������Ӧ�ó�����̣߳������ܹ������Ĵ���������ͣ��Ӧ�ó�����̡߳�<br>���ֻ����������õ� JVM ��׼���ߡ�</p>
+<p>����һ�����ӺܺõĽ������ҵ���˼�������ǱȽ�������ͬ�Ĺ��� Concurrent Mark �� Sweep collector (-XX:+UseConcMarkSweepGC)�� JVM ������ʱ����ĸ��ټ�¼��<br>��һ�γ���ͨ�� jstat �����</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 my-precious: me$ jstat -gc -t 4235 1s</span><br><span class="line">12345678910111213 Time S0C??? S1C??? S0U??? S1U????? EC?????? EU??????? OC???????? OU?????? MC???? MU??? CCSC?? CCSU?? YGC???? YGCT??? FGC??? FGCT???? GCT?? ?5.7 34048.0 34048.0? 0.0?? 34048.0 272640.0 194699.7 1756416.0?? 181419.9? 18304.0 17865.1 2688.0 2497.6????? 3??? 0.275?? 0????? 0.000??? 0.275?6.7 34048.0 34048.0 34048.0? 0.0?? 272640.0 247555.4 1756416.0?? 263447.9? 18816.0 18123.3 2688.0 2523.1????? 4??? 0.359?? 0????? 0.000??? 0.359?7.7 34048.0 34048.0? 0.0?? 34048.0 272640.0 257729.3 1756416.0?? 345109.8? 19072.0 18396.6 2688.0 2550.3????? 5??? 0.451?? 0????? 0.000??? 0.451?8.7 34048.0 34048.0 34048.0 34048.0 272640.0 272640.0 1756416.0? 444982.5? 19456.0 18681.3 2816.0 2575.8????? 7??? 0.550?? 0????? 0.000??? 0.550?9.7 34048.0 34048.0 34046.7? 0.0?? 272640.0 16777.0? 1756416.0?? 587906.3? 20096.0 19235.1 2944.0 2631.8????? 8??? 0.720?? 0????? 0.000??? 0.72010.7 34048.0 34048.0? 0.0?? 34046.2 272640.0 80171.6? 1756416.0?? 664913.4? 20352.0 19495.9 2944.0 2657.4????? 9??? 0.810?? 0????? 0.000??? 0.81011.7 34048.0 34048.0 34048.0? 0.0?? 272640.0 129480.8 1756416.0?? 745100.2? 20608.0 19704.5 2944.0 2678.4???? 10??? 0.896?? 0????? 0.000??? 0.89612.7 34048.0 34048.0? 0.0?? 34046.6 272640.0 164070.7 1756416.0?? 822073.7? 20992.0 19937.1 3072.0 2702.8???? 11??? 0.978?? 0????? 0.000??? 0.97813.7 34048.0 34048.0 34048.0? 0.0?? 272640.0 211949.9 1756416.0?? 897364.4? 21248.0 20179.6 3072.0 2728.1???? 12??? 1.087?? 1????? 0.004??? 1.09114.7 34048.0 34048.0? 0.0?? 34047.1 272640.0 245801.5 1756416.0?? 597362.6? 21504.0 20390.6 3072.0 2750.3???? 13??? 1.183?? 2????? 0.050??? 1.23315.7 34048.0 34048.0? 0.0?? 34048.0 272640.0 21474.1? 1756416.0?? 757347.0? 22012.0 20792.0 3200.0 2791.0???? 15??? 1.336?? 2????? 0.050??? 1.38616.7 34048.0 34048.0 34047.0? 0.0?? 272640.0 48378.0? 1756416.0?? 838594.4? 22268.0 21003.5 3200.0 2813.2???? 16??? 1.433?? 2????? 0.050??? 1.484</span><br></pre></td></tr></table></figure>
+<p>���Ƭ���� JVM �������17����ȡ�ġ����ڸ���Ϣ�����ǿ��Եó������Ľ����������12�� Minor GC��2�� Full GC��ʱ���ܿ��Ϊ50���롣ͨ�� jconsole ���� jvisualvm �����Ļ���GUI�Ĺ������ܵõ�ͬ���Ľ����</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 java -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC eu.plumbr.demo.GarbageProducer</span><br><span class="line">12345678910111213141516171819 3.157: [GC (Allocation Failure) 3.157: [ParNew: 272640K-&gt;34048K(306688K), 0.0844702 secs] 272640K-&gt;69574K(2063104K), 0.0845560 secs] [Times: user=0.23 sys=0.03, real=0.09 secs] 4.092: [GC (Allocation Failure) 4.092: [ParNew: 306688K-&gt;34048K(306688K), 0.1013723 secs] 342214K-&gt;136584K(2063104K), 0.1014307 secs] [Times: user=0.25 sys=0.05, real=0.10 secs] ... cut?for?brevity ...11.292: [GC (Allocation Failure) 11.292: [ParNew: 306686K-&gt;34048K(306688K), 0.0857219 secs] 971599K-&gt;779148K(2063104K), 0.0857875 secs] [Times: user=0.26 sys=0.04, real=0.09 secs] 12.140: [GC (Allocation Failure) 12.140: [ParNew: 306688K-&gt;34046K(306688K), 0.0821774 secs] 1051788K-&gt;856120K(2063104K), 0.0822400 secs] [Times: user=0.25 sys=0.03, real=0.08 secs] 12.989: [GC (Allocation Failure) 12.989: [ParNew: 306686K-&gt;34048K(306688K), 0.1086667 secs] 1128760K-&gt;931412K(2063104K), 0.1087416 secs] [Times: user=0.24 sys=0.04, real=0.11 secs] 13.098: [GC (CMS Initial Mark) [1 CMS-initial-mark: 897364K(1756416K)] 936667K(2063104K), 0.0041705 secs] [Times: user=0.02 sys=0.00, real=0.00 secs] 13.102: [CMS-concurrent-mark-start]13.341: [CMS-concurrent-mark: 0.238/0.238 secs] [Times: user=0.36 sys=0.01, real=0.24 secs] 13.341: [CMS-concurrent-preclean-start]13.350: [CMS-concurrent-preclean: 0.009/0.009 secs] [Times: user=0.03 sys=0.00, real=0.01 secs] 13.350: [CMS-concurrent-abortable-preclean-start]13.878: [GC (Allocation Failure) 13.878: [ParNew: 306688K-&gt;34047K(306688K), 0.0960456 secs] 1204052K-&gt;1010638K(2063104K), 0.0961542 secs] [Times: user=0.29 sys=0.04, real=0.09 secs] 14.366: [CMS-concurrent-abortable-preclean: 0.917/1.016 secs] [Times: user=2.22 sys=0.07, real=1.01 secs] 14.366: [GC (CMS Final Remark) [YG occupancy: 182593 K (306688 K)]14.366: [Rescan (parallel) , 0.0291598 secs]14.395: [weak refs processing, 0.0000232 secs]14.395: [class unloading, 0.0117661 secs]14.407: [scrub symbol table, 0.0015323 secs]14.409: [scrub string table, 0.0003221 secs][1 CMS-remark: 976591K(1756416K)] 1159184K(2063104K), 0.0462010 secs] [Times: user=0.14 sys=0.00, real=0.05 secs] 14.412: [CMS-concurrent-sweep-start]14.633: [CMS-concurrent-sweep: 0.221/0.221 secs] [Times: user=0.37 sys=0.00, real=0.22 secs] 14.633: [CMS-concurrent-reset-start]14.636: [CMS-concurrent-reset: 0.002/0.002 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]</span><br></pre></td></tr></table></figure>
+<p>�ڵ�ͷͬ���������֮ǰ�������ǿ�������ͬһ�� JVM �����ռ��������ռ���־���������Ȼ- XX �� + PrintGCDetails ��������һ����ͬ�Ҹ���ϸ�Ĺ��£�</p>
+<p>������Щ��Ϣ�����ǿ��Կ���12�� Minor GC ��ʼ��Щ�����治һ���ˡ�û���������� Full GC���ⲻͬ�ĵط����ڵ��� GC �����ô��в�ͬ�׶����������Σ�</p>
+<p>����ı�ǽ׶Σ�����0.0041705��Ҳ����4ms���ҡ�����׶λ���ͣ��ȫ���磨 stop-the-world�������¼���ֹͣ����Ӧ�ó�����̣߳�Ȼ��ʼ��ǡ�<br>����ִ�б�Ǻ���ϴ�׶Ρ���Щ���Ǻ�Ӧ�ó����̲߳��еġ�<br>��� Remark �׶Σ�������0.0462010��Լ46ms������׶λ��ٴ���ͣ���е��¼���<br>����ִ������������</p>
+<p>�����������˽׶�Ҳ�ǲ��еģ�����ֹͣ�����̡߳�<br>���ԣ��������Ǵ�����������־����������������ʵ����ֻ��ִ���� Major GC ȥ����������ռ���ѣ�������ִ�������� Full GC��<br>������Ǻ������� ���Ļ�����ô�� jstat �ṩ�����ݻ�������������ȷ�ľ��ߡ�����ȷ�г���������ͣ�����¼�����������������߳�ֹͣ�˹���50ms�������������ͼ�Ż�����������ᱻ�󵼵ġ��� ��ֻ�г��˻��ճ�ʼ��Ǻ����� Remark �׶Σ�jstat�������������Щ������ɵĹ�����</p>
+<p>����<br>���ǵ������������ñ����� Minor��Major��Full GC ���ַ�ʽ��˼�����⡣��Ӧ�ü��Ӧ���ӳٻ�����������Ȼ�� GC �¼��ͽ����ϵ������<br>������Щ GC �¼��ķ���������Ҫ����Ĺ�עĳЩ��Ϣ��GC �¼���ǿ������Ӧ�ó����߳�ֹͣ�˻��ǲ��еĴ����˲����¼���</p>
+<p>ԭ�����ӣ� javacodegeeks ���룺 ImportNew.com - ���ͷȥ����<br>�������ӣ� <a href="http://www.importnew.com/15820.html" target="_blank" rel="noopener">http://www.importnew.com/15820.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/26/a/" data-id="ck27f73nx0003tgva8mf19ztu"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Minor GC、Major GC和Full GC之间的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -119,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/26/Minor%20GC%E3%80%81Major%20GC%E5%92%8CFull%20GC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ck27f126f0001l0vahsjd4rsg"
+      <a data-url="http://yoursite.com/2019/10/26/Minor%20GC%E3%80%81Major%20GC%E5%92%8CFull%20GC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="ck27f73nt0001tgvahlob4dxp"
          class="article-share-link">Share</a>
       
     </footer>
@@ -197,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/26/MyBatis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A#%E5%92%8C$%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" data-id="ck27f126n0003l0va1w1bggb6"
+      <a data-url="http://yoursite.com/2019/10/26/MyBatis%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A#%E5%92%8C$%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" data-id="ck27f73o00005tgvaf83kdq3b"
          class="article-share-link">Share</a>
       
     </footer>
