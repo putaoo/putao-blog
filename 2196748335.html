@@ -54,6 +54,10 @@
   <time datetime="2019-10-27T13:06:01.926Z" itemprop="datePublished">2019-10-27</time>
 </a>
         
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">Jvm虚拟机</a>
+  </div>
+
       </div>
     
 
@@ -74,8 +78,7 @@
       
 
       
-        <hr>
-<h2 id="categories-Jvm虚拟机"><a href="#categories-Jvm虚拟机" class="headerlink" title="categories: Jvm虚拟机"></a>categories: Jvm虚拟机</h2><p>在 Plumbr 从事 GC 暂停检测相关功能的工作时，我被迫用自己的方式，通过大量文章、书籍和演讲来介绍我所做的工作。在整个过程中，经常对 Minor、Major、和 Full GC 事件的使用感到困惑。这也是我写这篇博客的原因，我希望能清楚地解释这其中的一些疑惑。<br>文章要求读者熟悉 JVM 内置的通用垃圾回收原则。堆内存划分为 Eden、Survivor 和 Tenured/Old 空间，代假设和其他不同的 GC 算法超出了本文讨论的范围。</p>
+        <p>在 Plumbr 从事 GC 暂停检测相关功能的工作时，我被迫用自己的方式，通过大量文章、书籍和演讲来介绍我所做的工作。在整个过程中，经常对 Minor、Major、和 Full GC 事件的使用感到困惑。这也是我写这篇博客的原因，我希望能清楚地解释这其中的一些疑惑。<br>文章要求读者熟悉 JVM 内置的通用垃圾回收原则。堆内存划分为 Eden、Survivor 和 Tenured/Old 空间，代假设和其他不同的 GC 算法超出了本文讨论的范围。</p>
 <h3 id="Minor-GC"><a href="#Minor-GC" class="headerlink" title="Minor GC"></a>Minor GC</h3><p>从年轻代空间（包括 Eden 和 Survivor 区域）回收内存被称为 Minor GC。这一定义既清晰又易于理解。但是，当发生Minor GC事件的时候，有一些有趣的地方需要注意到：</p>
 <a id="more"></a>
 <p>当 JVM 无法为一个新的对象分配空间时会触发 Minor GC，比如当 Eden 区满了。所以分配率越高，越频繁执行 Minor GC。<br>内存池被填满的时候，其中的内容全部会被复制，指针会从0开始跟踪空闲内存。Eden 和 Survivor 区进行了标记和复制操作，取代了经典的标记、扫描、压缩、清理操作。所以 Eden 和 Survivor 区不存在内存碎片。写指针总是停留在所使用内存池的顶部。<br>执行 Minor GC 操作时，不会影响到永久代。从永久代到年轻代的引用被当成 GC roots，从年轻代到永久代的引用在标记阶段被直接忽略掉。<br>质疑常规的认知，所有的 Minor GC 都会触发“全世界的暂停（stop-the-world）”，停止应用程序的线程。对于大部分应用程序，停顿导致的延迟都是可以忽略不计的。其中的真相就 是，大部分 Eden 区中的对象都能被认为是垃圾，永远也不会被复制到 Survivor 区或者老年代空间。如果正好相反，Eden 区大部分新生对象不符合 GC 条件，Minor GC 执行时暂停的时间将会长很多。<br>所以 Minor GC 的情况就相当清楚了——每次 Minor GC 会清理年轻代的内存。</p>
@@ -95,7 +98,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2196748335.html" data-id="ck295lbcy0001akvablm71qx8"
+      <a data-url="http://yoursite.com/2196748335.html" data-id="ck295thku0002n4vabf4s9yyr"
          class="article-share-link">分享</a>
       
     </footer>
@@ -170,6 +173,10 @@
     
       <li class="nav-item">
         <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
       </li>
     
       <li class="nav-item">
