@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>拦截器（Interceptor）与过滤器（Filter）的区别</title>
+    <url>/1588495736.html</url>
+    <content><![CDATA[<h3 id="拦截器（Interceptor）与过滤器（Filter）的区别"><a href="#拦截器（Interceptor）与过滤器（Filter）的区别" class="headerlink" title="拦截器（Interceptor）与过滤器（Filter）的区别"></a>拦截器（Interceptor）与过滤器（Filter）的区别</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>过滤器，是在java web中将你传入的request、response提前过滤掉一些信息，或者提前设置一些参数。然后再传入Servlet或Struts2的 action进行业务逻辑处理。比如过滤掉非法url（不是login.do的地址请求，如果用户没有登陆都过滤掉），或者在传入Servlet或Struts2的action前统一设置字符集，或者去除掉一些非法字符。</p>
+<p>拦截器，是面向切面编程（AOP，Aspect Oriented Program）的。就是在你的Service或者一个方法前调用一个方法，或者在方法后调用一个方法。比如动态代理就是拦截器的简单实现，在你调用方法前打印出字符串（或者做其它业务逻辑的操作），也可以在你调用方法后打印出字符串，甚至在你抛出异常的时候做业务逻辑的操作。</p>
+<a id="more"></a>
+<p>通俗理解：</p>
+<p>（1）过滤器（Filter）：当你有一堆东西的时候，你只希望选择符合你要求的某一些东西。定义这些要求的工具，就是过滤器。（理解：就是一堆字母中取一个B）</p>
+<p>（2）拦截器（Interceptor）：在一个流程正在进行的时候，你希望干预它的进展，甚至终止它进行，这是拦截器做的事情。（理解：就是一堆字母中，干预它，通过验证的少点，顺便干点别的东西）</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>主要区别：<br>拦截器是基于Java的反射机制的，而过滤器是基于函数回调。<br>拦截器不依赖于servlet容器，过滤器依赖于servlet容器。<br>拦截器只能对action请求起作用，而过滤器则可以对几乎所有的请求起作用。<br>拦截器可以访问action上下文、值栈里的对象，而过滤器不能访问。<br>在action的生命周期中，拦截器可以多次被调用，而过滤器只能在容器初始化时被调用一次<br>拦截器可以获取IOC容器中的各个bean，而过滤器就不行，这点很重要，在拦截器里注入一个service，可以调用业务逻辑。</p>
+<p>本质区别：<br>从灵活性上说拦截器功能更强大些，Filter能做的事情它都能做，而且可以在请求前，请求后执行，比较灵活。Filter主要是针对URL地址做一个编码的事情、过滤掉没用的参数、安全校验（比较泛的，比如登录不登录之类），太细的活儿还是建议用interceptor。具体还得根据不同情况选择合适的。<br><img src="/images/100020.jepg" alt="avatar"></p>
+<h4 id="执行顺序-："><a href="#执行顺序-：" class="headerlink" title="执行顺序 ："></a>执行顺序 ：</h4><p>过滤前—–拦截前—–Action处理—–拦截后—–过滤后。</p>
+<p>个人认为过滤是一个横向的过程，首先把客户端提交的内容进行过滤（例如未登录用户不能访问内部页面的处理）；过滤通过后，拦截器将进行用户提交数据的验证，做一些前期的数据处理；接着把处理后的数据发给对应的Action，Action处理完成返回后，拦截器还可以做些其他事情，再向上返回到过滤器的后续操作。<br><img src="/images/100021.jepg" alt="avatar"></p>
+<p>过滤器（Filter）是在请求进入容器后，但还未进入Servlet之前进行预处理的。请求结束返回也是，是在Servlet处理完后，返回给前端之前。所以过滤器（Filter）的doFilter(ServletRequest request, ServletResponse response, FilterChain chain<br>)的入参是ServletRequest ，而不是httpservletrequest。因为过滤器是在httpservlet之前。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void init(FilterConfig arg0) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> @Override</span><br><span class="line">public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException &#123;</span><br><span class="line">        System.out.println(&quot;before...&quot;);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        System.out.println(&quot;after...&quot;);</span><br><span class="line"> &#125;</span><br><span class="line">@Override</span><br><span class="line">public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Filter跟Servlet一样都是由服务器负责创建和销毁的。</p>
+<p>在web应用程序启动时，服务器会根据应用程序的web.xml文件中的配置信息调用public void init(FilterConfig filterConfig) throws ServletException方法来初始化Filter；在web应用程序被移除或者是服务器关闭时，会调用public void destroy()来销毁Filter。<br>在一个应用程序中一个Filter只会被创建和销毁一次。在初始化之后，Filter中声明了public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException方法，用来实现一些需要在拦截完成之后的业务逻辑。</p>
+<p>注意到上面的doFilter()方法的参数中，有FilterChain chain这个参数，它是传递过来的拦截链对象，里面包含了用户定义的一系列的拦截器，这些拦截器根据其在web.xml中定义的顺序依次被执行。当用户的信息验证通过或者当前拦截器不起作用时，我们可以执行chain.doFilter(request, response); 方法来跳过当前拦截器来执行拦截器链中的下一个拦截器。chain.doFilter(request, response); 这个方法的调用作为分水岭。事实上调用Servlet的doService()方法是在chain.doFilter(request, response); 这个方法中进行的。</p>
+<h4 id="拦截器与过滤器使用场景："><a href="#拦截器与过滤器使用场景：" class="headerlink" title="拦截器与过滤器使用场景："></a>拦截器与过滤器使用场景：</h4><p>SpringMVC的处理器拦截器类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理。</p>
+<p>1、日志记录：记录请求信息的日志，以便进行信息监控、信息统计、计算PV（Page View）等。<br>2、权限检查：如登录检测，进入处理器检测检测是否登录，如果没有直接返回到登录页面；<br>3、性能监控：有时候系统在某段时间莫名其妙的慢，可以通过拦截器在进入处理器之前记录开始时间，在处理完后记录结束时间，从而得到该请求的处理时间（如果有反向代理，如apache可以自动记录）；<br>4、通用行为：读取cookie得到用户信息并将用户对象放入请求，从而方便后续流程使用，还有如提取Locale、Theme信息等，只要是多个处理器都需要的即可使用拦截器实现。<br>5、OpenSessionInView：如hibernate，在进入处理器打开Session，在完成后关闭Session。</p>
+<h4 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h4><p>Spring的拦截器与Servlet的Filter有相似之处，比如二者都是AOP编程思想的体现，都能实现权限检查、日志记录等。</p>
+<p>不同的是：<br>使用范围不同：Filter是Servlet规范规定的，只能用于Web程序中。而拦截器既可以用于Web程序，也可以用于Application、Swing程序中。</p>
+<p>规范不同：Filter是在Servlet规范中定义的，是Servlet容器支持的。而拦截器是在Spring容器内的，是Spring框架支持的。</p>
+<p>使用的资源不同：同其他的代码块一样，拦截器也是一个Spring的组件，归Spring管理，配置在Spring文件中，因此能使用Spring里的任何资源、对象，例如Service对象、数据源、事务管理等，通过IOC注入到拦截器即可；而Filter则不能。</p>
+<p>深度不同：Filter在只在Servlet前后起作用。而拦截器能够深入到方法前后、异常抛出前后等，因此拦截器的使用具有更大的弹性。所以在Spring构架的程序中，要优先使用拦截器。<br>实际上Filter和Servlet极其相似，区别只是Filter不能直接对用户生成响应r里。实际上FiltedoFilter()方法里的代码就是从多个Servlet的service()方法里抽取的通用代码，通过使用Filter可以实现更好的复用。</p>
+<p>Filter是一个可以复用的代码片段，可以用来转换Http请求、响应和头信息。Filter不像Servlet，它不能产生一个请求或者响应，它只是修改对某一资源的请求，或者修改从某一资源的响应。</p>
+<p>JSR中说明的是，按照多个匹配的Filter，是按照其在web.xml中配置的顺序来执行的。所以这也就是，把自己的Filter或者其他的Filter（比如UrlRewrite的Filter）放在Struts2的 DispatcherFilter的前面的原因。因为它们需要在请求被Struts2框架处理之前，做一些前置的工作。<br>当Filter被调用，并且进入了Struts2的DispatcherFilter中后，Struts2会按照在Action中配置的Interceptor Stack中的Interceptor的顺序，来调用Interceptor。</p>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+  </entry>
+  <entry>
     <title>线程的五大状态</title>
     <url>/1776674258.html</url>
     <content><![CDATA[<h4 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h4><p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。<br><img src="/images/100019.png" alt="avatar"></p>
@@ -28,9 +61,10 @@
 <li>不要有超过5个以上的表连接（JOIN）</li>
 <li>考虑使用临时表或表变量存放中间结果。</li>
 <li>少用子查询</li>
-<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。<a id="more"></a>
-连接的表越多，其编译的时间和连接的开销也越大，性能越不好控制。<br>最好是把连接拆开成较小的几个部分逐个顺序执行。<br>优先执行那些能够大量减少结果的连接。</li>
+<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。</li>
 </ol>
+<a id="more"></a>
+<p>连接的表越多，其编译的时间和连接的开销也越大，性能越不好控制。<br>最好是把连接拆开成较小的几个部分逐个顺序执行。<br>优先执行那些能够大量减少结果的连接。</p>
 <p>拆分的好处不仅仅是减少SQL Server优化的时间，更使得SQL语句能够以你可以预测的方式和顺序执行。<br>如果一定需要连接很多表才能得到数据，那么很可能意味着设计上的缺陷。</p>
 <p>外连接是outer join，非常不好。因为outer join意味着必须对左表或右表查询所有行。<br>如果表很大而没有相应的where语句，那么outer join很容易导致table scan或index scan。<br>要尽量使用inner join避免scan整个表。</p>
 <h4 id="优化建议："><a href="#优化建议：" class="headerlink" title="优化建议："></a>优化建议：</h4><ol>
@@ -401,9 +435,9 @@
     <url>/2025562487.html</url>
     <content><![CDATA[<h3 id="in和exists的区别"><a href="#in和exists的区别" class="headerlink" title="in和exists的区别"></a>in和exists的区别</h3><p><em>转自：<a href="https://www.cnblogs.com/zhuyeshen/p/10955417.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhuyeshen/p/10955417.html</a><br>参考：<a href="http://www.pianshen.com/article/534497498/" target="_blank" rel="noopener">http://www.pianshen.com/article/534497498/</a><br>&#8195;&#8195;<a href="https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html</a></em></p>
 <h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><p>首先，查询中涉及到的两个表，一个user和一个order表，具体表的内容如下：</p>
-<p>user表：<br><img src="/images/100001.png" alt="avatar"></p>
-<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
+<p>user表：<br><img src="/images/100001.png" alt="avatar">  </p>
 <a id="more"></a>
+<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
 <h4 id="in查询"><a href="#in查询" class="headerlink" title="in查询"></a>in查询</h4><p>确定给定的值是否与子查询或列表中的值相匹配。in在查询的时候，首先查询子查询的表，然后将内表和外表做一个笛卡尔积，然后按照条件进行筛选。所以相对内表比较小的时候，in的速度较快。</p>
 <p>具体sql语句如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> 1 SELECT</span><br><span class="line"> 2     *</span><br><span class="line"> 3 FROM</span><br><span class="line"> 4     `user`</span><br><span class="line"> 5 WHERE</span><br><span class="line"> 6     `user`.id IN (</span><br><span class="line"> 7         SELECT</span><br><span class="line"> 8             `order`.user_id</span><br><span class="line"> 9         FROM</span><br><span class="line">10             `order`</span><br><span class="line">11     )</span><br></pre></td></tr></table></figure>

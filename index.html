@@ -63,6 +63,73 @@
       
         
 
+<article id="post-拦截器（Interceptor）与过滤器（Filter）的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/1588495736.html">拦截器（Interceptor）与过滤器（Filter）的区别</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/1588495736.html" class="article-date">
+  <time datetime="2019-10-28T12:54:53.362Z" itemprop="datePublished">2019-10-28</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="拦截器（Interceptor）与过滤器（Filter）的区别"><a href="#拦截器（Interceptor）与过滤器（Filter）的区别" class="headerlink" title="拦截器（Interceptor）与过滤器（Filter）的区别"></a>拦截器（Interceptor）与过滤器（Filter）的区别</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>过滤器，是在java web中将你传入的request、response提前过滤掉一些信息，或者提前设置一些参数。然后再传入Servlet或Struts2的 action进行业务逻辑处理。比如过滤掉非法url（不是login.do的地址请求，如果用户没有登陆都过滤掉），或者在传入Servlet或Struts2的action前统一设置字符集，或者去除掉一些非法字符。</p>
+<p>拦截器，是面向切面编程（AOP，Aspect Oriented Program）的。就是在你的Service或者一个方法前调用一个方法，或者在方法后调用一个方法。比如动态代理就是拦截器的简单实现，在你调用方法前打印出字符串（或者做其它业务逻辑的操作），也可以在你调用方法后打印出字符串，甚至在你抛出异常的时候做业务逻辑的操作。</p>
+        
+          <a class="article-more-link" href="/1588495736.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2afd8ed000bxkva8vpnfu24"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-线程的五大状态" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -111,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2aetzvp000cdovah2iogm89"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2afd8eb0008xkvabnhm4x85"
          class="article-share-link">分享</a>
       
     </footer>
@@ -177,14 +244,15 @@
 <li>不要有超过5个以上的表连接（JOIN）</li>
 <li>考虑使用临时表或表变量存放中间结果。</li>
 <li>少用子查询</li>
-<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。
+<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。</li>
+</ol>
         
           <a class="article-more-link" href="/2939935991.html">阅读全文...</a>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2aetzvn000bdovadoqr4nr7"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2afd8ec0009xkvaascr3p47"
          class="article-share-link">分享</a>
       
     </footer>
@@ -257,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2aetzvl0008dova8i2k44dh"
+      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2afd8ee000cxkva9k3qhf28"
          class="article-share-link">分享</a>
       
     </footer>
@@ -318,15 +386,14 @@
       
         <h3 id="in和exists的区别"><a href="#in和exists的区别" class="headerlink" title="in和exists的区别"></a>in和exists的区别</h3><p><em>转自：<a href="https://www.cnblogs.com/zhuyeshen/p/10955417.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhuyeshen/p/10955417.html</a><br>参考：<a href="http://www.pianshen.com/article/534497498/" target="_blank" rel="noopener">http://www.pianshen.com/article/534497498/</a><br>&#8195;&#8195;<a href="https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html</a></em></p>
 <h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><p>首先，查询中涉及到的两个表，一个user和一个order表，具体表的内容如下：</p>
-<p>user表：<br><img src="/images/100001.png" alt="avatar"></p>
-<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
+<p>user表：<br><img src="/images/100001.png" alt="avatar">  </p>
         
           <a class="article-more-link" href="/2025562487.html">阅读全文...</a>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2aetzvk0007dova2y86135a"
+      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2afd8e90006xkva19mt895r"
          class="article-share-link">分享</a>
       
     </footer>
@@ -393,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3786447307.html" data-id="ck2aetzvm0009dova9ldqf7r9"
+      <a data-url="http://yoursite.com/3786447307.html" data-id="ck2afd8eh000fxkva40b6div0"
          class="article-share-link">分享</a>
       
     </footer>
@@ -462,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/182044780.html" data-id="ck2aetzvg0004dovaak3w369g"
+      <a data-url="http://yoursite.com/182044780.html" data-id="ck2afd8e40003xkva2bz8hwjx"
          class="article-share-link">分享</a>
       
     </footer>
@@ -530,7 +597,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2196748335.html" data-id="ck2aetzvc0002dova93plgci3"
+      <a data-url="http://yoursite.com/2196748335.html" data-id="ck2afd8dz0001xkva978xe5qu"
          class="article-share-link">分享</a>
       
     </footer>

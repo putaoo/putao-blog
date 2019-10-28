@@ -85,9 +85,10 @@
 <li>不要有超过5个以上的表连接（JOIN）</li>
 <li>考虑使用临时表或表变量存放中间结果。</li>
 <li>少用子查询</li>
-<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。<a id="more"></a>
-连接的表越多，其编译的时间和连接的开销也越大，性能越不好控制。<br>最好是把连接拆开成较小的几个部分逐个顺序执行。<br>优先执行那些能够大量减少结果的连接。</li>
+<li>视图嵌套不要过深,一般视图嵌套不要超过2个为宜。</li>
 </ol>
+<a id="more"></a>
+<p>连接的表越多，其编译的时间和连接的开销也越大，性能越不好控制。<br>最好是把连接拆开成较小的几个部分逐个顺序执行。<br>优先执行那些能够大量减少结果的连接。</p>
 <p>拆分的好处不仅仅是减少SQL Server优化的时间，更使得SQL语句能够以你可以预测的方式和顺序执行。<br>如果一定需要连接很多表才能得到数据，那么很可能意味着设计上的缺陷。</p>
 <p>外连接是outer join，非常不好。因为outer join意味着必须对左表或右表查询所有行。<br>如果表很大而没有相应的where语句，那么outer join很容易导致table scan或index scan。<br>要尽量使用inner join避免scan整个表。</p>
 <h4 id="优化建议："><a href="#优化建议：" class="headerlink" title="优化建议："></a>优化建议：</h4><ol>
@@ -315,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2aetzvn000bdovadoqr4nr7"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2afd8ec0009xkvaascr3p47"
          class="article-share-link">分享</a>
       
     </footer>

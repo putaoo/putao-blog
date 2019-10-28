@@ -80,9 +80,9 @@
       
         <h3 id="in和exists的区别"><a href="#in和exists的区别" class="headerlink" title="in和exists的区别"></a>in和exists的区别</h3><p><em>转自：<a href="https://www.cnblogs.com/zhuyeshen/p/10955417.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhuyeshen/p/10955417.html</a><br>参考：<a href="http://www.pianshen.com/article/534497498/" target="_blank" rel="noopener">http://www.pianshen.com/article/534497498/</a><br>&#8195;&#8195;<a href="https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html</a></em></p>
 <h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><p>首先，查询中涉及到的两个表，一个user和一个order表，具体表的内容如下：</p>
-<p>user表：<br><img src="/images/100001.png" alt="avatar"></p>
-<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
+<p>user表：<br><img src="/images/100001.png" alt="avatar">  </p>
 <a id="more"></a>
+<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
 <h4 id="in查询"><a href="#in查询" class="headerlink" title="in查询"></a>in查询</h4><p>确定给定的值是否与子查询或列表中的值相匹配。in在查询的时候，首先查询子查询的表，然后将内表和外表做一个笛卡尔积，然后按照条件进行筛选。所以相对内表比较小的时候，in的速度较快。</p>
 <p>具体sql语句如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1 SELECT</span><br><span class="line"> 2     *</span><br><span class="line"> 3 FROM</span><br><span class="line"> 4     `user`</span><br><span class="line"> 5 WHERE</span><br><span class="line"> 6     `user`.id IN (</span><br><span class="line"> 7         SELECT</span><br><span class="line"> 8             `order`.user_id</span><br><span class="line"> 9         FROM</span><br><span class="line">10             `order`</span><br><span class="line">11     )</span><br></pre></td></tr></table></figure>
@@ -109,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2aetzvk0007dova2y86135a"
+      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2afd8e90006xkva19mt895r"
          class="article-share-link">分享</a>
       
     </footer>
