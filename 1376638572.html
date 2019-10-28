@@ -127,7 +127,7 @@
 <p>通常情况下”at-least-once”是我们首选.(相比at most once而言,重复接收数据总比丢失数据要好).</p>
 <h5 id="6、复制备份"><a href="#6、复制备份" class="headerlink" title="6、复制备份"></a>6、复制备份</h5><p>kafka将每个partition数据复制到多个server上,任何一个partition有一个leader和多个follower(可以没有);备份的个数可以通过broker配置文件来设定.leader处理所有的read-write请求,follower需要和leader保持同步.Follower和consumer一样,消费消息并保存在本地日志中;leader负责跟踪所有的follower状态,如果follower”落后”太多或者失效,leader将会把它从replicas同步列表中删除.当所有的follower都将一条消息保存成功,此消息才被认为是”committed”,那么此时consumer才能消费它.即使只有一个replicas实例存活,仍然可以保证消息的正常发送和接收,只要zookeeper集群存活即可.(不同于其他分布式存储,比如hbase需要”多数派”存活才行)</p>
 <p>当leader失效时,需在followers中选取出新的leader,可能此时follower落后于leader,因此需要选择一个”up-to-date”的follower.选择follower时需要兼顾一个问题,就是新leaderserver上所已经承载的partition leader的个数,如果一个server上有过多的partition leader,意味着此server将承受着更多的IO压力.在选举新leader,需要考虑到”负载均衡”.</p>
-<h5 id="7-日志"><a href="#7-日志" class="headerlink" title="7.日志"></a>7.日志</h5><p>如果一个topic的名称为”my_topic”,它有2个partitions,那么日志将会保存在my_topic_0和my_topic_1两个目录中;日志文件中保存了一序列”log entries”(日志条目),每个log entry格式为”4个字节的数字N表示消息的长度” + “N个字节的消息内容”;每个日志都有一个offset来唯一的标记一条消息,offset的值为8个字节的数字,表示此消息在此partition中所处的起始位置..每个partition在物理存储层面,有多个log file组成(称为segment).segmentfile的命名为”最小offset”.kafka.例如”00000000000.kafka”;其中”最小offset”表示此segment中起始消息的offset.</p>
+<h5 id="7、日志"><a href="#7、日志" class="headerlink" title="7、日志"></a>7、日志</h5><p>如果一个topic的名称为”my_topic”,它有2个partitions,那么日志将会保存在my_topic_0和my_topic_1两个目录中;日志文件中保存了一序列”log entries”(日志条目),每个log entry格式为”4个字节的数字N表示消息的长度” + “N个字节的消息内容”;每个日志都有一个offset来唯一的标记一条消息,offset的值为8个字节的数字,表示此消息在此partition中所处的起始位置..每个partition在物理存储层面,有多个log file组成(称为segment).segmentfile的命名为”最小offset”.kafka.例如”00000000000.kafka”;其中”最小offset”表示此segment中起始消息的offset.</p>
 <p><img src="/images/100012.png" alt="avatar"></p>
 <p>其中每个partiton中所持有的segments列表信息会存储在zookeeper中.</p>
 <p>当segment文件尺寸达到一定阀值时(可以通过配置文件设定,默认1G),将会创建一个新的文件;当buffer中消息的条数达到阀值时将会触发日志信息flush到日志文件中,同时如果”距离最近一次flush的时间差”达到阀值时,也会触发flush到日志文件.如果broker失效,极有可能会丢失那些尚未flush到文件的消息.因为server意外实现,仍然会导致log文件格式的破坏(文件尾部),那么就要求当server启东是需要检测最后一个segment的文件结构是否合法并进行必要的修复.</p>
@@ -211,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2acfg5000081ovafbypfiik"
+      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2aetzvl0008dova8i2k44dh"
          class="article-share-link">分享</a>
       
     </footer>
@@ -221,6 +221,15 @@
   
     
   <nav class="article-nav">
+    
+      <a href="/2939935991.html" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            SQL 优化总结
+          
+        </div>
+      </a>
     
     
       <a href="/2025562487.html" class="article-nav-link">

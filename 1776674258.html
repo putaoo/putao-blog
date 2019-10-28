@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    MyBatis面试题：# 和 $ 的区别是什么 |
+    线程的五大状态 |
     
     涛的BLOG</title>
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-MyBatis面试题：# 和 $ 的区别是什么" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-线程的五大状态" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MyBatis面试题：# 和 $ 的区别是什么
+      线程的五大状态
     </h1>
   
   
@@ -50,12 +50,12 @@
 
     
       <div class="article-meta">
-        <a href="/182044780.html" class="article-date">
-  <time datetime="2019-10-27T14:25:31.213Z" itemprop="datePublished">2019-10-27</time>
+        <a href="/1776674258.html" class="article-date">
+  <time datetime="2019-10-28T12:40:00.388Z" itemprop="datePublished">2019-10-28</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Mybatis/">Mybatis</a>
+    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
   </div>
 
       </div>
@@ -63,6 +63,8 @@
 
     
       
+    <div class="tocbot"></div>
+
 
 
 
@@ -76,32 +78,21 @@
       
 
       
-        <p><em>转载自：Mybatis中文网：<a href="http://www.mybatis.cn/" target="_blank" rel="noopener">http://www.mybatis.cn/</a></em></p>
-<p>经常碰到这样的面试题目：#{}和${}的区别是什么？</p>
-<p>正确的答案是：<strong>#{}是预编译处理，${}是字符串替换。</strong></p>
-<p>备注：${}是插值，插值的新认识见： <a href="http://www.mybatis.cn/archives/653.html" target="_blank" rel="noopener">http://www.mybatis.cn/archives/653.html</a></p>
+        <h4 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h4><p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。<br><img src="/images/100019.png" alt="avatar"></p>
 <a id="more"></a>
-<ol>
-<li><p>mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值。</p>
-</li>
-<li><p>mybatis在处理${}时，就是把${}替换成变量的值。</p>
-</li>
-<li><p>使用#{}可以有效的防止SQL注入，提高系统安全性。原因在于：预编译机制。预编译完成之后，SQL的结构已经固定，即便用户输入非法参数，也不会对SQL的结构产生影响，从而避免了潜在的安全风险。</p>
-</li>
-<li><p>预编译是提前对SQL语句进行预编译，而其后注入的参数将不会再进行SQL编译。我们知道，SQL注入是发生在编译的过程中，因为恶意注入了某些特殊字符，最后被编译成了恶意的执行操作。而预编译机制则可以很好的防止SQL注入。</p>
-</li>
-</ol>
-<p>补充1:</p>
-<p>$符号一般用来当作占位符，常使用Linux脚本的人应该对此有更深的体会吧。例如：$1，$2等等表示输入参数的占位符。知道了这点就能很容易区分$和#，从而不容易记错了。</p>
-<p>补充2：</p>
-<p>万事洞明皆学问，对于mybatis与sql这两门技术而言，看似简单，但是深挖进去会发现里面的东西还是挺多的。要想成为一名合格的开发人员，需要不断的去学习，更需要不断的去思考。可以参考：<a href="http://www.mybatis.cn/category/mysql-mybatis/" target="_blank" rel="noopener">http://www.mybatis.cn/category/mysql-mybatis/</a> ，系统的学习sql和mybatis的东西，这是本站2019年计划出版的小册子，欢迎试读。</p>
-<p>补充3：</p>
-<p>有网友提问：既然${}会引起sql注入，为什么有了#{}还需要有${}呢？那其存在的意义是什么？<br>可以这么去理解：#{}主要用于预编译，而预编译的场景其实非常受限，而${}用于替换，很多场景会出现替换，而这种场景可不是预编译，例如：MyBatis XML配置对抗MyBatis注解的一大杀器：SQL片段，抽取可重用的SQL语句。</p>
+<h5 id="1-新建状态"><a href="#1-新建状态" class="headerlink" title="1.新建状态"></a>1.新建状态</h5><p>当用new操作符创建一个线程时。此时程序还没有开始运行线程中的代码。</p>
+<h5 id="2-就绪状态"><a href="#2-就绪状态" class="headerlink" title="2.就绪状态"></a>2.就绪状态</h5><p>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，start()方法创建线程运行的系统资源，并等待调度线程调度。当start()方法返回后，线程就处于就绪状态。</p>
+<p>处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序来调度的。</p>
+<p>当线程对象调用start()方法之后，该线程就处于就绪状态，处于这个状态的线程并没有开始运行，只是表示该线程可以运行了。至于该线程何时开始运行，取决于JVM里线程调度器的调度。</p>
+<h5 id="3-运行状态（running）"><a href="#3-运行状态（running）" class="headerlink" title="3.运行状态（running）"></a>3.运行状态（running）</h5><p>当线程获得CPU时间后，它才进入运行状态，真正开始执行run()方法。</p>
+<h5 id="4-阻塞状态（blocked）"><a href="#4-阻塞状态（blocked）" class="headerlink" title="4.阻塞状态（blocked）"></a>4.阻塞状态（blocked）</h5><p>线程运行过程中，可能由于各种原因进入阻塞状态：<br>①线程通过调用sleep方法进入睡眠状态；<br>②线程调用一个在I/O上被阻塞的操作，即该操作在输入输出操作完成之前不会返回到它的调用者；<br>③线程试图得到一个锁，而该锁正被其他线程持有；<br>④线程在等待某个触发条件；<br>所谓阻塞状态是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。</p>
+<h5 id="5-死亡状态（dead）"><a href="#5-死亡状态（dead）" class="headerlink" title="5.死亡状态（dead）"></a>5.死亡状态（dead）</h5><p>有两个原因会导致线程死亡：<br>①run方法正常退出而自然死亡；<br>②一个未捕获的异常终止了run方法而使线程猝死；</p>
+<p>为了确定线程在当前是否存活着（就是要么是可运行的，要么是被阻塞了），需要使用isAlive方法，如果是可运行或被阻塞，这个方法返回true；如果线程仍旧是new状态且不是可运行的，或者线程死亡了，则返回false。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/182044780.html" data-id="ck2aetzvg0004dovaak3w369g"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2aetzvp000cdovah2iogm89"
          class="article-share-link">分享</a>
       
     </footer>
@@ -112,19 +103,10 @@
     
   <nav class="article-nav">
     
-      <a href="/3786447307.html" class="article-nav-link">
-        <strong class="article-nav-caption">前一篇</strong>
-        <div class="article-nav-title">
-          
-            电商系统中关于订单和库存的几个问题
-          
-        </div>
-      </a>
     
-    
-      <a href="/2196748335.html" class="article-nav-link">
+      <a href="/2939935991.html" class="article-nav-link">
         <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">Minor GC、Major GC和Full GC之间的区别</div>
+        <div class="article-nav-title">SQL 优化总结</div>
       </a>
     
   </nav>
