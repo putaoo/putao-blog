@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Mysql中in和exist的区别 |
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-Mysql中in和exist的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql中in和exist的区别
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2025562487.html" class="article-date">
+  <time datetime="2019-10-28T10:40:50.790Z" itemprop="datePublished">2019-10-28</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="in和exists的区别"><a href="#in和exists的区别" class="headerlink" title="in和exists的区别"></a><em>in和exists的区别</em></h3><h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><p>首先，查询中涉及到的两个表，一个user和一个order表，具体表的内容如下：</p>
+<p>user表：<br><img src="/images/100001.png" alt="avatar"></p>
+<p>order表：<br><img src="/images/100002.png" alt="avatar"></p>
+<a id="more"></a>
+<h4 id="in查询"><a href="#in查询" class="headerlink" title="in查询"></a>in查询</h4><p>确定给定的值是否与子查询或列表中的值相匹配。in在查询的时候，首先查询子查询的表，然后将内表和外表做一个笛卡尔积，然后按照条件进行筛选。所以相对内表比较小的时候，in的速度较快。</p>
+<p>具体sql语句如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> 1 SELECT</span><br><span class="line"> 2     *</span><br><span class="line"> 3 FROM</span><br><span class="line"> 4     `user`</span><br><span class="line"> 5 WHERE</span><br><span class="line"> 6     `user`.id IN (</span><br><span class="line"> 7         SELECT</span><br><span class="line"> 8             `order`.user_id</span><br><span class="line"> 9         FROM</span><br><span class="line">10             `order`</span><br><span class="line">11     )</span><br></pre></td></tr></table></figure>
+<p>这条语句很简单，通过子查询查到的user_id 的数据，去匹配user表中的id然后得到结果。该语句执行结果如下：<br><img src="/images/100003.png" alt="avatar"></p>
+<p>它的执行流程是什么样子的呢？让我们一起来看一下。</p>
+<p>首先，在数据库内部，查询子查询，执行如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">    `order`.user_id</span><br><span class="line">FROM</span><br><span class="line">    `order`</span><br></pre></td></tr></table></figure>
+<p>执行完毕后，得到结果如下：<br><img src="100004.png" alt="avatar"><br>此时，将查询到的结果和原有的user表做一个笛卡尔积，结果如下：<br><img src="100005.png" alt="avatar"><br>此时，再根据我们的user.id IN order.user_id的条件，将结果进行筛选（既比较id列和user_id 列的值是否相等，将不相等的删除）。最后，得到两条符合条件的数据。<br><img src="100006.png" alt="avatar">
+　　　　</p>
+<h4 id="exists"><a href="#exists" class="headerlink" title="exists"></a>exists</h4><p>指定一个子查询，检测行的存在。遍历循环外表，然后看外表中的记录有没有和内表的数据一样的。匹配上就将结果放入结果集中。</p>
+<p>具体sql语句如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1 SELECT</span><br><span class="line"> 2     `user`.*</span><br><span class="line"> 3 FROM</span><br><span class="line"> 4     `user`</span><br><span class="line"> 5 WHERE</span><br><span class="line"> 6     EXISTS (</span><br><span class="line"> 7         SELECT</span><br><span class="line"> 8             `order`.user_id</span><br><span class="line"> 9         FROM</span><br><span class="line">10             `order`</span><br><span class="line">11         WHERE</span><br><span class="line">12             `user`.id = `order`.user_id</span><br><span class="line">13     )</span><br></pre></td></tr></table></figure>
+<p>这条sql语句的执行结果和上面的in的执行结果是一样的:<br><img src="100007.png" alt="avatar"></p>
+<p>但是，不一样的是它们的执行流程完全不一样：</p>
+<p>使用exists关键字进行查询的时候，首先，我们先查询的不是子查询的内容，而是查我们的主查询的表，也就是说，我们先执行的sql语句是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT `user`.* FROM `user`</span><br></pre></td></tr></table></figure>
+<p>得到的结果如下：<br><img src="100008.png" alt="avatar"><br>然后，根据表的每一条记录，执行以下语句，依次去判断where后面的条件是否成立：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">EXISTS (</span><br><span class="line">        SELECT</span><br><span class="line">            `order`.user_id</span><br><span class="line">        FROM</span><br><span class="line">            `order`</span><br><span class="line">        WHERE</span><br><span class="line">            `user`.id = `order`.user_id</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>如果成立则返回true不成立则返回false。如果返回的是true的话，则该行结果保留，如果返回的是false的话，则删除该行，最后将得到的结果返回。</p>
+<h4 id="区别及应用场景"><a href="#区别及应用场景" class="headerlink" title="区别及应用场景"></a>区别及应用场景</h4><p>in 和 exists的区别: 如果子查询得出的结果集记录较少，主查询中的表较大且又有索引时应该用in, 反之如果外层的主查询记录较少，子查询中的表大，又有索引时使用exists。其实我们区分in和exists主要是造成了驱动顺序的改变(这是性能变化的关键)，如果是exists，那么以外层表为驱动表，先被访问，如果是IN，那么先执行子查询，所以我们会以驱动表的快速返回为目标，那么就会考虑到索引及结果集的关系了 ，另外IN时不对NULL进行处理。</p>
+<p>in 是把外表和内表作hash 连接，而exists是对外表作loop循环，每次loop循环再对内表进行查询。一直以来认为exists比in效率高的说法是不准确的。</p>
+<h4 id="not-in-和not-exists"><a href="#not-in-和not-exists" class="headerlink" title="not in 和not exists"></a>not in 和not exists</h4><p>如果查询语句使用了not in 那么内外表都进行全表扫描，没有用到索引；而not extsts 的子查询依然能用到表上的索引。所以无论那个表大，用not exists都比not in要快。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2aal8fn0006dkva7rtq7ggb"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/3887008439.html" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">MySQL中exists和in的区别及使用场景</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
