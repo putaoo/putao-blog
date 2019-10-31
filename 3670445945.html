@@ -78,34 +78,34 @@
       
 
       
-        <h2 id="领域驱动设计"><a href="#领域驱动设计" class="headerlink" title="领域驱动设计"></a>领域驱动设计</h2><h3 id="软件模型要素"><a href="#软件模型要素" class="headerlink" title="软件模型要素"></a>软件模型要素</h3><p><em>摘自 Eric Evans 《领域驱动设计：软件核心复杂性应对之道》</em></p>
-<h4 id="ENTITY-实体"><a href="#ENTITY-实体" class="headerlink" title="ENTITY(实体)"></a>ENTITY(实体)</h4><h5 id="ENTITY建模"><a href="#ENTITY建模" class="headerlink" title="ENTITY建模"></a>ENTITY建模</h5><p>最基本的职责是确保连续性，使其行为清晰且可预测。</p>
+        <h3 id="软件模型要素"><a href="#软件模型要素" class="headerlink" title="软件模型要素"></a>软件模型要素</h3><p><em>摘自 Eric Evans 《领域驱动设计：软件核心复杂性应对之道》</em></p>
+<h3 id="ENTITY-实体"><a href="#ENTITY-实体" class="headerlink" title="ENTITY(实体)"></a>ENTITY(实体)</h3><h4 id="ENTITY建模"><a href="#ENTITY建模" class="headerlink" title="ENTITY建模"></a>ENTITY建模</h4><p>最基本的职责是确保连续性，使其行为清晰且可预测。</p>
 <p>保持实体简练是实现上述职责的关键。</p>
 <a id="more"></a>
 <p>抓住定义实体最核心的特征，尤其是用于识别，查找，或匹配对象的特征。</p>
 <p>实体除了标识问题，往往通过协调其关联的对象的操作来完成自己的职责。</p>
 <p>示例：<br><img src="/images/100023.jpg" alt="avatar"></p>
-<h5 id="唯一标识"><a href="#唯一标识" class="headerlink" title="唯一标识"></a>唯一标识</h5><p>保持全局唯一</p>
-<h4 id="VALUE-OBJECT-值对象"><a href="#VALUE-OBJECT-值对象" class="headerlink" title="VALUE OBJECT(值对象)"></a>VALUE OBJECT(值对象)</h4><p>用于描述领域某个方面而本身没有概念标识的对象。</p>
+<h4 id="唯一标识"><a href="#唯一标识" class="headerlink" title="唯一标识"></a>唯一标识</h4><p>保持全局唯一</p>
+<h3 id="VALUE-OBJECT-值对象"><a href="#VALUE-OBJECT-值对象" class="headerlink" title="VALUE OBJECT(值对象)"></a>VALUE OBJECT(值对象)</h3><p>用于描述领域某个方面而本身没有概念标识的对象。</p>
 <p>实例化后用来表示一些设计元素，只关心它们是什么，而不用关心它们是谁。</p>
 <p>示例：在电力运营公司的软件中，一个地址对应于公司线路和服务的一个目的地。如果几个室友各自打电话申请电力服务，公司需要知道他们其实是住在同一个地方。在这种情况下，地址是一个ENTITY。换种方式，模型可以将电力服务与住处关联起来，住处就是一个带有地址属性的ENTITY了，这里的地址就是一个VALUE OBJECT。</p>
 <p>VALUE OBJECT 经常作为参数在对象之间传递消息。</p>
 <p>当我们只关心一个模型元素的属性时，应该把它归类为VALUE OBJECT。我们应该使这个模型元素能够表示出其属性的意义，并为它提供相关功能。VALUE OBJECT 是不可变的。不要为它分配任何标识。也不要设计成ENTITY那么复杂。</p>
 <p><img src="/images/100024.jpg" alt="avatar"></p>
-<h5 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h5><p>复制：可能导致系统被大量的对象阻塞。挡在两个机器之间传递一个副本时，只需发送一条消息，副本到达接收端是独立存在的。</p>
+<h4 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h4><p>复制：可能导致系统被大量的对象阻塞。挡在两个机器之间传递一个副本时，只需发送一条消息，副本到达接收端是独立存在的。</p>
 <p>共享：可能会减慢分布式系统的速度。传递的是一个引用，这要求每次交互都要向发送方返回一条消息。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 节省数据库空间或减少对象数量是一个关键要求时。</span><br><span class="line">2. 通信开销很低时（如中央服务器中）。</span><br><span class="line">3. 共享的对象被严格限定为不可变时。</span><br><span class="line">  3.1 保持VALUE OBJECT 不可变极大简化了实现，并确保共享和引用传递的安全性。</span><br><span class="line">  3.2 特殊情况</span><br><span class="line">    3.2.1 如果VALUE频繁改变。</span><br><span class="line">    3.2.2 如果创建或删除对象的开销很大。</span><br><span class="line">    3.2.3 如果替换（而不是修改）将打乱集群。</span><br><span class="line">    3.2.4 如果VALUE的共享不多，或者共享不会提高集群性能，或其他某种技术原因。</span><br></pre></td></tr></table></figure>
-<h4 id="SERVICE-服务"><a href="#SERVICE-服务" class="headerlink" title="SERVICE(服务)"></a>SERVICE(服务)</h4><p>SERVICE是作为接口提供的一种操作，他在模型中是独立的，它不像ENTITY和VALUE OBJECT 那样具有封装的状态。</p>
+<h3 id="SERVICE-服务"><a href="#SERVICE-服务" class="headerlink" title="SERVICE(服务)"></a>SERVICE(服务)</h3><p>SERVICE是作为接口提供的一种操作，他在模型中是独立的，它不像ENTITY和VALUE OBJECT 那样具有封装的状态。</p>
 <p>它强调与其他对象的关系。只是定义了能够给客户做什么。是一个动词，以一个活动来命名。</p>
 <p>SERVICE有定义的职责，这种职责以及履行它的接口应该是作为领域模型的一部分来加以定义。</p>
-<h5 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h5><p>与领域概念相关的操作不是ENTITY或VALUE OBJECT 的一个自然组成部分。</p>
+<h4 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h4><p>与领域概念相关的操作不是ENTITY或VALUE OBJECT 的一个自然组成部分。</p>
 <p>接口是根据领域模型的其他元素定义的。</p>
 <p>操作是无状态的。<br>无状态指任何客户都可以使用某个SERVICE的任何实例，不必关心该实例的历史状态。</p>
 <p>当领域中的某个重要的过程或转换操作不是ENTITY或VALUE OBJECT 的自然职责时，应该在模型中添加一个作为独立接口的操作，并将其声明为SERICE。定义接口时要使用模型语言，并确保操作名称是UBIQUITOUS LANGUAGE中的术语。此外，应该使SERVICE成为无状态的。</p>
-<h5 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h5><p>控制领域层中接口的粒度，并且避免客户端与ENTITY和VALUE OBJECT耦合。</p>
+<h4 id="粒度"><a href="#粒度" class="headerlink" title="粒度"></a>粒度</h4><p>控制领域层中接口的粒度，并且避免客户端与ENTITY和VALUE OBJECT耦合。</p>
 <p>在大型系统中，中等粒度的、无状态的SERVICE更容易被复用，因为它们在简单的接口背后封装了重要的功能。此外，细粒度的对象可能导致分布式系统的消息传递效率低下。</p>
 <p>引入领域层服务有助于应用层和领域层之间保持一条明确的界限。</p>
-<h4 id="MODULE-模块，也称PACKAGE"><a href="#MODULE-模块，也称PACKAGE" class="headerlink" title="MODULE(模块，也称PACKAGE)"></a>MODULE(模块，也称PACKAGE)</h4><p>MODULE也是一种表达机制。</p>
+<h3 id="MODULE-模块，也称PACKAGE"><a href="#MODULE-模块，也称PACKAGE" class="headerlink" title="MODULE(模块，也称PACKAGE)"></a>MODULE(模块，也称PACKAGE)</h3><p>MODULE也是一种表达机制。</p>
 <p>它的选择应该取决于被划分到模块中的对象的意义。</p>
 <p>如果模型讲述了一个故事，MODULE就是这个故事的各个章节。</p>
 <p>一个内聚的概念集合。MODULE之间是低耦合的。</p>
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3670445945.html" data-id="ck2evsww8000t04va9essevk8"
+      <a data-url="http://yoursite.com/3670445945.html" data-id="ck2evzrnh0011akva6lj30jhu"
          class="article-share-link">分享</a>
       
     </footer>
