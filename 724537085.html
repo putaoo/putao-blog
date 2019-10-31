@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    ArrayList与LinkedList的区别 |
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-ArrayList与LinkedList的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ArrayList与LinkedList的区别
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/724537085.html" class="article-date">
+  <time datetime="2019-10-29T14:17:59.895Z" itemprop="datePublished">2019-10-29</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别"></a>ArrayList 与 LinkedList 区别</h3><p>一，是否线程安全：都是不同步的，也就是不保证线程安全；</p>
+<p>二，底层数据结构：ArrayList 底层使用的是 Object[] 数组；LinkedList 使用的是双向链表数据结构（JDK1.6前为双向循环链表，JDK1.7后取消了循环）；</p>
+<p>三，插入删除影响：① ArrayList 采用数组存储，因此插入和删除元素的时间复杂度都受元素位置的影响。比如：执行 add(E e) 方法的时候， ArrayList 会默认将该元素追加到此列表的末尾，这种情况的时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)），那么时间复杂度就为 O(n-i)，因为在进行上述操作的时候，集合中第 i 和第 i 个元素之后的 (n-i) 个元素，都要执行向后/前位移一位的操作。 ② LinkedList 采用的是链表存储，所以插入、删除元素时间复杂度不受元素位置的影响，都是近似 O(1)，而数组为近似 O(n)；</p>
+<p>四，快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持，所谓快速随机访问，是通过元素的序号来定位元素对象 (对应get(int index)方法)；</p>
+<p>五，内存空间占用： ArrayList 的空间浪费，主要体现在 List 列表的结尾，会预留一定的空间容量；而 LinkedList 的空间花费，则体现在它的每一个元素，都需要消耗比 ArrayList 更多的空间，这是由于直接后继和直接前驱的存在。</p>
+<p>关于 RandomAccess 接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface RandomAccess &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看源码可以看到， RandomAccess 接口中什么都没有定义。所以，这就是个标识接口，标识那些实现了这个接口的类，具有随机访问的功能。</p>
+<p>在 binarySearch() 方法中，它要判断传入的 List 是否是 RamdomAccess 的实例。如果是，则调用 indexedBinarySearch() 方法；如果不是，那么就调用 iteratorBinarySearch() 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; int binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) &#123;</span><br><span class="line">    if (list instanceof RandomAccess || list.size()&lt;BINARYSEARCH_THRESHOLD)</span><br><span class="line">        return Collections.indexedBinarySearch(list, key);</span><br><span class="line">    else</span><br><span class="line">        return Collections.iteratorBinarySearch(list, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayList 实现了 RandomAccess 接口， 而 LinkedList 没有实现。为什么呢？还是和底层数据结构有关。ArrayList 底层是数组，而 LinkedList 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以支持快速随机访问。而链表需要遍历到特定的位置，才能访问特定位置的元素，时间复杂度为 O(n)，所以不是快速高效的随机访问。</p>
+<p>ArrayList 实现了 RandomAccess 接口，表明了具有快速随机访问的功能。不过 RandomAccess 接口只是一个标识，并不是说 ArrayList 实现 RandomAccess 接口，才具有快速随机访问的功能！</p>
+<p>总结 List 的遍历方式选择：</p>
+<p>实现了 RandomAccess 接口的 list，优先选择普通 for 循环 ，其次 foreach；<br>未实现 RandomAccess 接口的 ist， 优先选择 iterator 遍历（foreach 遍历底层也是通过 iterator 实现的），大 size 的数据，千万不要使用普通 for 循环。<br>关于双向链表和双向循环链表<br>双向链表</p>
+<p>双向链表： 包含两个指针，一个 prev 指针指向前一个节点（第一个 prev 指向 nil），一个 next 指针指向后一个节点（最后一个 next 同样指向 nil）；</p>
+<p>双向循环链表： 最后一个节点的 next 指针指向第一个节点的 head，而第一个节点的 head 的 prev 指针指向最后一个节点，所以是构成一个循环。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2etg9u4000138va43an901b"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/664034925.html" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            Java实体类序列化id的作用
+          
+        </div>
+      </a>
+    
+    
+      <a href="/1588495736.html" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">拦截器（Interceptor）与过滤器（Filter）的区别</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    线程的五大状态 |
+    Java实体类序列化id的作用 |
     
     涛的BLOG</title>
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-线程的五大状态" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-Java实体类序列化id的作用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      线程的五大状态
+      Java实体类序列化id的作用
     </h1>
   
   
@@ -50,12 +50,12 @@
 
     
       <div class="article-meta">
-        <a href="/1776674258.html" class="article-date">
-  <time datetime="2019-10-28T12:40:00.388Z" itemprop="datePublished">2019-10-28</time>
+        <a href="/664034925.html" class="article-date">
+  <time datetime="2019-10-31T14:00:17.036Z" itemprop="datePublished">2019-10-31</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
   </div>
 
       </div>
@@ -78,21 +78,25 @@
       
 
       
-        <h4 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h4><p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。<br><img src="/images/100019.png" alt="avatar"></p>
+        <h3 id="Java序列化时候序列ID作用"><a href="#Java序列化时候序列ID作用" class="headerlink" title="Java序列化时候序列ID作用"></a>Java序列化时候序列ID作用</h3><p>简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
 <a id="more"></a>
-<h5 id="1-新建状态"><a href="#1-新建状态" class="headerlink" title="1.新建状态"></a>1.新建状态</h5><p>当用new操作符创建一个线程时。此时程序还没有开始运行线程中的代码。</p>
-<h5 id="2-就绪状态"><a href="#2-就绪状态" class="headerlink" title="2.就绪状态"></a>2.就绪状态</h5><p>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，start()方法创建线程运行的系统资源，并等待调度线程调度。当start()方法返回后，线程就处于就绪状态。</p>
-<p>处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序来调度的。</p>
-<p>当线程对象调用start()方法之后，该线程就处于就绪状态，处于这个状态的线程并没有开始运行，只是表示该线程可以运行了。至于该线程何时开始运行，取决于JVM里线程调度器的调度。</p>
-<h5 id="3-运行状态（running）"><a href="#3-运行状态（running）" class="headerlink" title="3.运行状态（running）"></a>3.运行状态（running）</h5><p>当线程获得CPU时间后，它才进入运行状态，真正开始执行run()方法。</p>
-<h5 id="4-阻塞状态（blocked）"><a href="#4-阻塞状态（blocked）" class="headerlink" title="4.阻塞状态（blocked）"></a>4.阻塞状态（blocked）</h5><p>线程运行过程中，可能由于各种原因进入阻塞状态：<br>①线程通过调用sleep方法进入睡眠状态；<br>②线程调用一个在I/O上被阻塞的操作，即该操作在输入输出操作完成之前不会返回到它的调用者；<br>③线程试图得到一个锁，而该锁正被其他线程持有；<br>④线程在等待某个触发条件；<br>所谓阻塞状态是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。</p>
-<h5 id="5-死亡状态（dead）"><a href="#5-死亡状态（dead）" class="headerlink" title="5.死亡状态（dead）"></a>5.死亡状态（dead）</h5><p>有两个原因会导致线程死亡：<br>①run方法正常退出而自然死亡；<br>②一个未捕获的异常终止了run方法而使线程猝死；</p>
-<p>为了确定线程在当前是否存活着（就是要么是可运行的，要么是被阻塞了），需要使用isAlive方法，如果是可运行或被阻塞，这个方法返回true；如果线程仍旧是new状态且不是可运行的，或者线程死亡了，则返回false。</p>
+<p>当实现java.io.Serializable接口的实体（类）没有显式地定义一个名为serialVersionUID，类型为long的变量时，Java序列化机制会根据编译的class自动生成一个serialVersionUID作序列化版本比较用，这种情况下，只有同一次编译生成的class才会生成相同的serialVersionUID 。</p>
+<p>如果我们不希望通过编译来强制划分软件版本，即实现序列化接口的实体能够兼容先前版本，未作更改的类，就需要显式地定义一个名为serialVersionUID，类型为long的变量，不修改这个变量值的序列化实体都可以相互进行串行化和反串行化。</p>
+<p>假设两年前我保存了某个类的一个对象，这两年来，我修改该类，删除了某个属性和增加了另外一个属性，两年后，我又去读取那个保存的对象，或有什么结果？未知！sun的jdk就会蒙了。为此，一个解决办法就是在类中增加版本后，每一次类的属性修改，都应该把版本号升级一下，这样，在读取时，比较存储对象时的版本号与当前类的版本号，如果不一致，则直接报版本号不同的错!</p>
+<p>异常场景回忆如下：</p>
+<pre><code>环境：
+
+1）分布式即多台resin服务器；
+
+2）序列化的java类没有显示定义serialVersionUID；
+
+3）使用了redis作为缓存（序列化后的对象存入redis缓存中）；</code></pre><p>在使用过程，报序列化时候版本不兼容，即serialVersionUID不同异常。由于不显示定义serialVersionUID，在分布式环境，相同类的class在不同resin在的class的serialVersionUID不同，反序列化就容易报此异常。</p>
+<p>所以，在使用序列化过程中，最好显示定义序列号。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2etg9ut000i38vabqopcqj3"
+      <a data-url="http://yoursite.com/664034925.html" data-id="ck2etg9u8000338vahd1630f2"
          class="article-share-link">分享</a>
       
     </footer>
@@ -103,19 +107,19 @@
     
   <nav class="article-nav">
     
-      <a href="/1588495736.html" class="article-nav-link">
+      <a href="/4237283706.html" class="article-nav-link">
         <strong class="article-nav-caption">前一篇</strong>
         <div class="article-nav-title">
           
-            拦截器（Interceptor）与过滤器（Filter）的区别
+            PO BO VO DTO POJO DAO DO在java中的概念及应用
           
         </div>
       </a>
     
     
-      <a href="/2939935991.html" class="article-nav-link">
+      <a href="/724537085.html" class="article-nav-link">
         <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">SQL 优化总结</div>
+        <div class="article-nav-title">ArrayList与LinkedList的区别</div>
       </a>
     
   </nav>

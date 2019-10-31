@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    线程的五大状态 |
+    PO BO VO DTO POJO DAO DO在java中的概念及应用 |
     
     涛的BLOG</title>
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-线程的五大状态" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-PO BO VO DTO POJO DAO DO在java中的概念及应用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      线程的五大状态
+      PO BO VO DTO POJO DAO DO在java中的概念及应用
     </h1>
   
   
@@ -50,12 +50,12 @@
 
     
       <div class="article-meta">
-        <a href="/1776674258.html" class="article-date">
-  <time datetime="2019-10-28T12:40:00.388Z" itemprop="datePublished">2019-10-28</time>
+        <a href="/4237283706.html" class="article-date">
+  <time datetime="2019-10-31T14:17:14.442Z" itemprop="datePublished">2019-10-31</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
   </div>
 
       </div>
@@ -78,21 +78,21 @@
       
 
       
-        <h4 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h4><p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。<br><img src="/images/100019.png" alt="avatar"></p>
+        <h3 id="PO-BO-VO-DTO-POJO-DAO-DO这些Java中的概念分别指一些什么？"><a href="#PO-BO-VO-DTO-POJO-DAO-DO这些Java中的概念分别指一些什么？" class="headerlink" title="PO BO VO DTO POJO DAO DO这些Java中的概念分别指一些什么？"></a>PO BO VO DTO POJO DAO DO这些Java中的概念分别指一些什么？</h3><p>有面试官问道该问题，知道部分概念，现进行全面的总结。</p>
+<h4 id="缩写的含义"><a href="#缩写的含义" class="headerlink" title="缩写的含义"></a>缩写的含义</h4><h5 id="PO"><a href="#PO" class="headerlink" title="PO"></a>PO</h5><p>是 Persistant Object 的缩写，用于表示数据库中的一条记录映射成的 java 对象。PO 仅仅用于表示数据，没有任何数据操作。通常遵守 Java Bean 的规范，拥有 getter/setter 方法。</p>
 <a id="more"></a>
-<h5 id="1-新建状态"><a href="#1-新建状态" class="headerlink" title="1.新建状态"></a>1.新建状态</h5><p>当用new操作符创建一个线程时。此时程序还没有开始运行线程中的代码。</p>
-<h5 id="2-就绪状态"><a href="#2-就绪状态" class="headerlink" title="2.就绪状态"></a>2.就绪状态</h5><p>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，start()方法创建线程运行的系统资源，并等待调度线程调度。当start()方法返回后，线程就处于就绪状态。</p>
-<p>处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序来调度的。</p>
-<p>当线程对象调用start()方法之后，该线程就处于就绪状态，处于这个状态的线程并没有开始运行，只是表示该线程可以运行了。至于该线程何时开始运行，取决于JVM里线程调度器的调度。</p>
-<h5 id="3-运行状态（running）"><a href="#3-运行状态（running）" class="headerlink" title="3.运行状态（running）"></a>3.运行状态（running）</h5><p>当线程获得CPU时间后，它才进入运行状态，真正开始执行run()方法。</p>
-<h5 id="4-阻塞状态（blocked）"><a href="#4-阻塞状态（blocked）" class="headerlink" title="4.阻塞状态（blocked）"></a>4.阻塞状态（blocked）</h5><p>线程运行过程中，可能由于各种原因进入阻塞状态：<br>①线程通过调用sleep方法进入睡眠状态；<br>②线程调用一个在I/O上被阻塞的操作，即该操作在输入输出操作完成之前不会返回到它的调用者；<br>③线程试图得到一个锁，而该锁正被其他线程持有；<br>④线程在等待某个触发条件；<br>所谓阻塞状态是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。</p>
-<h5 id="5-死亡状态（dead）"><a href="#5-死亡状态（dead）" class="headerlink" title="5.死亡状态（dead）"></a>5.死亡状态（dead）</h5><p>有两个原因会导致线程死亡：<br>①run方法正常退出而自然死亡；<br>②一个未捕获的异常终止了run方法而使线程猝死；</p>
-<p>为了确定线程在当前是否存活着（就是要么是可运行的，要么是被阻塞了），需要使用isAlive方法，如果是可运行或被阻塞，这个方法返回true；如果线程仍旧是new状态且不是可运行的，或者线程死亡了，则返回false。</p>
+<h5 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h5><p>是 Data Access Object 的缩写，用于表示一个数据访问对象。使用 DAO 访问数据库，包括插入、更新、删除、查询等操作，与 PO 一起使用。DAO 一般在持久层，完全封装数据库操作，对外暴露的方法使得上层应用不需要关注数据库相关的任何信息。</p>
+<h5 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h5><p>是 Value Object 的缩写，用于表示一个与前端进行交互的 java 对象。有的朋友也许有疑问，这里可不可以使用 PO 传递数据？实际上，这里的 VO 只包含前端需要展示的数据即可，对于前端不需要的数据，比如数据创建和修改的时间等字段，出于减少传输数据量大小和保护数据库结构不外泄的目的，不应该在 VO 中体现出来。通常遵守 Java Bean 的规范，拥有 getter/setter 方法。</p>
+<h5 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h5><p>是 Data Transfer Object 的缩写，用于表示一个数据传输对象。DTO 通常用于不同服务或服务不同分层之间的数据传输。DTO 与 VO 概念相似，并且通常情况下字段也基本一致。但 DTO 与 VO 又有一些不同，这个不同主要是设计理念上的，比如 API 服务需要使用的 DTO 就可能与 VO 存在差异。通常遵守 Java Bean 的规范，拥有 getter/setter 方法。</p>
+<h5 id="BO"><a href="#BO" class="headerlink" title="BO"></a>BO</h5><p>是 Business Object 的缩写，用于表示一个业务对象。BO 包括了业务逻辑，常常封装了对 DAO、RPC 等的调用，可以进行 PO 与 VO/DTO 之间的转换。BO 通常位于业务层，要区别于直接对外提供服务的服务层：BO 提供了基本业务单元的基本业务操作，在设计上属于被服务层业务流程调用的对象，一个业务流程可能需要调用多个 BO 来完成。</p>
+<h5 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h5><p>是 Plain Ordinary Java Object 的缩写，表示一个简单 java 对象。上面说的 PO、VO、DTO 都是典型的 POJO。而 DAO、BO 一般都不是 POJO，只提供一些调用方法。</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>如图表示了各个Object在分层架构中承担的职责，它有效地控制了信息地传播。</p>
+<p><img src="/images/100017.jpg" alt="avatar"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2etg9ut000i38vabqopcqj3"
+      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2etg9ub000538vagzo624kn"
          class="article-share-link">分享</a>
       
     </footer>
@@ -103,19 +103,19 @@
     
   <nav class="article-nav">
     
-      <a href="/1588495736.html" class="article-nav-link">
+      <a href="/3806922126.html" class="article-nav-link">
         <strong class="article-nav-caption">前一篇</strong>
         <div class="article-nav-title">
           
-            拦截器（Interceptor）与过滤器（Filter）的区别
+            如何优化数据库(概述)
           
         </div>
       </a>
     
     
-      <a href="/2939935991.html" class="article-nav-link">
+      <a href="/664034925.html" class="article-nav-link">
         <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">SQL 优化总结</div>
+        <div class="article-nav-title">Java实体类序列化id的作用</div>
       </a>
     
   </nav>
