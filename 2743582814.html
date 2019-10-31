@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    如何控制多线程执行顺序 |
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-如何控制多线程执行顺序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何控制多线程执行顺序
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2743582814.html" class="article-date">
+  <time datetime="2019-10-31T15:08:40.262Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="如何控制多线程执行顺序"><a href="#如何控制多线程执行顺序" class="headerlink" title="如何控制多线程执行顺序"></a>如何控制多线程执行顺序</h3><h4 id="方法一：Join（）使用"><a href="#方法一：Join（）使用" class="headerlink" title="方法一：Join（）使用"></a>方法一：Join（）使用</h4><p>先看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main.java;</span><br><span class="line"></span><br><span class="line">public class App &#123;</span><br><span class="line"></span><br><span class="line">  static Thread thread1 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">      System.out.println(&quot;thread1&quot;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">  static Thread thread2 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line"></span><br><span class="line">      System.out.println(&quot;thread2&quot;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">  static Thread thread3 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">      System.out.println(&quot;thread3&quot;);</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) throws InterruptedException&#123;</span><br><span class="line"></span><br><span class="line">      thread1.start();</span><br><span class="line">      thread1.join();</span><br><span class="line"></span><br><span class="line">      thread2.start();</span><br><span class="line">      thread2.join();</span><br><span class="line"></span><br><span class="line">      thread3.start();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thread1</span><br><span class="line">thread2</span><br><span class="line">thread3</span><br></pre></td></tr></table></figure>
+<p>我们不管执行多少次都是按顺序执行的。</p>
+<p>原理分析：<br>Join（）作用：让主线程等待子线程运行结束后才能继续运行。<br>这段代码里面的意思是这样的：</p>
+<p>程序在main线程中调用thread1线程的join方法，则main线程放弃cpu控制权，并返回thread1线程继续执行直到线程thread1执行完毕<br>所以结果是thread1线程执行完后，才到主线程执行，相当于在main线程中同步thread1线程，thread1执行完了，main线程才有执行的机会.</p>
+<p>我们来看看join（）的源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* Waits at most &lt;code&gt;millis&lt;/code&gt; milliseconds for this thread to</span><br><span class="line">* die. A timeout of &lt;code&gt;0&lt;/code&gt; means to wait forever.</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">public final synchronized void join(long millis)</span><br><span class="line">  throws InterruptedException &#123;</span><br><span class="line">  long base = System.currentTimeMillis();</span><br><span class="line">  long now = 0;</span><br><span class="line"></span><br><span class="line">  if (millis &lt; 0) &#123;</span><br><span class="line">    throw new IllegalArgumentException(&quot;timeout value is negative&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (millis == 0) &#123;</span><br><span class="line">    while (isAlive()) &#123;</span><br><span class="line">      wait(0);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    while (isAlive()) &#123;</span><br><span class="line">      long delay = millis - now;</span><br><span class="line">      if (delay &lt;= 0) &#123;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">      wait(delay);</span><br><span class="line">      now = System.currentTimeMillis() - base;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>源码解读：<br>这里有一个isAlive()方法很重要。什么意思呢？<br>判断当前线程是否处于活动状态。活动状态就是线程启动且尚未终止，比如正在运行或准备开始运行。</p>
+<p>所以从代码上看，如果线程被生成了，但还未被起动，调用它的 join() 方法是没有作用的，将直接继续向下执行。</p>
+<p>wait()方法，什么意思呢？<br>在Object.java中，wait()的作用是让当前线程进入等待状态，同时，wait()也会让当前线程释放它所持有的锁。</p>
+<p>所以Join()主要就是通过wait()方法来实现这个目的的。</p>
+<p>最后来个代码步骤解读吧：<br>1： 主线程运行；<br>2：创建thread1线程 （创建后的thread1线程状态为新建状态）；<br>3：主线程调用thread1.start()方法 （thread1线程状态变为就绪状态，等待cpu的一个资源调度，有了资源后thread1状态为运行状态）；<br>4：主线程调用thread1.join() 方法 （主线程会休眠，等待子线程thread1运行结束后才会继续运行）。</p>
+<h4 id="方法二：ExecutorService-的使用"><a href="#方法二：ExecutorService-的使用" class="headerlink" title="方法二：ExecutorService ()的使用"></a>方法二：ExecutorService ()的使用</h4><p>依旧先看代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package main.java;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.ExecutorService;</span><br><span class="line">import java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line">public class App &#123;</span><br><span class="line"></span><br><span class="line">static Thread thread1 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">    System.out.println(&quot;thread1&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static Thread thread2 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;thread2&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">static Thread thread3 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">    System.out.println(&quot;thread3&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">static ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) throws InterruptedException&#123;</span><br><span class="line"></span><br><span class="line">    executorService.submit(thread1);</span><br><span class="line">    executorService.submit(thread2);</span><br><span class="line">    executorService.submit(thread3);</span><br><span class="line"></span><br><span class="line">    executorService.shutdown();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thread1</span><br><span class="line">thread2</span><br><span class="line">thread3</span><br></pre></td></tr></table></figure>
+<p>结果：无论运行多少次，结果都是按照我们的顺序执行的。</p>
+<p>原理：利用并发包里的Excutors的newSingleThreadExecutor产生一个单线程的线程池，而这个线程池的底层原理就是一个先进先出（FIFO）的队列。代码中executor.submit依次添加了123线程，按照FIFO的特性，执行顺序也就是123的执行结果，从而保证了执行顺序。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2743582814.html" data-id="ck2eukbyv000mewva8a8leuli"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/4132421017.html" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">explain执行计划详解</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

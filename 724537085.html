@@ -54,6 +54,10 @@
   <time datetime="2019-10-29T14:17:59.895Z" itemprop="datePublished">2019-10-29</time>
 </a>
         
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/List/">List</a>
+  </div>
+
       </div>
     
 
@@ -76,6 +80,7 @@
       
         <h3 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别"></a>ArrayList 与 LinkedList 区别</h3><p>一，是否线程安全：都是不同步的，也就是不保证线程安全；</p>
 <p>二，底层数据结构：ArrayList 底层使用的是 Object[] 数组；LinkedList 使用的是双向链表数据结构（JDK1.6前为双向循环链表，JDK1.7后取消了循环）；</p>
+<a id="more"></a>
 <p>三，插入删除影响：① ArrayList 采用数组存储，因此插入和删除元素的时间复杂度都受元素位置的影响。比如：执行 add(E e) 方法的时候， ArrayList 会默认将该元素追加到此列表的末尾，这种情况的时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)），那么时间复杂度就为 O(n-i)，因为在进行上述操作的时候，集合中第 i 和第 i 个元素之后的 (n-i) 个元素，都要执行向后/前位移一位的操作。 ② LinkedList 采用的是链表存储，所以插入、删除元素时间复杂度不受元素位置的影响，都是近似 O(1)，而数组为近似 O(n)；</p>
 <p>四，快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持，所谓快速随机访问，是通过元素的序号来定位元素对象 (对应get(int index)方法)；</p>
 <p>五，内存空间占用： ArrayList 的空间浪费，主要体现在 List 列表的结尾，会预留一定的空间容量；而 LinkedList 的空间花费，则体现在它的每一个元素，都需要消耗比 ArrayList 更多的空间，这是由于直接后继和直接前驱的存在。</p>
@@ -95,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/724537085.html" data-id="ck2etqacr0003h0vagljg2ova"
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2eukbyd0002ewva3asbb7yr"
          class="article-share-link">分享</a>
       
     </footer>

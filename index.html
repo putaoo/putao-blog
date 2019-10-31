@@ -63,6 +63,143 @@
       
         
 
+<article id="post-如何控制多线程执行顺序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2743582814.html">如何控制多线程执行顺序</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2743582814.html" class="article-date">
+  <time datetime="2019-10-31T15:08:40.262Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="如何控制多线程执行顺序"><a href="#如何控制多线程执行顺序" class="headerlink" title="如何控制多线程执行顺序"></a>如何控制多线程执行顺序</h3><h4 id="方法一：Join（）使用"><a href="#方法一：Join（）使用" class="headerlink" title="方法一：Join（）使用"></a>方法一：Join（）使用</h4><p>先看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main.java;</span><br><span class="line"></span><br><span class="line">public class App &#123;</span><br><span class="line"></span><br><span class="line">  static Thread thread1 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">      System.out.println(&quot;thread1&quot;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2743582814.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2743582814.html" data-id="ck2eukbyv000mewva8a8leuli"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-explain执行计划详解" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/4132421017.html">explain执行计划详解</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/4132421017.html" class="article-date">
+  <time datetime="2019-10-31T15:00:00.919Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="explain执行计划详解"><a href="#explain执行计划详解" class="headerlink" title="explain执行计划详解"></a>explain执行计划详解</h3><p>MySQL 优化sql  explain执行计划详解</p>
+<p><img src="/images/100022.png" alt="avatar"></p>
+<p>1）、id列数字越大越先执行，如果说数字一样大，那么就从上往下依次执行，id列为null的就表是这是一个结果集，不需要使用它来进行查询。</p>
+<p>2）、select_type列常见的有：</p>
+<p>A：simple：表示不需要union操作或者不包含子查询的简单select查询。有连接查询时，外层的查询为simple，且只有一个</p>
+        
+          <a class="article-more-link" href="/4132421017.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/4132421017.html" data-id="ck2eukbyo000bewvaagm81ke1"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-数据库查询优化30条注意事项" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -114,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2etqad8000mh0vage2uc6l5"
+      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2eukbyy000newva4rnv2f71"
          class="article-share-link">分享</a>
       
     </footer>
@@ -182,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2etqad6000jh0vabwd14bms"
+      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2eukbyr000fewvaf7i4h1bs"
          class="article-share-link">分享</a>
       
     </footer>
@@ -249,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2etqad2000eh0va77q44abw"
+      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2eukbym0008ewvadkbx9b0q"
          class="article-share-link">分享</a>
       
     </footer>
@@ -315,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2etqacn0001h0vaetix8add"
+      <a data-url="http://yoursite.com/664034925.html" data-id="ck2eukbyl0007ewvafonydgkf"
          class="article-share-link">分享</a>
       
     </footer>
@@ -358,6 +495,10 @@
   <time datetime="2019-10-29T14:17:59.895Z" itemprop="datePublished">2019-10-29</time>
 </a>
         
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/List/">List</a>
+  </div>
+
       </div>
     
 
@@ -372,26 +513,13 @@
       
         <h3 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别"></a>ArrayList 与 LinkedList 区别</h3><p>一，是否线程安全：都是不同步的，也就是不保证线程安全；</p>
 <p>二，底层数据结构：ArrayList 底层使用的是 Object[] 数组；LinkedList 使用的是双向链表数据结构（JDK1.6前为双向循环链表，JDK1.7后取消了循环）；</p>
-<p>三，插入删除影响：① ArrayList 采用数组存储，因此插入和删除元素的时间复杂度都受元素位置的影响。比如：执行 add(E e) 方法的时候， ArrayList 会默认将该元素追加到此列表的末尾，这种情况的时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)），那么时间复杂度就为 O(n-i)，因为在进行上述操作的时候，集合中第 i 和第 i 个元素之后的 (n-i) 个元素，都要执行向后/前位移一位的操作。 ② LinkedList 采用的是链表存储，所以插入、删除元素时间复杂度不受元素位置的影响，都是近似 O(1)，而数组为近似 O(n)；</p>
-<p>四，快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持，所谓快速随机访问，是通过元素的序号来定位元素对象 (对应get(int index)方法)；</p>
-<p>五，内存空间占用： ArrayList 的空间浪费，主要体现在 List 列表的结尾，会预留一定的空间容量；而 LinkedList 的空间花费，则体现在它的每一个元素，都需要消耗比 ArrayList 更多的空间，这是由于直接后继和直接前驱的存在。</p>
-<p>关于 RandomAccess 接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface RandomAccess &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>查看源码可以看到， RandomAccess 接口中什么都没有定义。所以，这就是个标识接口，标识那些实现了这个接口的类，具有随机访问的功能。</p>
-<p>在 binarySearch() 方法中，它要判断传入的 List 是否是 RamdomAccess 的实例。如果是，则调用 indexedBinarySearch() 方法；如果不是，那么就调用 iteratorBinarySearch() 方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; int binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) &#123;</span><br><span class="line">    if (list instanceof RandomAccess || list.size()&lt;BINARYSEARCH_THRESHOLD)</span><br><span class="line">        return Collections.indexedBinarySearch(list, key);</span><br><span class="line">    else</span><br><span class="line">        return Collections.iteratorBinarySearch(list, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ArrayList 实现了 RandomAccess 接口， 而 LinkedList 没有实现。为什么呢？还是和底层数据结构有关。ArrayList 底层是数组，而 LinkedList 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以支持快速随机访问。而链表需要遍历到特定的位置，才能访问特定位置的元素，时间复杂度为 O(n)，所以不是快速高效的随机访问。</p>
-<p>ArrayList 实现了 RandomAccess 接口，表明了具有快速随机访问的功能。不过 RandomAccess 接口只是一个标识，并不是说 ArrayList 实现 RandomAccess 接口，才具有快速随机访问的功能！</p>
-<p>总结 List 的遍历方式选择：</p>
-<p>实现了 RandomAccess 接口的 list，优先选择普通 for 循环 ，其次 foreach；<br>未实现 RandomAccess 接口的 ist， 优先选择 iterator 遍历（foreach 遍历底层也是通过 iterator 实现的），大 size 的数据，千万不要使用普通 for 循环。<br>关于双向链表和双向循环链表<br>双向链表</p>
-<p>双向链表： 包含两个指针，一个 prev 指针指向前一个节点（第一个 prev 指向 nil），一个 next 指针指向后一个节点（最后一个 next 同样指向 nil）；</p>
-<p>双向循环链表： 最后一个节点的 next 指针指向第一个节点的 head，而第一个节点的 head 的 prev 指针指向最后一个节点，所以是构成一个循环。</p>
-
+        
+          <a class="article-more-link" href="/724537085.html">阅读全文...</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/724537085.html" data-id="ck2etqacr0003h0vagljg2ova"
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2eukbyd0002ewva3asbb7yr"
          class="article-share-link">分享</a>
       
     </footer>
@@ -458,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2etqad4000fh0va7gtce57q"
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2eukbyt000iewvafvq3axnb"
          class="article-share-link">分享</a>
       
     </footer>
@@ -524,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2etqad5000ih0vaepq1hi9c"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2eukbyz000qewvaez4gc4ng"
          class="article-share-link">分享</a>
       
     </footer>
@@ -598,148 +726,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2etqacz000ah0vabj8bhuqb"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-kafka入门：简介、使用场景、设计原理、主要配置及集群搭建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/1376638572.html">kafka入门：简介、使用场景、设计原理、主要配置及集群搭建</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/1376638572.html" class="article-date">
-  <time datetime="2019-10-28T11:31:52.184Z" itemprop="datePublished">2019-10-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Kafka/">Kafka</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="Kafka简介使用场景设计原理"><a href="#Kafka简介使用场景设计原理" class="headerlink" title="Kafka简介使用场景设计原理"></a>Kafka简介使用场景设计原理</h3><p><em>关于kafka说明可以参考：<a href="http://kafka.apache.org/documentation.html" target="_blank" rel="noopener">http://kafka.apache.org/documentation.html</a></em></p>
-<p><em>文章转自：<a href="http://www.aboutyun.com/thread-9341-1-1.html" target="_blank" rel="noopener">http://www.aboutyun.com/thread-9341-1-1.html</a></em></p>
-<h4 id="问题导读："><a href="#问题导读：" class="headerlink" title="问题导读："></a>问题导读：</h4><ol>
-<li>zookeeper在kafka的作用是什么？  </li>
-<li>kafka中几乎不允许对消息进行“随机读写”的原因是什么？</li>
-<li>kafka集群consumer和producer状态信息是如何保存的？</li>
-<li>partitions设计的目的的根本原因是什么？</li>
-</ol>
-        
-          <a class="article-more-link" href="/1376638572.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2etqad0000bh0va6z2r6eov"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Mysql中in和exist的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2025562487.html">Mysql中in和exist的区别</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2025562487.html" class="article-date">
-  <time datetime="2019-10-28T10:40:50.790Z" itemprop="datePublished">2019-10-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="in和exists的区别"><a href="#in和exists的区别" class="headerlink" title="in和exists的区别"></a>in和exists的区别</h3><p><em>转自：<a href="https://www.cnblogs.com/zhuyeshen/p/10955417.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhuyeshen/p/10955417.html</a><br>参考：<a href="http://www.pianshen.com/article/534497498/" target="_blank" rel="noopener">http://www.pianshen.com/article/534497498/</a><br>&#8195;&#8195;<a href="https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoxiong-kankan/p/7928153.html</a></em></p>
-<h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><p>首先，查询中涉及到的两个表，一个user和一个order表，具体表的内容如下：</p>
-<p>user表：<br><img src="/images/100001.png" alt="avatar">  </p>
-        
-          <a class="article-more-link" href="/2025562487.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2etqacy0008h0va2w02ergi"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2eukbyp000eewvabkwba28x"
          class="article-share-link">分享</a>
       
     </footer>
