@@ -85,9 +85,9 @@
 <p>（1）过滤器（Filter）：当你有一堆东西的时候，你只希望选择符合你要求的某一些东西。定义这些要求的工具，就是过滤器。（理解：就是一堆字母中取一个B）</p>
 <p>（2）拦截器（Interceptor）：在一个流程正在进行的时候，你希望干预它的进展，甚至终止它进行，这是拦截器做的事情。（理解：就是一堆字母中，干预它，通过验证的少点，顺便干点别的东西）</p>
 <h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>主要区别：<br>拦截器是基于Java的反射机制的，而过滤器是基于函数回调。<br>拦截器不依赖于servlet容器，过滤器依赖于servlet容器。<br>拦截器只能对action请求起作用，而过滤器则可以对几乎所有的请求起作用。<br>拦截器可以访问action上下文、值栈里的对象，而过滤器不能访问。<br>在action的生命周期中，拦截器可以多次被调用，而过滤器只能在容器初始化时被调用一次<br>拦截器可以获取IOC容器中的各个bean，而过滤器就不行，这点很重要，在拦截器里注入一个service，可以调用业务逻辑。</p>
-<p>本质区别：<br>从灵活性上说拦截器功能更强大些，Filter能做的事情它都能做，而且可以在请求前，请求后执行，比较灵活。Filter主要是针对URL地址做一个编码的事情、过滤掉没用的参数、安全校验（比较泛的，比如登录不登录之类），太细的活儿还是建议用interceptor。具体还得根据不同情况选择合适的。<br><img src="/images/100020.jepg" alt="avatar"></p>
+<p>本质区别：<br>从灵活性上说拦截器功能更强大些，Filter能做的事情它都能做，而且可以在请求前，请求后执行，比较灵活。Filter主要是针对URL地址做一个编码的事情、过滤掉没用的参数、安全校验（比较泛的，比如登录不登录之类），太细的活儿还是建议用interceptor。具体还得根据不同情况选择合适的。<br><img src="/images/100020.jpeg" alt="avatar"></p>
 <h4 id="执行顺序-："><a href="#执行顺序-：" class="headerlink" title="执行顺序 ："></a>执行顺序 ：</h4><p>过滤前—–拦截前—–Action处理—–拦截后—–过滤后。</p>
-<p>个人认为过滤是一个横向的过程，首先把客户端提交的内容进行过滤（例如未登录用户不能访问内部页面的处理）；过滤通过后，拦截器将进行用户提交数据的验证，做一些前期的数据处理；接着把处理后的数据发给对应的Action，Action处理完成返回后，拦截器还可以做些其他事情，再向上返回到过滤器的后续操作。<br><img src="/images/100021.jepg" alt="avatar"></p>
+<p>个人认为过滤是一个横向的过程，首先把客户端提交的内容进行过滤（例如未登录用户不能访问内部页面的处理）；过滤通过后，拦截器将进行用户提交数据的验证，做一些前期的数据处理；接着把处理后的数据发给对应的Action，Action处理完成返回后，拦截器还可以做些其他事情，再向上返回到过滤器的后续操作。<br><img src="/images/100021.jpeg" alt="avatar"></p>
 <p>过滤器（Filter）是在请求进入容器后，但还未进入Servlet之前进行预处理的。请求结束返回也是，是在Servlet处理完后，返回给前端之前。所以过滤器（Filter）的doFilter(ServletRequest request, ServletResponse response, FilterChain chain<br>)的入参是ServletRequest ，而不是httpservletrequest。因为过滤器是在httpservlet之前。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void init(FilterConfig arg0) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> @Override</span><br><span class="line">public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException &#123;</span><br><span class="line">        System.out.println(&quot;before...&quot;);</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        System.out.println(&quot;after...&quot;);</span><br><span class="line"> &#125;</span><br><span class="line">@Override</span><br><span class="line">public void destroy() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -107,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2evzrnc000xakva7wwlcv8o"
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2fg0hki000or0va9kwk9aub"
          class="article-share-link">分享</a>
       
     </footer>
