@@ -63,6 +63,206 @@
       
         
 
+<article id="post-Java实体类序列化id的作用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/664034925.html">Java实体类序列化id的作用</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/664034925.html" class="article-date">
+  <time datetime="2019-10-31T14:00:17.036Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="Java序列化时候序列ID作用"><a href="#Java序列化时候序列ID作用" class="headerlink" title="Java序列化时候序列ID作用"></a>Java序列化时候序列ID作用</h3><p>简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
+        
+          <a class="article-more-link" href="/664034925.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/664034925.html" data-id="ck2g4sefe000b7wvad9m31olj"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-ArrayList与LinkedList的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/724537085.html">ArrayList与LinkedList的区别</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/724537085.html" class="article-date">
+  <time datetime="2019-10-29T14:17:59.895Z" itemprop="datePublished">2019-10-29</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/List/">List</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别"></a>ArrayList 与 LinkedList 区别</h3><p>一，是否线程安全：都是不同步的，也就是不保证线程安全；</p>
+<p>二，底层数据结构：ArrayList 底层使用的是 Object[] 数组；LinkedList 使用的是双向链表数据结构（JDK1.6前为双向循环链表，JDK1.7后取消了循环）；</p>
+        
+          <a class="article-more-link" href="/724537085.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2g4sef200017wva58ycg88i"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-拦截器（Interceptor）与过滤器（Filter）的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/1588495736.html">拦截器（Interceptor）与过滤器（Filter）的区别</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/1588495736.html" class="article-date">
+  <time datetime="2019-10-28T12:54:53.362Z" itemprop="datePublished">2019-10-28</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="拦截器（Interceptor）与过滤器（Filter）的区别"><a href="#拦截器（Interceptor）与过滤器（Filter）的区别" class="headerlink" title="拦截器（Interceptor）与过滤器（Filter）的区别"></a>拦截器（Interceptor）与过滤器（Filter）的区别</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>过滤器，是在java web中将你传入的request、response提前过滤掉一些信息，或者提前设置一些参数。然后再传入Servlet或Struts2的 action进行业务逻辑处理。比如过滤掉非法url（不是login.do的地址请求，如果用户没有登陆都过滤掉），或者在传入Servlet或Struts2的action前统一设置字符集，或者去除掉一些非法字符。</p>
+<p>拦截器，是面向切面编程（AOP，Aspect Oriented Program）的。就是在你的Service或者一个方法前调用一个方法，或者在方法后调用一个方法。比如动态代理就是拦截器的简单实现，在你调用方法前打印出字符串（或者做其它业务逻辑的操作），也可以在你调用方法后打印出字符串，甚至在你抛出异常的时候做业务逻辑的操作。</p>
+        
+          <a class="article-more-link" href="/1588495736.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2g4sefr000t7wva4adqcn1a"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-线程的五大状态" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -111,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2fg0hkl000vr0va576p8m57"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2g4sefu00107wva8temgo4z"
          class="article-share-link">分享</a>
       
     </footer>
@@ -185,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2fg0hk50008r0va3pwbh89l"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2g4sefo000o7wvaeh6u6b4a"
          class="article-share-link">分享</a>
       
     </footer>
@@ -258,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2fg0hkg000kr0va7qke7coo"
+      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2g4sefn000n7wva8iqdekk2"
          class="article-share-link">分享</a>
       
     </footer>
@@ -326,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2fg0hk8000br0vaetas3afr"
+      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2g4sef600037wva3wybgdjc"
          class="article-share-link">分享</a>
       
     </footer>
@@ -393,7 +593,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3786447307.html" data-id="ck2fg0hkk000sr0va5yqud7yc"
+      <a data-url="http://yoursite.com/3786447307.html" data-id="ck2g4sefv00137wvafxiz43ty"
          class="article-share-link">分享</a>
       
     </footer>
@@ -462,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/182044780.html" data-id="ck2fg0hk70009r0vadgy42yol"
+      <a data-url="http://yoursite.com/182044780.html" data-id="ck2g4sefc00087wva3pvp0k7y"
          class="article-share-link">分享</a>
       
     </footer>
@@ -530,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2196748335.html" data-id="ck2fg0hka000cr0vacnjr45j1"
+      <a data-url="http://yoursite.com/2196748335.html" data-id="ck2g4sefd00097wvaeuew4tvr"
          class="article-share-link">分享</a>
       
     </footer>

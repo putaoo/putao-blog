@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Redis的Key设计原则 |
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-Redis的Key设计原则" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis的Key设计原则
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2868983245.html" class="article-date">
+  <time datetime="2019-11-01T12:44:22.061Z" itemprop="datePublished">2019-11-01</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Redis/">Redis</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="Redis-的key-设计原则"><a href="#Redis-的key-设计原则" class="headerlink" title="Redis 的key 设计原则"></a>Redis 的key 设计原则</h3><p>Redis是一款基于内存式的key-value的NO-SQL数据库。可以作为数据库、缓存服务或消息服务使等。支持丰富的数据类型。比如: 字符串、哈希表、链表、集合、有序集合、位图、Hyperloglogs等</p>
+<p> Redis具备LRU淘汰、事务实现、以及不同级别的硬盘持久化等能力，并且支持副本集和通过Redis Sentinel实现的高可用方案，同时还支持通过Redis Cluster实现的数据自动分片能力。</p>
+<p> Redis的主要功能都基于单线程模型实现，也就是说Redis使用一个线程来服务所有的客户端请求，<br>同时Redis采用了非阻塞式IO，并精细地优化各种命令的算法时间复杂度，这些信息意味着：<br>Redis是线程安全的（因为只有一个线程），其所有操作都是原子的，不会因并发产生数据异<br>常</p>
+<a id="more"></a>
+
+<p>Redis的速度非常快（因为使用非阻塞式IO，且大部分命令的算法时间复杂度都是O(1))<br>使用高耗时的Redis命令是很危险的，会占用唯一的一个线程的大量处理时间，导致所有的请<br>求都被拖慢。（例如时间复杂度为O(N)的KEYS命令，严格禁止在生产环境中使用）</p>
+<h5 id="关于Key的一些注意事项："><a href="#关于Key的一些注意事项：" class="headerlink" title="关于Key的一些注意事项："></a>关于Key的一些注意事项：</h5><p>不要使用过长的Key。例如使用一个1024字节的key就不是一个好主意，不仅会消耗更多的内存，还会导致查找的效率降低</p>
+<p>Key短到缺失了可读性也是不好的，例如”u1000flw”比起”user:1000:followers”来说，节省了寥寥的存储空间，却引发了可读性和可维护性上的麻烦</p>
+<p>最好使用统一的规范来设计Key，比如”object-type:id:attr”，以这一规范设计出的Key可能<br>是”user:1000”或”comment:1234:reply-to”</p>
+<p>Redis允许的最大Key长度是512MB（对Value的长度限制也是512MB）</p>
+<p>Redis没有Int、Float、Boolean等数据类型的概念，所有的基本类型在Redis中都以String体现。</p>
+<h5 id="与String相关的常用命令："><a href="#与String相关的常用命令：" class="headerlink" title="与String相关的常用命令："></a>与String相关的常用命令：</h5><p>SET：为一个key设置value，可以配合EX/PX参数指定key的有效期，通过NX/XX参数针对<br>key是否存在的情况进行区别操作，时间复杂度O(1)</p>
+<p>GET：获取某个key对应的value，时间复杂度O(1)</p>
+<p>GETSET：为一个key设置value，并返回该key的原value，时间复杂度O(1)</p>
+<p>MSET：为多个key设置value，时间复杂度O(N)</p>
+<p>MSETNX：同MSET，如果指定的key中有任意一个已存在，则不进行任何操作，时间复杂度<br>O(N)</p>
+<p>MGET：获取多个key对应的value，时间复杂度O(N)</p>
+<p>Redis的基本数据类型只有String，但Redis可以把String作为整型或浮点型数字来使<br>用，主要体现在INCR、DECR类的命令上：</p>
+<p>INCR：将key对应的value值自增1，并返回自增后的值。只对可以转换为整型的String数据起<br>作用。时间复杂度O(1)</p>
+<p>INCRBY：将key对应的value值自增指定的整型数值，并返回自增后的值。只对可以转换为整<br>型的String数据起作用。时间复杂度O(1)</p>
+<p>DECR/DECRBY：同INCR/INCRBY，自增改为自减。</p>
+<p>INCR/DECR系列命令要求操作的value类型为String，并可以转换为64位带符号的整型数字，否则<br>会返回错误。<br>也就是说，进行INCR/DECR系列命令的value，必须在[-2^63 ~ 2^63 - 1]范围内。</p>
+<p>前文提到过，Redis采用单线程模型，天然是线程安全的，这使得INCR/DECR命令可以非常便利的<br>实现高并发场景下的精确控制。</p>
+<p><em>转自：<a href="https://blog.csdn.net/xingyue0422/article/details/88837790" target="_blank" rel="noopener">https://blog.csdn.net/xingyue0422/article/details/88837790</a></em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2868983245.html" data-id="ck2g4sefj000f7wvagupqbf6a"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/3685033284.html" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">Redis中设置了过期时间的Key，还需要知道什么</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
