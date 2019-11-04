@@ -1,7 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>云服务器安装使用amysql</title>
+    <title>云服务器安装Redis</title>
+    <url>/640131451.html</url>
+    <content><![CDATA[<h3 id="Redis的安装"><a href="#Redis的安装" class="headerlink" title="Redis的安装"></a>Redis的安装</h3><p>获取资源</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-4.0.8.tar.gz</span><br></pre></td></tr></table></figure>
+<p>解压</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar xzf redis-4.0.8.tar.gz</span><br></pre></td></tr></table></figure>
+<p>建立一个redis目录的软连接指向redis-4.0.8；这样做为了不把redis目录固定到指定版本，有利于Redis未来版本升级</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ln -s redis-4.0.8 redis</span><br></pre></td></tr></table></figure>
+<p>进入redis目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd redis</span><br></pre></td></tr></table></figure>
+<p>编译</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>安装,不指定目录的话会将Redis的相关运行文件放到/usr/local/bin下，则可在任意目录下执行Redis的命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>修改配置文件，最重要的，但可以一次搞定</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/bind 查询 bind</span><br><span class="line">注释掉并且写上bind 0.0.0.0</span><br><span class="line"></span><br><span class="line">/dmonize 查询 daemonize</span><br><span class="line">将no修改为yes</span><br><span class="line"></span><br><span class="line">/requirepass 查找 requirepass 输入n 查找下一个</span><br><span class="line">添加 requirepass ‘密码’</span><br></pre></td></tr></table></figure>
+<p>设置开机启动<br>开始编写脚本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#vim /etc/init.d/redis  --创建脚本文件</span><br></pre></td></tr></table></figure>
+<p>这里我的redis安装路径是/usr/local/src/redis-3.0.3,端口为8530,然后redis.conf文件在/etc下面，你们根据自己的实际情况修改就行(这个脚本可以根据redis自带的启动脚本进行修改，它默认的路径是在$redis/utils/redis_init_script，$redis是redis的安装路径)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#chkconfig: 22345 10 90</span><br><span class="line">#description: Start and Stop redis</span><br><span class="line"></span><br><span class="line">REDISPORT=8530</span><br><span class="line">EXEC=/usr/local/src/redis-3.0.3/src/redis-server</span><br><span class="line">CLIEXEC=/usr/local/src/redis-3.0.3/src/redis-cli</span><br><span class="line"></span><br><span class="line">PIDFILE=/var/run/redis.pid</span><br><span class="line">CONF=&quot;/etc/redis.conf&quot;</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        if [ -f $PIDFILE ];then</span><br><span class="line">            echo &quot;$PIDFILE exists,process is already running or crashed&quot;</span><br><span class="line">        else</span><br><span class="line">            echo &quot;Starting Redis server...&quot;</span><br><span class="line">            $EXEC $CONF</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        if [ ! -f $PIDFILE ];then</span><br><span class="line">            echo &quot;$PIDFILE does not exist,process is not running&quot;</span><br><span class="line">        else</span><br><span class="line">            PID=$(cat $PIDFILE)</span><br><span class="line">            echo &quot;Stopping...&quot;</span><br><span class="line">            $CLIEXEC -p $REDISPORT shutdown</span><br><span class="line">            while [ -x /proc/$&#123;PID&#125; ]</span><br><span class="line">                do</span><br><span class="line">                    echo &quot;Waiting for Redis to shutdown...&quot;</span><br><span class="line">                    sleep 1</span><br><span class="line">                done</span><br><span class="line">                echo &quot;Redis stopped&quot;</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">    restart)</span><br><span class="line">        &quot;$0&quot; stop</span><br><span class="line">        sleep 3</span><br><span class="line">        &quot;$0&quot; start</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo &quot;Please use start or stop or restart as first argument&quot;</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>修改文件权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#chmod +x /etc/init.d/redis</span><br></pre></td></tr></table></figure>
+<p>把脚本添加到系统服务列表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#chkconfig --add redis</span><br><span class="line">#chkconfig redis on</span><br><span class="line">#chkconfig --list   //查看所有注册的脚本文件</span><br></pre></td></tr></table></figure>
+<p>重启redis</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@pmserver src]# ./redis-cli shutdown</span><br><span class="line">[root@pmserver src]# ./redis-server ../redis.conf &amp;</span><br></pre></td></tr></table></figure>
+<p>ping<br><img src="/images/100039.jpg" alt="avatar"></p>
+<p>检测后台进程是否存在</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps -ef |grep redis</span><br></pre></td></tr></table></figure>
+<p>检测6379端口是否在监听</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netstat -lntp | grep 6379</span><br></pre></td></tr></table></figure>
+<p>修改防火墙</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 6379 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">systemctl restart iptables.service</span><br></pre></td></tr></table></figure>
+<p>添加安全组</p>
+<p>略</p>
+<p>然后就可以通过远程连接连接上redis服务了。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>云服务器安装JDK</title>
+    <url>/357862892.html</url>
+    <content><![CDATA[<h3 id="JDK的安装"><a href="#JDK的安装" class="headerlink" title="JDK的安装"></a>JDK的安装</h3><p>Linux 下载文件 到指定目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -P 指定目录 下载地址</span><br><span class="line"></span><br><span class="line">wget -P /root/sdk https://download.oracle.com/otn/java/jdk/8u231-b11/5b13a193868b4bf28bcb45c792fce896/jdk-8u231-linux-x64.tar.gz?AuthParam=1572829315_41bf4e6a11869d180feb9124b1e86545</span><br></pre></td></tr></table></figure>
+<p>如果下载到当前目录下 不用 -P 参数</p>
+<p>用上述命令下载，下载需到oracle官网获取tar包的链接</p>
+<a id="more"></a>
+<p>然后解压</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf jdk-8u181-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi /etc/environment</span><br></pre></td></tr></table></figure>
+<p>加上语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export JAVA_HOME=/root/sdk/jdk1.8.0_231</span><br></pre></td></tr></table></figure>
+<p>执行一下命令使配置生效</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source /etc/environment</span><br></pre></td></tr></table></figure>
+<p>添加用户环境变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+<p>在最后添加一下语句</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#set java environment</span><br><span class="line">export JAVA_HOME=/root/sdk/jdk1.8.0_231</span><br><span class="line">export JRE_HOME=$JAVA_HOME/jre</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH</span><br><span class="line">export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>执行命令使配置生效</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>验证是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>如图证明安装成功</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java version &quot;1.8.0_231&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_231-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.231-b11, mixed mode)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>云服务器安装mysql</title>
     <url>/489243170.html</url>
     <content><![CDATA[<h3 id="记录一次腾讯云服务器安装Mysql遇到的坑"><a href="#记录一次腾讯云服务器安装Mysql遇到的坑" class="headerlink" title="记录一次腾讯云服务器安装Mysql遇到的坑"></a>记录一次腾讯云服务器安装Mysql遇到的坑</h3><h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><p>检测一下系统中是否已安装mysql的相关服务,无输出则表明未安装。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep mysql</span><br></pre></td></tr></table></figure>

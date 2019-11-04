@@ -63,6 +63,143 @@
       
         
 
+<article id="post-数据库查询优化30条注意事项" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2161281511.html">数据库查询优化30条注意事项</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2161281511.html" class="article-date">
+  <time datetime="2019-10-31T14:39:20.192Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="数据库查询优化30点注意事项"><a href="#数据库查询优化30点注意事项" class="headerlink" title="数据库查询优化30点注意事项"></a>数据库查询优化30点注意事项</h3><p>1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</p>
+<p>2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id from t where num is null</span><br></pre></td></tr></table></figure>
+<p>最好不要给数据库留NULL，尽可能的使用 NOT NULL填充数据库.</p>
+        
+          <a class="article-more-link" href="/2161281511.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2juu0m600172cva2apc2t49"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-如何优化数据库(概述)" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/3806922126.html">如何优化数据库(概述)</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/3806922126.html" class="article-date">
+  <time datetime="2019-10-31T14:22:54.872Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="面试被问到如何优化数据库"><a href="#面试被问到如何优化数据库" class="headerlink" title="面试被问到如何优化数据库"></a>面试被问到如何优化数据库</h3><p>可以从不同层面进行回答，例如：</p>
+<p>（1）、根据服务层面：配置mysql性能优化参数；</p>
+<p>（2）、从系统层面增强mysql的性能：优化数据表结构、字段类型、字段索引、分表，分库、读写分离等等。</p>
+        
+          <a class="article-more-link" href="/3806922126.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2juu0ls000k2cvahwca92ll"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-PO BO VO DTO POJO DAO DO在java中的概念及应用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -112,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2j5n3yg000cc4va4eetb4m5"
+      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2juu0lm000c2cva5amghi9y"
          class="article-share-link">分享</a>
       
     </footer>
@@ -178,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2j5n3y40006c4vafcoaa8rd"
+      <a data-url="http://yoursite.com/664034925.html" data-id="ck2juu0l300012cva3hqvaghf"
          class="article-share-link">分享</a>
       
     </footer>
@@ -245,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/724537085.html" data-id="ck2j5n3xr0001c4va7udqc27p"
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2juu0lc00022cva312ebw8u"
          class="article-share-link">分享</a>
       
     </footer>
@@ -312,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2j5n3z9000wc4va0j8casjl"
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2juu0m0000u2cva6ol422pm"
          class="article-share-link">分享</a>
       
     </footer>
@@ -378,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2j5n3zd000yc4vaelr81qn7"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2juu0m2000z2cvabub7ayov"
          class="article-share-link">分享</a>
       
     </footer>
@@ -452,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2j5n3yp000kc4va7zfw14wq"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2juu0m300102cva7qgkds3h"
          class="article-share-link">分享</a>
       
     </footer>
@@ -525,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2j5n3z2000tc4va5yza6xsu"
+      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2juu0lw000q2cvagq89ac69"
          class="article-share-link">分享</a>
       
     </footer>
@@ -593,143 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2j5n3ya0009c4vahdeahs81"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-电商系统中关于订单和库存的几个问题" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/3786447307.html">电商系统中关于订单和库存的几个问题</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/3786447307.html" class="article-date">
-  <time datetime="2019-10-28T01:53:41.507Z" itemprop="datePublished">2019-10-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">系统设计</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><em>原创整理，转载请注明出处</em></p>
-<h3 id="电商系统关于订单和库存的几个问题"><a href="#电商系统关于订单和库存的几个问题" class="headerlink" title="电商系统关于订单和库存的几个问题"></a>电商系统关于订单和库存的几个问题</h3><p>最近参加面试，被问及电商项目中如何处理并发情况下用户下单、减库存、事务一致性等问题。由于之前的项目类似于一个单体项目，对于高并发、高可用的的设计未有考虑，故面试问答很不流畅，有一定的相关概念，却没有一整套解决相关问题的流程。所以决定做个总结，以备后用。<br>总结起来有一下几个问题：</p>
-        
-          <a class="article-more-link" href="/3786447307.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/3786447307.html" data-id="ck2j5n3zg0011c4vab3segzbp"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-MyBatis面试题：# 和 $ 的区别是什么" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/182044780.html">MyBatis面试题：# 和 $ 的区别是什么</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/182044780.html" class="article-date">
-  <time datetime="2019-10-27T14:25:31.213Z" itemprop="datePublished">2019-10-27</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Mybatis/">Mybatis</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p><em>转载自：Mybatis中文网：<a href="http://www.mybatis.cn/" target="_blank" rel="noopener">http://www.mybatis.cn/</a></em></p>
-<p>经常碰到这样的面试题目：#{}和${}的区别是什么？</p>
-<p>正确的答案是：<strong>#{}是预编译处理，${}是字符串替换。</strong></p>
-<p>备注：${}是插值，插值的新认识见： <a href="http://www.mybatis.cn/archives/653.html" target="_blank" rel="noopener">http://www.mybatis.cn/archives/653.html</a></p>
-        
-          <a class="article-more-link" href="/182044780.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/182044780.html" data-id="ck2j5n3y70008c4vad3vzhr7e"
+      <a data-url="http://yoursite.com/2025562487.html" data-id="ck2juu0li00062cva69dm2wyf"
          class="article-share-link">分享</a>
       
     </footer>
