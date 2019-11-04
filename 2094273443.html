@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Java实体类序列化id的作用 |
+    Springboot应用部署 |
     
     涛的BLOG</title>
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-Java实体类序列化id的作用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-Springboot应用部署" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java实体类序列化id的作用
+      Springboot应用部署
     </h1>
   
   
@@ -50,12 +50,12 @@
 
     
       <div class="article-meta">
-        <a href="/664034925.html" class="article-date">
-  <time datetime="2019-10-31T14:00:17.036Z" itemprop="datePublished">2019-10-31</time>
+        <a href="/2094273443.html" class="article-date">
+  <time datetime="2019-11-04T14:37:49.466Z" itemprop="datePublished">2019-11-04</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+    <a class="article-category-link" href="/categories/Springboot/">Springboot</a>
   </div>
 
       </div>
@@ -78,25 +78,16 @@
       
 
       
-        <h3 id="Java序列化时候序列ID作用"><a href="#Java序列化时候序列ID作用" class="headerlink" title="Java序列化时候序列ID作用"></a>Java序列化时候序列ID作用</h3><p>简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
-<a id="more"></a>
-<p>当实现java.io.Serializable接口的实体（类）没有显式地定义一个名为serialVersionUID，类型为long的变量时，Java序列化机制会根据编译的class自动生成一个serialVersionUID作序列化版本比较用，这种情况下，只有同一次编译生成的class才会生成相同的serialVersionUID 。</p>
-<p>如果我们不希望通过编译来强制划分软件版本，即实现序列化接口的实体能够兼容先前版本，未作更改的类，就需要显式地定义一个名为serialVersionUID，类型为long的变量，不修改这个变量值的序列化实体都可以相互进行串行化和反串行化。</p>
-<p>假设两年前我保存了某个类的一个对象，这两年来，我修改该类，删除了某个属性和增加了另外一个属性，两年后，我又去读取那个保存的对象，或有什么结果？未知！sun的jdk就会蒙了。为此，一个解决办法就是在类中增加版本后，每一次类的属性修改，都应该把版本号升级一下，这样，在读取时，比较存储对象时的版本号与当前类的版本号，如果不一致，则直接报版本号不同的错!</p>
-<p>异常场景回忆如下：</p>
-<pre><code>环境：
-
-1）分布式即多台resin服务器；
-
-2）序列化的java类没有显示定义serialVersionUID；
-
-3）使用了redis作为缓存（序列化后的对象存入redis缓存中）；</code></pre><p>在使用过程，报序列化时候版本不兼容，即serialVersionUID不同异常。由于不显示定义serialVersionUID，在分布式环境，相同类的class在不同resin在的class的serialVersionUID不同，反序列化就容易报此异常。</p>
-<p>所以，在使用序列化过程中，最好显示定义序列号。</p>
+        <h3 id="记录一次springboot打包、发布，安装nginx，部署并访问"><a href="#记录一次springboot打包、发布，安装nginx，部署并访问" class="headerlink" title="记录一次springboot打包、发布，安装nginx，部署并访问"></a>记录一次springboot打包、发布，安装nginx，部署并访问</h3><p>springboot项目打包部署到阿里云</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/qq_34975710/article/details/83989642</span><br><span class="line">或</span><br><span class="line">https://blog.csdn.net/qiushi_1990/article/details/79915880</span><br></pre></td></tr></table></figure>
+<p>在阿里云Centos下如何安装Nginx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.jb51.net/article/95433.htm</span><br></pre></td></tr></table></figure>
+<p>先把参考地址记录在此，有时间了再自己总结。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2kj4ko5000414va4oomajrl"
+      <a data-url="http://yoursite.com/2094273443.html" data-id="ck2kj4koj000e14vaaafw00v4"
          class="article-share-link">分享</a>
       
     </footer>
@@ -107,19 +98,10 @@
     
   <nav class="article-nav">
     
-      <a href="/4237283706.html" class="article-nav-link">
-        <strong class="article-nav-caption">前一篇</strong>
-        <div class="article-nav-title">
-          
-            PO BO VO DTO POJO DAO DO在java中的概念及应用
-          
-        </div>
-      </a>
     
-    
-      <a href="/724537085.html" class="article-nav-link">
+      <a href="/640131451.html" class="article-nav-link">
         <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">ArrayList与LinkedList的区别</div>
+        <div class="article-nav-title">云服务器安装Redis</div>
       </a>
     
   </nav>
