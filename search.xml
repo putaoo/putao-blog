@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>idea dependencies 红色波浪线</title>
+    <url>/2812748585.html</url>
+    <content><![CDATA[<h3 id="IDEA-Maven的Dependencies中出现红色波浪线"><a href="#IDEA-Maven的Dependencies中出现红色波浪线" class="headerlink" title="IDEA-Maven的Dependencies中出现红色波浪线"></a>IDEA-Maven的Dependencies中出现红色波浪线</h3><p>有几个处理方案，记录如下：<br>本地仓库jar包已存在：<a href="https://blog.csdn.net/u014672466/article/details/80211340" target="_blank" rel="noopener">https://blog.csdn.net/u014672466/article/details/80211340</a></p>
+<p>删除jar包重新下载：<a href="https://blog.csdn.net/qq_41983010/article/details/83307660" target="_blank" rel="noopener">https://blog.csdn.net/qq_41983010/article/details/83307660</a></p>
+<p>maven plugin 红线：<a href="https://blog.csdn.net/H_O_H/article/details/79587913" target="_blank" rel="noopener">https://blog.csdn.net/H_O_H/article/details/79587913</a></p>
+<p>综合方案：<a href="https://blog.csdn.net/u010003835/article/details/78480626" target="_blank" rel="noopener">https://blog.csdn.net/u010003835/article/details/78480626</a></p>
+<p>idea ifnore 文件</p>
+<p>Git 忽略.idea/workspace.xml文件 ： <a href="https://cloud.tencent.com/developer/article/1348041" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1348041</a>  </p>
+<p>新工程的ignore文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HELP.md</span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line">!**/src/main/**</span><br><span class="line">!**/src/test/**</span><br><span class="line"></span><br><span class="line">### STS ###</span><br><span class="line">.apt_generated</span><br><span class="line">.classpath</span><br><span class="line">.factorypath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">.springBeans</span><br><span class="line">.sts4-cache</span><br><span class="line"></span><br><span class="line">### IntelliJ IDEA ###</span><br><span class="line">.idea</span><br><span class="line">*.iws</span><br><span class="line">*.iml</span><br><span class="line">*.ipr</span><br><span class="line"></span><br><span class="line">### NetBeans ###</span><br><span class="line">/nbproject/private/</span><br><span class="line">/nbbuild/</span><br><span class="line">/dist/</span><br><span class="line">/nbdist/</span><br><span class="line">/.nb-gradle/</span><br><span class="line">build/</span><br><span class="line"></span><br><span class="line">### VS Code ###</span><br><span class="line">.vscode/</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Springboot应用部署</title>
     <url>/2094273443.html</url>
     <content><![CDATA[<h3 id="记录一次springboot打包、发布，安装nginx，部署并访问"><a href="#记录一次springboot打包、发布，安装nginx，部署并访问" class="headerlink" title="记录一次springboot打包、发布，安装nginx，部署并访问"></a>记录一次springboot打包、发布，安装nginx，部署并访问</h3><p>springboot项目打包部署到阿里云</p>

@@ -63,6 +63,73 @@
       
         
 
+<article id="post-如何控制多线程执行顺序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2743582814.html">如何控制多线程执行顺序</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2743582814.html" class="article-date">
+  <time datetime="2019-10-31T15:08:40.262Z" itemprop="datePublished">2019-10-31</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="如何控制多线程执行顺序"><a href="#如何控制多线程执行顺序" class="headerlink" title="如何控制多线程执行顺序"></a>如何控制多线程执行顺序</h3><h4 id="方法一：Join（）使用"><a href="#方法一：Join（）使用" class="headerlink" title="方法一：Join（）使用"></a>方法一：Join（）使用</h4><p>先看一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main.java;</span><br><span class="line"></span><br><span class="line">public class App &#123;</span><br><span class="line"></span><br><span class="line">  static Thread thread1 = new Thread(new Runnable()&#123;</span><br><span class="line"></span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">      System.out.println(&quot;thread1&quot;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2743582814.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2743582814.html" data-id="ck2lsgohc000y64vacmxvg5z7"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-explain执行计划详解" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -115,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4132421017.html" data-id="ck2kk4o9c000pckva701f9exq"
+      <a data-url="http://yoursite.com/4132421017.html" data-id="ck2lsgoh8000s64vadfeebvn2"
          class="article-share-link">分享</a>
       
     </footer>
@@ -184,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2kk4o9h000wckvadcmd4z8x"
+      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2lsgohj001764vag7vm82c9"
          class="article-share-link">分享</a>
       
     </footer>
@@ -252,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2kk4o9e000sckva8eu65pu1"
+      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2lsgohd001164vah2fybyfd"
          class="article-share-link">分享</a>
       
     </footer>
@@ -319,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2kk4o94000ackva74ge6tpa"
+      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2lsgogp000b64va3epcdbad"
          class="article-share-link">分享</a>
       
     </footer>
@@ -385,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2kk4o8w0003ckvaffc88d68"
+      <a data-url="http://yoursite.com/664034925.html" data-id="ck2lsgogm000864vabepv7kfj"
          class="article-share-link">分享</a>
       
     </footer>
@@ -452,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/724537085.html" data-id="ck2kk4o8t0001ckvacprzcqcz"
+      <a data-url="http://yoursite.com/724537085.html" data-id="ck2lsgog8000264va8ju6b7iu"
          class="article-share-link">分享</a>
       
     </footer>
@@ -519,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2kk4o9m0016ckvadryaguhp"
+      <a data-url="http://yoursite.com/1588495736.html" data-id="ck2lsgohf001364vabf43airb"
          class="article-share-link">分享</a>
       
     </footer>
@@ -585,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2kk4o9o0019ckva5b05cdrb"
+      <a data-url="http://yoursite.com/1776674258.html" data-id="ck2lsgohg001664va7yojfpwc"
          class="article-share-link">分享</a>
       
     </footer>
@@ -659,80 +726,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2kk4o98000hckva5n1efxbx"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-kafka入门：简介、使用场景、设计原理、主要配置及集群搭建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/1376638572.html">kafka入门：简介、使用场景、设计原理、主要配置及集群搭建</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/1376638572.html" class="article-date">
-  <time datetime="2019-10-28T11:31:52.184Z" itemprop="datePublished">2019-10-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Kafka/">Kafka</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="Kafka简介使用场景设计原理"><a href="#Kafka简介使用场景设计原理" class="headerlink" title="Kafka简介使用场景设计原理"></a>Kafka简介使用场景设计原理</h3><p><em>关于kafka说明可以参考：<a href="http://kafka.apache.org/documentation.html" target="_blank" rel="noopener">http://kafka.apache.org/documentation.html</a></em></p>
-<p><em>文章转自：<a href="http://www.aboutyun.com/thread-9341-1-1.html" target="_blank" rel="noopener">http://www.aboutyun.com/thread-9341-1-1.html</a></em></p>
-<h4 id="问题导读："><a href="#问题导读：" class="headerlink" title="问题导读："></a>问题导读：</h4><ol>
-<li>zookeeper在kafka的作用是什么？  </li>
-<li>kafka中几乎不允许对消息进行“随机读写”的原因是什么？</li>
-<li>kafka集群consumer和producer状态信息是如何保存的？</li>
-<li>partitions设计的目的的根本原因是什么？</li>
-</ol>
-        
-          <a class="article-more-link" href="/1376638572.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/1376638572.html" data-id="ck2kk4o9a000mckva5akb9tx2"
+      <a data-url="http://yoursite.com/2939935991.html" data-id="ck2lsgoh5000q64vac8sicme2"
          class="article-share-link">分享</a>
       
     </footer>
