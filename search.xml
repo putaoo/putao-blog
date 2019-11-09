@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>云服务器安装Rabbitmq</title>
+    <url>/2067313518.html</url>
+    <content><![CDATA[<h3 id="云服务器安装Rabbitmq"><a href="#云服务器安装Rabbitmq" class="headerlink" title="云服务器安装Rabbitmq"></a>云服务器安装Rabbitmq</h3><h4 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h4><p>Erlang</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https://www.rabbitmq.com/releases/erlang/erlang-18.3-1.el7.centos.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>rabbitmq</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el6.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>Socat</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget http://repo.iotti.biz/CentOS/6/x86_64/socat-1.7.3.2-1.el6.lux.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h4><p>因为RabbitMq依赖Erlang和Socat，所以安装时要按照顺安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rpm -ivh erlang-18.3-1.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">rpm -ivh socat-1.7.3.2-1.el6.lux.x86_64.rpm</span><br><span class="line"></span><br><span class="line">rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="配置Rabbitmq"><a href="#配置Rabbitmq" class="headerlink" title="配置Rabbitmq"></a>配置Rabbitmq</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/ebin/rabbit.app</span><br></pre></td></tr></table></figure>
+<p>将loopback_users,改为 []</p>
+<p><img src="/images/100042.png" alt="avatar"></p>
+<h4 id="安装管理插件"><a href="#安装管理插件" class="headerlink" title="安装管理插件"></a>安装管理插件</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br></pre></td></tr></table></figure>
+<h4 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chkconfig rabbitmq-server on</span><br></pre></td></tr></table></figure>
+<h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>通过 rabbitmq-server start 试图启动时报错：</p>
+<p><img src="/images/100043.png" alt="avatar"></p>
+<p>有人给出解决方案</p>
+<p><img src="/images/100044.png" alt="avatar"></p>
+<p>删除/var/lib/rabbitmq/mnesia文件后，重新启动。</p>
+<p>rabbitmq-server start 不是以deamon后台进程启动的，需要 -detached</p>
+<p>如图表示启动成功</p>
+<p><img src="/images/100045.png" alt="avatar"></p>
+<h4 id="配置ipconfig-和-安全组"><a href="#配置ipconfig-和-安全组" class="headerlink" title="配置ipconfig 和 安全组"></a>配置ipconfig 和 安全组</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 15672 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">systemctl restart iptables.service</span><br><span class="line"></span><br><span class="line">这里不要使用直接修改配置文件的方式，踩过几次坑了，谨记。</span><br></pre></td></tr></table></figure>
+
+<p>安全组略。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>什么是SaaS？</title>
+    <url>/3590921231.html</url>
+    <content><![CDATA[<h2 id="什么是-SAAS？"><a href="#什么是-SAAS？" class="headerlink" title="什么是 SAAS？"></a>什么是 SAAS？</h2><h3 id="初始SAAS"><a href="#初始SAAS" class="headerlink" title="初始SAAS"></a>初始SAAS</h3><h3 id="云服务的三种模式"><a href="#云服务的三种模式" class="headerlink" title="云服务的三种模式"></a>云服务的三种模式</h3><h5 id="IaaS（基础设施即服务）"><a href="#IaaS（基础设施即服务）" class="headerlink" title="IaaS（基础设施即服务）"></a>IaaS（基础设施即服务）</h5><p>IaaS（Infrastructure as a Service），即基础设施即服务。提供给消费者的服务是对所有计算基础设施的利用，包括处理CPU、内存、存储、网络和其它基本的计算资源，用户能够部署和运行任意软件，包括操作系统和应用程 序。消费者不管理或控制任何云计算基础设施，但能控制操作系统的选择、存储空间、部署的应用，也有可能获得 有限制的网络组件（例如路由器、防火墙、负载均衡器等）的控制.</p>
+<a id="more"></a>
+<h5 id="PaaS（平台即服务）"><a href="#PaaS（平台即服务）" class="headerlink" title="PaaS（平台即服务）"></a>PaaS（平台即服务）</h5><p>PaaS（Platform-as-a-Service），即平台即服务。提供给消费者的服务是把客户采用提供的开发语言和工具（例如Java，python, .Net等）开发的或收购的应用程序部署到供应商的云计算基础设施上去。客户不需要管理或控制底层的云基础设施，包括网络、服务器、操作系统、存储等，但客户能控制部署的应用程序，也可能控制运行应用程 序的托管环境配置。</p>
+<h5 id="SaaS（软件即服务）"><a href="#SaaS（软件即服务）" class="headerlink" title="SaaS（软件即服务）"></a>SaaS（软件即服务）</h5><p>SaaS（Software-as-a-Service），即软件即服务。提供给消费者完整的软件解决方案，你可以从软件服务商处以租 用或购买等方式获取软件应用，组织用户即可通过 Internet 连接到该应用（通常使用 Web 浏览器）。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。服务提供商负责管理硬件和软件，并根据适当 的服务协议确保应用和数据的可用性和安全性。SaaS 让组织能够通过最低前期成本的应用快速建成投产。</p>
+<h5 id="区别与联系"><a href="#区别与联系" class="headerlink" title="区别与联系"></a>区别与联系</h5><p><img src="/images/100039.png" alt="avatar"></p>
+<h3 id="SaaS的概述"><a href="#SaaS的概述" class="headerlink" title="SaaS的概述"></a>SaaS的概述</h3><h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>SaaS软件就适用对象而言，可以划分为针对个人的与针对企业的<br>面向个人的SaaS产品：在线文档，账务管理，文件管理，日程计划、照片管理、联系人管理，等等云类型的服务<br>而面向企业的SaaS产品主要包括：CRM（客户关系管理）、ERP（企业资源计划管理）、线上视频或者与群组通话会议、HRM（人力资源管理）、OA(办公系统)、外勤管理、财务管理、审批管理等。</p>
+<h4 id="SAAS-行业分析"><a href="#SAAS-行业分析" class="headerlink" title="SAAS 行业分析"></a>SAAS 行业分析</h4><p>中国企业软件及SaaS企业软件市场规模</p>
+<p><img src="/images/100041.png" alt="avatar"></p>
+<p>2016年部分SaaS企业年报数据<br><img src="/images/100040.jfif" alt="avatar"></p>
+<p>从营收规模来看，电商SaaS公司点点客以3.7亿元在诸多细分领域的SaaS公司中独占鳌头，但即便如此， 3.7亿的整体规模与海外SaaS巨头动辄数十亿美金（2017财年，Salesforce总营收83.9亿美元）营收相比，规模依然差距甚远。这一方面说明国内SaaS存在一个漫长的红利期，另一方面也说明国内SaaS的增长仍有很大想象空间。</p>
+<p>从增长幅度来看，餐饮行业SaaS解决方案提供商客如云超过600%的数据颇为亮眼，点点客也实现了超过100%的增长。普遍性的营收增长说明，SaaS行业整体向好，仍处于快速上升期，保持着强劲的发展动力。</p>
+<p>从净利润来看，绝大多数SaaS公司的业绩都在亏损。这表明，目前行业的竞争非常激烈，牺牲利润，抢占市场份额是大多数SaaS公司的首要选择；其次，行业整体面临着“低价瓶颈”。</p>
+<h4 id="细分领域分析"><a href="#细分领域分析" class="headerlink" title="细分领域分析"></a>细分领域分析</h4><h5 id="CRM-客户关系管理"><a href="#CRM-客户关系管理" class="headerlink" title="CRM(客户关系管理)"></a>CRM(客户关系管理)</h5><p>CRM无疑是SaaS行业起步较早，且厮杀最为激烈的市场之一。</p>
+<p>目前，业界对CRM市场的普遍认知是，该领域的“三层金字塔”已基本形成，3-5个TOP级玩家组成了顶层集团（门槛约为纯SaaS营收超过5000万人民币），其次是不超过20家的腰部企业，最底层为大量鱼龙混杂的跟随者和“后风口创业者”。</p>
+<p>随着市场竞争的不断加剧，在未来的CRM领域，绝大多数底层厂商将会被迫退出战场，“三层塔”迭代为“二元世界”。此时，“二八效应”将愈加凸显。TOP玩家们将吃掉绝大多数的市场份额，而更多的CRM厂商只能瓜分两成左右余下的市场空间。除非有颠覆性的技术革命发生，这样的情况在未来很长的一段时间内，也许很难发生逆转。</p>
+<p>尽管如此，身处第一集团中的SaaS CRM厂商仍需要时刻保持扩张速度。因为，各大TOP级的CRM厂商之间的差距并不明显，而“老大和老二打架，老三和老四不见了”的情况屡见不鲜。</p>
+<p>以CRM厂商和创科技（红圈营销）为例，根据其发布的年度报告，2016年，和创科技营收1.12亿元，同比增长63.21%，净利润﹣9975.32万元，亏损同比去年收窄9.21%。</p>
+<p>尽管营收突破亿元，但连续2年的亏损，仍然让和创科技饱受争议。分析其亏损的原因，基本可判定为“战略性亏损”，即明明可以盈利，却“不敢”盈利。导致这种情况的原因其实很简单，在CRM市场，和创科技面临着来自其他“友商”的压力，一旦放弃高增速转而追求利润，便有“丢失阵地”的风险。根据相关数据估算，CRM市场另两家代表性厂商纷享销客和销售易在2016年的营收分别约为1.2亿元和1.3亿元，始终在虎视眈眈。</p>
+<p>换而言之，CRM市场带给行业的启示是，SaaS公司如果想要踏踏实实的实现盈利，可能要等到占据细分市场绝对优势的份额之后。</p>
+<h5 id="ERP（企业资源计划管理软件）"><a href="#ERP（企业资源计划管理软件）" class="headerlink" title="ERP（企业资源计划管理软件）"></a>ERP（企业资源计划管理软件）</h5><p>ERP是Enterprise Resource Planning（企业资源计划）的简称，是上个世纪90年代美国一家IT公司根据当时计算机信息、IT技术发展及企业对供应链管理的需求，预测在今后信息时代企业管理信息系统的发展趋势和即将发生变革，而提出了这个概念。 ERP是针对物资资源管理（物流）、人力资源管理（人流）、财务资源管理（财流）、信息资源管理（信息流）集成一体化的企业管理软件。它将包含客户/服务架构，使用图形用户接口，应用开放系统制作。除了已有的标准功能，它还包括其它特性，如品质、过程运作管理、以及调整报告等。<br>ERP系统的特点有：<br>企业内部管理所需的业务应用系统，主要是指财务、物流、人力资源等核心模块。</p>
+<p>物流管理系统采用了制造业的MRP管理思想；FMIS有效地实现了预算管理、业务评估、管理会计、ABC成本归集方法等现代基本财务管理方法；人力资源管理系统在组织机构设计、岗位管理、薪酬体系以及人力资源开发等方面同样集成了先进的理念。<br>ERP系统是一个在全公司范围内应用的、高度集成的系统。数据在各业务系统之间高度共享，所有源数据只需在某一个系统中输入一次，保证了数据的一致性。<br>对公司内部业务流程和管理过程进行了优化，主要的业务流程实现了自动化。<br>采用了计算机最新的主流技术和体系结构：B/S、INTERNET体系结构，WINDOWS界面。在能通信的地方都可以方便地接入到系统中来。<br>集成性、先进性、统一性、完整性、开放性。</p>
+<h5 id="TMS（电话营销管理软件）"><a href="#TMS（电话营销管理软件）" class="headerlink" title="TMS（电话营销管理软件）"></a>TMS（电话营销管理软件）</h5><h5 id="呼叫中心（Call-Center，也称为联络中心）"><a href="#呼叫中心（Call-Center，也称为联络中心）" class="headerlink" title="呼叫中心（Call Center，也称为联络中心）"></a>呼叫中心（Call Center，也称为联络中心）</h5><h5 id="EOA-协调办公系统"><a href="#EOA-协调办公系统" class="headerlink" title="EOA(协调办公系统)"></a>EOA(协调办公系统)</h5><h5 id="电商Saas"><a href="#电商Saas" class="headerlink" title="电商Saas"></a>电商Saas</h5><p>二爷始终认为电商SaaS是被行业严重低估的一个重要市场。这一认识，主要基于两点原因。</p>
+<p>首先，实现线上销售是企业用户信息化转型和移动互联网创业的刚性需求，简单来说就是把生意做到线上去；其次，电商成交系统位于整个企业运营的中台，同时对接着企业的资金流、信息流和物流，是企业“云转型”绝佳切入点。</p>
+<p>目前，国内标榜电商SaaS的厂商非常之多，但实力却相差悬殊，主要原因在于大批早先经营“商城建站”外包的ISV蹭着云计算的热点，自封为SaaS公司，这导致了整个市场的情况颇为复杂。业内真正能够代表电商SaaS的厂商为数不多，如专注移动电商成交系统的点点客和有赞，做移动分销系统的易订货和千米网，以及从传统外包转型而来的商派（云起）。</p>
+<p>由于业务形态直接涉及B端用户的销售体系，电商SaaS在实现营收方面的想象空间非常之大。以点点客为例，依据其今年4月发布的2016年度报告，点点客2016年实现营收3.7亿元，增幅达102.12%，净利润﹣5148万元。</p>
+<p>从营收金额来看，3.7亿元绝对是一个令所有竞争对手都非常艳羡的数字，即便放眼整个SaaS领域，年营收能够达到3.7亿的也是凤毛麟角。至于5148万的亏损，在点点客公开的年报中亦有说明，主要原因是2016年的销售费用、宣传推广费用、房租及办公费用等开支同比上年都有大幅增长，归根结底就俩字“扩张”。以此来看，点点客的亏损也属于典型的“战略性亏损”，背后同样是对SaaS移动电商市场份额的极度渴望。</p>
+<p>分析电商SaaS市场，有赞亦需给予关注。但由于有赞是在今年4月才在港股借壳上市，暂无公开年报，也没有具体的营收数据。但根据前两年的数据（有赞2014年营收39.7万，亏损2.17亿；2015年营收977.9万，亏损7亿），并结合白鸦在有赞四周年发布会上的透露的信息合理的推断，有赞2016年的营收应该是在数千万级别。但有赞面临最大的问题是，亏损数字的持续居高不下，虽然这一局面会在2016年6月有赞宣布结束免费，向会员店铺收取4800元的年费之后有所扭转，但这一举措带来的具体势能和效果，目前还不得而知。唯一可以确定的是，有赞收费与其上市之后伴随而来的业绩压力有着必然关联，毕竟账面上亏得太多着实是令人难堪的。</p>
+<p>回到SaaS公司营收和盈利的问题上，电商SaaS告诉我们的是，在细分市场领先的SaaS公司是具备盈利的空间和可能性的，也有盈利的法子。同时，市场很残酷，靠资本输血的情况今后将难以为继，SaaS公司最终还是要回到激烈的市场竞争中去接受检验。即便绝大多数SaaS公司还没有走到上市的那一步，但针对SaaS的投资已然趋于理性，成长速度、CAC、ARPU、NPS已经成为投资机构评估SaaS项目的必选项。</p>
+<h5 id="HRM-人力资源管理"><a href="#HRM-人力资源管理" class="headerlink" title="HRM(人力资源管理)"></a>HRM(人力资源管理)</h5><p>与CRM市场类似，HRM同样是SaaS行业发展较早，且较为成熟的一个领域。主要原因在于，HRM占据“人事+薪酬＋管理”的基础入口，且直接与企业的金融、征信、信贷等业务息息相关。同时，随着人力成本越来越贵，企业用户对人力资源精细化管理呈现刚需。</p>
+<p>在HRM市场，北森云具有一定代表性，根据其公布的2016年度报告，北森云2016年营业收入为1.82亿元，较上年同期增长29.17%，净利润为-1.1亿元，较上年同期亏损有所增加。</p>
+<p>整体来看，北森云上市之后的发展比较稳健，而亏损的原因主要源自两个方面。首先是扩充团队，新增了100余位客户成功部成员；其次是PaaS平台等研发技术成本的支出，占管理费用增长额的54.03%。</p>
+<p>扩充团队不过多讨论，主要分析北森云做PaaS平台的逻辑。事实上，SaaS业内明确提出做PaaS的不止北森云一家，比较知名的还有销售易。尽管二爷对SaaS公司做PaaS平台持保留意见，但这一现象反映出SaaS公司对未来的云计算市场大趋势的一种态度。</p>
+<p>众所周知，在国内云计算领域，PaaS层的发展相对滞后，市场空间也相对更大。但PaaS全面爆发的时间究竟到没到？能不能做起来？即便PaaS的机会出现了，能够抓住契机的会不会一定是你？这些问题还不确定。SaaS公司不惜牺牲利润，拿着营收去做PaaS平台，本身表现出了一种焦虑，有几分“赌”的成分。</p>
+<p>另一方面，2016年，HRM行业的投融资尤为活跃，拉勾网2016年3月完成了2.2亿人民币的C轮融资并推出HR SaaS产品“拉勾云人事”。理才网2016年10月宣布获得6亿元B轮融资，斗米兼职宣布B轮融资4000万美元、阳光保险20亿元注资易才、京东金融、蚂蚁金服进入人力资源行业、以及猎上网、51社保等。</p>
+<p>将上述两个维度结合起来分析，我们会发现，对某些细分领域内地SaaS厂商来说，同质化竞争的问题已经比较严重，那么SaaS何时盈利这个问题可能需要等待厂商们先理清差异化竞争优势或是找到新的业务增长点之后再做考虑。</p>
+]]></content>
+      <categories>
+        <category>SaaS</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Retrofit2 使用教程</title>
     <url>/2082103828.html</url>
     <content><![CDATA[<h3 id="Retrofit2-使用教程"><a href="#Retrofit2-使用教程" class="headerlink" title="Retrofit2 使用教程"></a>Retrofit2 使用教程</h3><p>Retrofit2 简单来说就是一个网络请求适配器，它将一个基本的Java接口通过动态代理的方式翻译成一个Http请求，并通过Okhttp去发送请求。此外它还具有强大的可扩展性，支持各种格式的转换，以及RxJava。</p>
