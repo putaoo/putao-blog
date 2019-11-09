@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Java实体类序列化id的作用 |
+    Jvm启动参数配置 |
     
     涛的BLOG</title>
   
@@ -29,7 +29,7 @@
   <section class="outer">
   
 
-<article id="post-Java实体类序列化id的作用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-Jvm启动参数配置" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -37,7 +37,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java实体类序列化id的作用
+      Jvm启动参数配置
     </h1>
   
   
@@ -50,12 +50,12 @@
 
     
       <div class="article-meta">
-        <a href="/664034925.html" class="article-date">
-  <time datetime="2019-10-31T14:00:17.036Z" itemprop="datePublished">2019-10-31</time>
+        <a href="/3261579538.html" class="article-date">
+  <time datetime="2019-11-09T10:14:49.316Z" itemprop="datePublished">2019-11-09</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+    <a class="article-category-link" href="/categories/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">Jvm虚拟机</a>
   </div>
 
       </div>
@@ -78,25 +78,20 @@
       
 
       
-        <h3 id="Java序列化时候序列ID作用"><a href="#Java序列化时候序列ID作用" class="headerlink" title="Java序列化时候序列ID作用"></a>Java序列化时候序列ID作用</h3><p>简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
+        <h3 id="Jvm-启动参数配置"><a href="#Jvm-启动参数配置" class="headerlink" title="Jvm 启动参数配置"></a>Jvm 启动参数配置</h3><p>Springboot项目java -jar 启动jar包参数详解</p>
+<p>命令实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -Xms500m -Xmx500m -Xmn250m -Xss256k -server -XX:+HeapDumpOnOutOfMemoryError -jar $JAR_PATH/test-0.0.1-SNAPSHOT.jar --spring.profiles.active=daily -verbose:class &amp;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
-<p>当实现java.io.Serializable接口的实体（类）没有显式地定义一个名为serialVersionUID，类型为long的变量时，Java序列化机制会根据编译的class自动生成一个serialVersionUID作序列化版本比较用，这种情况下，只有同一次编译生成的class才会生成相同的serialVersionUID 。</p>
-<p>如果我们不希望通过编译来强制划分软件版本，即实现序列化接口的实体能够兼容先前版本，未作更改的类，就需要显式地定义一个名为serialVersionUID，类型为long的变量，不修改这个变量值的序列化实体都可以相互进行串行化和反串行化。</p>
-<p>假设两年前我保存了某个类的一个对象，这两年来，我修改该类，删除了某个属性和增加了另外一个属性，两年后，我又去读取那个保存的对象，或有什么结果？未知！sun的jdk就会蒙了。为此，一个解决办法就是在类中增加版本后，每一次类的属性修改，都应该把版本号升级一下，这样，在读取时，比较存储对象时的版本号与当前类的版本号，如果不一致，则直接报版本号不同的错!</p>
-<p>异常场景回忆如下：</p>
-<pre><code>环境：
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--spring.profiles.active=daily， 这个可以在spring-boot启动中指定系统变量，多环境(测试、预发、线上配置)的区分</span><br><span class="line"></span><br><span class="line">在排查jar包冲突时，可以指定启动的-verbose:class  打印出启动的应用实际加载类的路径，来排查来源。</span><br><span class="line"></span><br><span class="line">jvm堆设值： -Xms500m -Xmx500m -Xmn250m -Xss256k</span><br><span class="line"></span><br><span class="line">nohup 不挂断地运行命令；&amp; 在后台运行 ，一般两个一起用。 eg：nohup command &amp;</span><br><span class="line"></span><br><span class="line">-server:服务器模式，在多个CPU时性能佳，启动慢但性能好，能合理管理内存。</span><br><span class="line"></span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError：在堆溢出时保存快照</span><br></pre></td></tr></table></figure>
 
-1）分布式即多台resin服务器；
-
-2）序列化的java类没有显示定义serialVersionUID；
-
-3）使用了redis作为缓存（序列化后的对象存入redis缓存中）；</code></pre><p>在使用过程，报序列化时候版本不兼容，即serialVersionUID不同异常。由于不显示定义serialVersionUID，在分布式环境，相同类的class在不同resin在的class的serialVersionUID不同，反序列化就容易报此异常。</p>
-<p>所以，在使用序列化过程中，最好显示定义序列号。</p>
+<p>参考：Springboot项目java -jar 启动jar包参数详解  <a href="https://blog.csdn.net/baidu_35140444/article/details/82980139" target="_blank" rel="noopener">https://blog.csdn.net/baidu_35140444/article/details/82980139</a><br> Java JVM启动参数  <a href="https://www.cnblogs.com/zkyefei/p/9334562.html" target="_blank" rel="noopener">https://www.cnblogs.com/zkyefei/p/9334562.html</a><br> JVM常用启动参数  <a href="http://www.manongjc.com/article/100677.html" target="_blank" rel="noopener">http://www.manongjc.com/article/100677.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2rexm0k0003cova13lm5bcq"
+      <a data-url="http://yoursite.com/3261579538.html" data-id="ck2rexm0g0001cova3cuv376n"
          class="article-share-link">分享</a>
       
     </footer>
@@ -107,19 +102,10 @@
     
   <nav class="article-nav">
     
-      <a href="/4237283706.html" class="article-nav-link">
-        <strong class="article-nav-caption">前一篇</strong>
-        <div class="article-nav-title">
-          
-            PO BO VO DTO POJO DAO DO在java中的概念及应用
-          
-        </div>
-      </a>
     
-    
-      <a href="/724537085.html" class="article-nav-link">
+      <a href="/2067313518.html" class="article-nav-link">
         <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">ArrayList与LinkedList的区别</div>
+        <div class="article-nav-title">云服务器安装Rabbitmq</div>
       </a>
     
   </nav>

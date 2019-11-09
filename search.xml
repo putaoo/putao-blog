@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Jvm启动参数配置</title>
+    <url>/3261579538.html</url>
+    <content><![CDATA[<h3 id="Jvm-启动参数配置"><a href="#Jvm-启动参数配置" class="headerlink" title="Jvm 启动参数配置"></a>Jvm 启动参数配置</h3><p>Springboot项目java -jar 启动jar包参数详解</p>
+<p>命令实例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nohup java -Xms500m -Xmx500m -Xmn250m -Xss256k -server -XX:+HeapDumpOnOutOfMemoryError -jar $JAR_PATH/test-0.0.1-SNAPSHOT.jar --spring.profiles.active=daily -verbose:class &amp;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+<p>说明：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">--spring.profiles.active=daily， 这个可以在spring-boot启动中指定系统变量，多环境(测试、预发、线上配置)的区分</span><br><span class="line"></span><br><span class="line">在排查jar包冲突时，可以指定启动的-verbose:class  打印出启动的应用实际加载类的路径，来排查来源。</span><br><span class="line"></span><br><span class="line">jvm堆设值： -Xms500m -Xmx500m -Xmn250m -Xss256k</span><br><span class="line"></span><br><span class="line">nohup 不挂断地运行命令；&amp; 在后台运行 ，一般两个一起用。 eg：nohup command &amp;</span><br><span class="line"></span><br><span class="line">-server:服务器模式，在多个CPU时性能佳，启动慢但性能好，能合理管理内存。</span><br><span class="line"></span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError：在堆溢出时保存快照</span><br></pre></td></tr></table></figure>
+
+<p>参考：Springboot项目java -jar 启动jar包参数详解  <a href="https://blog.csdn.net/baidu_35140444/article/details/82980139" target="_blank" rel="noopener">https://blog.csdn.net/baidu_35140444/article/details/82980139</a><br> Java JVM启动参数  <a href="https://www.cnblogs.com/zkyefei/p/9334562.html" target="_blank" rel="noopener">https://www.cnblogs.com/zkyefei/p/9334562.html</a><br> JVM常用启动参数  <a href="http://www.manongjc.com/article/100677.html" target="_blank" rel="noopener">http://www.manongjc.com/article/100677.html</a></p>
+]]></content>
+      <categories>
+        <category>Jvm虚拟机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>云服务器安装Rabbitmq</title>
     <url>/2067313518.html</url>
     <content><![CDATA[<h3 id="云服务器安装Rabbitmq"><a href="#云服务器安装Rabbitmq" class="headerlink" title="云服务器安装Rabbitmq"></a>云服务器安装Rabbitmq</h3><h4 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h4><p>Erlang</p>
