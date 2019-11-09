@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>dfdf</title>
+    <title>Retrofit2 使用教程</title>
     <url>/2082103828.html</url>
-    <content><![CDATA[<h4 id="ddfdsa"><a href="#ddfdsa" class="headerlink" title="ddfdsa"></a>ddfdsa</h4>]]></content>
+    <content><![CDATA[<h3 id="Retrofit2-使用教程"><a href="#Retrofit2-使用教程" class="headerlink" title="Retrofit2 使用教程"></a>Retrofit2 使用教程</h3><p>Retrofit2 简单来说就是一个网络请求适配器，它将一个基本的Java接口通过动态代理的方式翻译成一个Http请求，并通过Okhttp去发送请求。此外它还具有强大的可扩展性，支持各种格式的转换，以及RxJava。</p>
+<h4 id="基本使用步骤"><a href="#基本使用步骤" class="headerlink" title="基本使用步骤"></a>基本使用步骤</h4><p>1、定义一个请求的接口</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public interface ApiService &#123;</span><br><span class="line"></span><br><span class="line">    @POST(&quot;stock/query1&quot;)</span><br><span class="line">    @FormUrlEncoded</span><br><span class="line">    @Headers(&quot;Content-Type:application/json&quot;)</span><br><span class="line">    Call&lt;String&gt; query( @Field(&quot;prefix&quot;) String prefix, @Field(&quot;code&quot;) String code,</span><br><span class="line">                          @Field(&quot;profitInc&quot;) double profitInc, @Field(&quot;revenueInc&quot;) double revenueInc);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @POST(&quot;stock/query1&quot;)</span><br><span class="line">    Call&lt;Response&gt; query1( @Body Request request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、创建Retrofit对象，及接口的实例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class RetrofitFactory &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;base.url&#125;&quot;)</span><br><span class="line">    private String baseUrl;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Retrofit buildRetrofit()&#123;</span><br><span class="line">        Gson gson = new GsonBuilder()</span><br><span class="line">                .setLenient()</span><br><span class="line">                .create();</span><br><span class="line">        return new Retrofit.Builder().baseUrl(baseUrl)</span><br><span class="line">                .addConverterFactory(MyGsonConverterFactory.create(gson))</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public ApiService buildApiService()&#123;</span><br><span class="line">        return buildRetrofit().create(ApiService.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、发起请求</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class StockServiceImpl implements StockService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ApiService apiService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Response query ( String marker , String code , double revenueInc , double profitInc ) throws IOException&#123;</span><br><span class="line">        return apiService.query1(Request.build(marker,code,revenueInc,profitInc)).execute().body();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="注解及自定义转换器"><a href="#注解及自定义转换器" class="headerlink" title="注解及自定义转换器"></a>注解及自定义转换器</h4><p>参考：Retrofit解析2之使用简介 <a href="https://cloud.tencent.com/developer/article/1199060" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1199060</a><br>  Android 一份详细的Retrofit2.0基本使用总结 <a href="https://www.2cto.com/kf/201805/750839.html" target="_blank" rel="noopener">https://www.2cto.com/kf/201805/750839.html</a></p>
+]]></content>
+      <categories>
+        <category>Retrofit2</category>
+      </categories>
   </entry>
   <entry>
     <title>idea dependencies 红色波浪线</title>
@@ -12,6 +24,7 @@
 <p>删除jar包重新下载：<a href="https://blog.csdn.net/qq_41983010/article/details/83307660" target="_blank" rel="noopener">https://blog.csdn.net/qq_41983010/article/details/83307660</a></p>
 <p>maven plugin 红线：<a href="https://blog.csdn.net/H_O_H/article/details/79587913" target="_blank" rel="noopener">https://blog.csdn.net/H_O_H/article/details/79587913</a></p>
 <p>综合方案：<a href="https://blog.csdn.net/u010003835/article/details/78480626" target="_blank" rel="noopener">https://blog.csdn.net/u010003835/article/details/78480626</a></p>
+<a id="more"></a>
 <p>idea ifnore 文件</p>
 <p>Git 忽略.idea/workspace.xml文件 ： <a href="https://cloud.tencent.com/developer/article/1348041" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1348041</a>  </p>
 <p>新工程的ignore文件</p>
