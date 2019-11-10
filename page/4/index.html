@@ -11,7 +11,6 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    如何优化数据库(概述) |
     
     涛的BLOG</title>
   
@@ -26,19 +25,54 @@
 
 <body>
 <main class="content">
-  <section class="outer">
-  
+  <section class="jumbotron">
+  <div class="video">
+    
+      <div class="video-frame">
+        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
+      </div>
+    
+    <div class="video-media">
+      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
+             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
+        <source src="/images/ocean/ocean.mp4" type="video/mp4">
+        <source src="/images/ocean/ocean.ogv" type="video/ogg">
+        <source src="/images/ocean/ocean.webm" type="video/webm">
+        <p>Your user agent does not support the HTML5 Video element.</p>
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+    <div class="video-inner text-center text-white">
+      <h1><a href="/">涛的BLOG</a></h1>
+      <p></p>
+      <div><img src="/images/hexo-inverted.svg" class="brand" alt="涛的BLOG"></div>
+    </div>
+    <div class="video-learn-more">
+      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
+    </div>
+  </div>
+</section>
 
-<article id="post-如何优化数据库(概述)" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<div id="landingpage">
+  <section class="outer">
+  <article class="articles">
+    
+    <h1 class="page-type-title"></h1>
+
+    
+      
+        
+
+<article id="post-Minor GC、Major GC和Full GC之间的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      如何优化数据库(概述)
-    </h1>
+    <h2 itemprop="name">
+      <a class="article-title" href="/2196748335.html">Minor GC、Major GC和Full GC之间的区别</a>
+    </h2>
   
   
 
@@ -50,24 +84,16 @@
 
     
       <div class="article-meta">
-        <a href="/3806922126.html" class="article-date">
-  <time datetime="2019-10-31T14:22:54.872Z" itemprop="datePublished">2019-10-31</time>
+        <a href="/2196748335.html" class="article-date">
+  <time datetime="2019-10-27T13:06:01.926Z" itemprop="datePublished">2019-10-27</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+    <a class="article-category-link" href="/categories/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">Jvm虚拟机</a>
   </div>
 
       </div>
     
-
-    
-      
-    <div class="tocbot"></div>
-
-
-
-
 
     
 
@@ -78,21 +104,16 @@
       
 
       
-        <h3 id="面试被问到如何优化数据库"><a href="#面试被问到如何优化数据库" class="headerlink" title="面试被问到如何优化数据库"></a>面试被问到如何优化数据库</h3><p>可以从不同层面进行回答，例如：</p>
-<p>（1）、根据服务层面：配置mysql性能优化参数；</p>
-<p>（2）、从系统层面增强mysql的性能：优化数据表结构、字段类型、字段索引、分表，分库、读写分离等等。</p>
-<a id="more"></a>
-<p>（3）、从数据库层面增强性能：优化SQL语句，合理使用字段索引。</p>
-<p>（4）、从代码层面增强性能：使用缓存和NoSQL数据库方式存储，如MongoDB/Memcached/Redis来缓解高并发下数据库查询的压力。</p>
-<p>（5）、减少数据库操作次数，尽量使用数据库访问驱动的批处理方法。</p>
-<p>（6）、不常使用的数据迁移备份，避免每次都在海量数据中去检索。</p>
-<p>（7）、提升数据库服务器硬件配置，或者搭建数据库集群。</p>
-<p>（8）、编程手段防止SQL注入：使用JDBC PreparedStatement按位插入或查询；正则表达式过滤（非法字符串过滤）</p>
-
+        <p><em>原文链接： javacodegeeks 翻译： ImportNew.com - 光光头去打酱油</em></p>
+<p><em>译文链接： <a href="http://www.importnew.com/15820.html" target="_blank" rel="noopener">http://www.importnew.com/15820.html</a></em></p>
+<p>在 Plumbr 从事 GC 暂停检测相关功能的工作时，我被迫用自己的方式，通过大量文章、书籍和演讲来介绍我所做的工作。在整个过程中，经常对 Minor、Major、和 Full GC 事件的使用感到困惑。这也是我写这篇博客的原因，我希望能清楚地解释这其中的一些疑惑。<br>文章要求读者熟悉 JVM 内置的通用垃圾回收原则。堆内存划分为 Eden、Survivor 和 Tenured/Old 空间，代假设和其他不同的 GC 算法超出了本文讨论的范围。</p>
+        
+          <a class="article-more-link" href="/2196748335.html">阅读全文...</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2sz9fb9001f2ovahicg5ovj"
+      <a data-url="http://yoursite.com/2196748335.html" data-id="ck2sz9fab00082ova4pwn70us"
          class="article-share-link">分享</a>
       
     </footer>
@@ -100,38 +121,26 @@
   </div>
 
   
-    
-  <nav class="article-nav">
-    
-      <a href="/2161281511.html" class="article-nav-link">
-        <strong class="article-nav-caption">前一篇</strong>
-        <div class="article-nav-title">
-          
-            数据库查询优化30条注意事项
-          
-        </div>
-      </a>
-    
-    
-      <a href="/4237283706.html" class="article-nav-link">
-        <strong class="article-nav-caption">后一篇</strong>
-        <div class="article-nav-title">PO BO VO DTO POJO DAO DO在java中的概念及应用</div>
-      </a>
-    
-  </nav>
 
-
-  
-
-  
-    
   
 
 </article>
 
 
 
+      
+  </article>
+  
+
+  
+    <nav class="page-nav">
+      
+      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 </section>
+</div>
+
   <footer class="footer">
   <div class="outer">
     <div class="float-right">
@@ -151,8 +160,8 @@
 
 </main>
 
-<aside class="sidebar sidebar-specter">
-  
+  <aside class="sidebar">
+    
     <button class="navbar-toggle"></button>
 <nav class="navbar">
   
@@ -217,21 +226,6 @@
   <script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
-
-  <script src="/js/tocbot.min.js"></script>
-  <script>
-    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-    tocbot.init({
-      tocSelector: '.tocbot',
-      contentSelector: '.article-entry',
-      headingSelector: 'h1, h2, h3, h4, h5, h6',
-      hasInnerContainers: true,
-      scrollSmooth: true,
-      positionFixedSelector: '.tocbot',
-      positionFixedClass: 'is-position-fixed',
-      fixedSidebarOffset: 'auto',
-    });
-  </script>
 
 
 <script src="/js/ocean.js"></script>

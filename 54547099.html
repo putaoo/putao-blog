@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="spring,redis,mysql">
+  
+  
+    <meta name="description" content="Running is a life not only of natural philosophy but also vibrant and free way.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    RabbitMq demo |
+    
+    涛的BLOG</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-RabbitMq demo" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RabbitMq demo
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/54547099.html" class="article-date">
+  <time datetime="2019-11-10T12:29:28.635Z" itemprop="datePublished">2019-11-10</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/RabbitMQ/">RabbitMQ</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="RabbitMQ-demo"><a href="#RabbitMQ-demo" class="headerlink" title="RabbitMQ demo"></a>RabbitMQ demo</h3><h4 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h4><p>配置类,定义连接工厂，template，queue，exchange，binding</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@Slf4j</span><br><span class="line">public class RabbitConfig &#123;</span><br><span class="line">    /**</span><br><span class="line">     *  Broker: 它提供一种传输服务，它的角色就是维护一条从生产者到消费者的路线，保证数据能够按照指定的方式进行传输。</span><br><span class="line">     *  Exchange: 消息交换机，它指定消息按什么规则路由到哪个队列。</span><br><span class="line">     *          FanoutExchange: 将消息分发到所有绑定的队列，没有routing_key 概念</span><br><span class="line">     *          HeadersExchange: 通过添加key-value 匹配</span><br><span class="line">     *          DirectExchange：按照指定的routing-key 分发到指定的队列</span><br><span class="line">     *          TopicExchange: 通过关键字匹配</span><br><span class="line">     *  Queue: 消息的载体，每个消息都会被投到一个或多个队列。</span><br><span class="line">     *  Binging: 绑定，它的作用是把Exchange和Queue按照路由规则绑定起来。</span><br><span class="line">     *  Routing Key: 路由关键字，exchange根据这个关键字进行消息投递</span><br><span class="line">     *  vhost: 虚拟主机，一个broker里可以有多个vhost，用作不同用户权限的分离。</span><br><span class="line">     *  Producer: 消息生产者，投递消息的程序</span><br><span class="line">     *  Consumer: 消息消费者，接收消息的程序</span><br><span class="line">     *  Channel: 消息通道，在客户端的每个连接里，可建立多个channel。</span><br><span class="line">     *</span><br><span class="line">    **/</span><br><span class="line">    public static final String RABBIT_QUEUE_USER = &quot;rabbit_queue_user&quot;;</span><br><span class="line">    public static final String RABBIT_QUEUE_USER_A = &quot;rabbit_queue_user_a&quot;;</span><br><span class="line">    public static final String RABBIT_EXCHANGE_USER = &quot;rabbit_exchange_user&quot;;</span><br><span class="line">    public static final String RABBIT_ROUTING_KEY_USER = &quot;rabbit_routing_key_user&quot;;</span><br><span class="line">    public static final String RABBIT_ROUTING_KEY_USER_A = &quot;rabbit_routing_key_user_a&quot;;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.rabbitmq.host&#125;&quot;)</span><br><span class="line">    private String host;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.rabbitmq.port&#125;&quot;)</span><br><span class="line">    private int port;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.rabbitmq.username&#125;&quot;)</span><br><span class="line">    private String username;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.rabbitmq.password&#125;&quot;)</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;spring.rabbitmq.virtual-host&#125;&quot;)</span><br><span class="line">    private String virtualHost;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public ConnectionFactory connectionFactory() &#123;</span><br><span class="line">        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(host,port);</span><br><span class="line">        connectionFactory.setUsername(username);</span><br><span class="line">        connectionFactory.setPassword(password);</span><br><span class="line">        connectionFactory.setVirtualHost(virtualHost);</span><br><span class="line">        connectionFactory.setPublisherConfirms(true);</span><br><span class="line">        connectionFactory.setPublisherReturns(true);</span><br><span class="line"></span><br><span class="line">        return connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(name = &quot;generalRabbitTemplate&quot;)</span><br><span class="line">    //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><br><span class="line">    public RabbitTemplate rabbitTemplate()&#123;</span><br><span class="line">        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());</span><br><span class="line">        rabbitTemplate.setMandatory(true);</span><br><span class="line">        rabbitTemplate.setReturnCallback(returnCallback());</span><br><span class="line">        rabbitTemplate.setConfirmCallback(confirmCallback());</span><br><span class="line">        return rabbitTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean RabbitTemplate.ReturnCallback returnCallback()&#123;</span><br><span class="line">        return (message, replyCode, replyText, exchange, routingKey)</span><br><span class="line">              -&gt; log.error(&quot;ReturnCallback消息发送失败: &#123;&#125;&quot;, new String(message.getBody(), StandardCharsets.UTF_8));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public RabbitTemplate.ConfirmCallback confirmCallback()&#123;</span><br><span class="line">        return (correlationData , ack ,cause) -&gt; &#123;</span><br><span class="line">            log.info(&quot;回调id：&#123;&#125;&quot;,correlationData.getId());</span><br><span class="line">            if ( ack )&#123;</span><br><span class="line">                log.info(&quot;消费消息成功！&quot;);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                log.info(&quot;消费消息失败，原因：&quot; + cause);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange directExchange()&#123;</span><br><span class="line">        return new DirectExchange(RabbitConfig.RABBIT_EXCHANGE_USER);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Queue queueUser()&#123;</span><br><span class="line">        return new Queue(RabbitConfig.RABBIT_QUEUE_USER,true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Queue queueUserA()&#123;</span><br><span class="line">        return new Queue(RabbitConfig.RABBIT_QUEUE_USER_A,true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Binding binding()&#123;</span><br><span class="line">        return BindingBuilder.bind(queueUser()).to(directExchange()).with(RabbitConfig.RABBIT_ROUTING_KEY_USER);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Binding bindingA()&#123;</span><br><span class="line">        return BindingBuilder.bind(queueUserA()).to(directExchange()).with(RabbitConfig.RABBIT_ROUTING_KEY_USER_A);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采用默认配置的生产者，sping默认配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class GeneralProducer&#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(GeneralProducer.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private RabbitTemplate generalRabbitTemplate;</span><br><span class="line"></span><br><span class="line">    public void send(String exchange,String routingKey,String content)&#123;</span><br><span class="line">        logger.info(&quot;发送消息：&#123;&#125;,Exchange:&#123;&#125;,RoutingKey :&#123;&#125;&quot;,content,exchange,routingKey);</span><br><span class="line">        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString().replace(&quot;-&quot;,&quot;&quot;));</span><br><span class="line">        logger.info(&quot;CorrelationData: &#123;&#125;&quot;, JSONObject.toJSONString(correlationData));</span><br><span class="line">        generalRabbitTemplate.convertAndSend(exchange,routingKey,content,correlationData);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义消息确认和未找到Queue处理策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Producer implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback&#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(Producer.class);</span><br><span class="line"></span><br><span class="line">    private RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public Producer(RabbitTemplate rabbitTemplate)&#123;</span><br><span class="line">        this.rabbitTemplate = rabbitTemplate;</span><br><span class="line">        //配置文件默认已经有配置了</span><br><span class="line">        rabbitTemplate.setConfirmCallback(this::confirm);</span><br><span class="line">        rabbitTemplate.setReturnCallback(this::returnedMessage);</span><br><span class="line">        rabbitTemplate.setMandatory(true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void send(String exchange,String routingKey,String content)&#123;</span><br><span class="line">        logger.info(&quot;发送消息：&#123;&#125;,Exchange:&#123;&#125;,RoutingKey :&#123;&#125;&quot;,content,exchange,routingKey);</span><br><span class="line">        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString().replace(&quot;-&quot;,&quot;&quot;));</span><br><span class="line">        logger.info(&quot;CorrelationData: &#123;&#125;&quot;, JSONObject.toJSONString(correlationData));</span><br><span class="line">        rabbitTemplate.convertAndSend(exchange,routingKey,content,correlationData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * publisher-confirms: true 消息有没有到达MQ（会返回一个ack确认码）</span><br><span class="line">    * @author putao</span><br><span class="line">    * @date  2019/11/10 14:32</span><br><span class="line">    **/</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void confirm ( CorrelationData correlationData , boolean ack , String cause ) &#123;</span><br><span class="line">        logger.info(&quot;回调id：&#123;&#125;&quot;,correlationData.getId());</span><br><span class="line">        if ( ack )&#123;</span><br><span class="line">            logger.info(&quot;消费消息成功！&quot;);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            logger.info(&quot;消费消息失败，原因：&quot; + cause);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * publisher-returns: true 消息有没有找到合适的队列,主要是为了生产者和mq之间的一个确认机制，当消息到没到mq，会提供相应的回调，在项目中 RabbitSender 这个类中进行了相应的配置</span><br><span class="line">    * @author putao</span><br><span class="line">    * @date  2019/11/10 14:32</span><br><span class="line">    **/</span><br><span class="line">    @Override</span><br><span class="line">    public void returnedMessage ( Message message , int replyCode , String replyText , String exchange , String routingKey ) &#123;</span><br><span class="line">        logger.info(&quot;消息发送失败，&#123;&#125;&quot;,new String(message.getBody()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring.rabbitmq.host=</span><br><span class="line">spring.rabbitmq.port=5672</span><br><span class="line">spring.rabbitmq.username=</span><br><span class="line">spring.rabbitmq.password=</span><br><span class="line">spring.rabbitmq.publisher-confirms=true</span><br><span class="line">spring.rabbitmq.publisher-returns=true</span><br><span class="line">spring.rabbitmq.virtual-host=/</span><br></pre></td></tr></table></figure>
+
+<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><p>配置类（消费者如无特殊业务需要，不要随意添加各种参数）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class DirectConfig &#123;</span><br><span class="line">    public static final String RABBIT_QUEUE_USER = &quot;rabbit_queue_user_a&quot;;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Queue queue()&#123;</span><br><span class="line">        return new Queue(RABBIT_QUEUE_USER);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消费者。可以有几种写法。<br>实现 ChannelAwareMessageListener 类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ListenerA implements ChannelAwareMessageListener &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(ListenerA.class);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @RabbitListener(queues = DirectConfig.RABBIT_QUEUE_USER)</span><br><span class="line">    public void onMessage ( Message message , Channel channel ) throws Exception &#123;</span><br><span class="line">        //logger.info(&quot;消费消息：&#123;&#125;&quot;,new String(message.getBody()));</span><br><span class="line">        System.out.println(&quot;Listener Demo 消费&quot; + message.getMessageProperties().getHeaders().get(&quot;spring_returned_message_correlation&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>利用Rabbithandler 直接获取自定义消息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ListenerE  &#123;</span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(ListenerE.class);</span><br><span class="line"></span><br><span class="line">    @RabbitHandler</span><br><span class="line">    @RabbitListener(queues = DirectConfig.RABBIT_QUEUE_USER)</span><br><span class="line">    public void hand( String messages, Message message)&#123;</span><br><span class="line">        //logger.info(&quot;Listener E 消费消息 &#123;&#125;&quot;,message);</span><br><span class="line">        System.out.println(&quot;Listener E 消费消息 &quot; + message.getMessageProperties().getHeaders().get(&quot;spring_returned_message_correlation&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可不用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Listener &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(Listener.class);</span><br><span class="line"></span><br><span class="line">    @RabbitListener(queues = DirectConfig.RABBIT_QUEUE_USER_A)</span><br><span class="line">    public void listen( Message message, Channel channel ) throws IOException&#123;</span><br><span class="line">        //手动ack</span><br><span class="line">        //long deliveryTag = message.getMessageProperties().getDeliveryTag();</span><br><span class="line">        //channel.basicAck(deliveryTag,true);</span><br><span class="line"></span><br><span class="line">        //logger.info(&quot;Listener 消费消息&#123;&#125;&quot;, JSONObject.parseObject(new String(message.getBody()), User.class));</span><br><span class="line">        System.out.println(&quot;Listener 消费消息: &quot;+ message.getMessageProperties().getHeaders().get(&quot;spring_returned_message_correlation&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过试错，发现只有一种写法是不支持的。<br>如下：RabbitListener 定义在类上，RabbitHandler想要获取Message对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@RabbitListener(queues = DirectConfig.RABBIT_QUEUE_USER)</span><br><span class="line">public class ListenerE  &#123;</span><br><span class="line">    private static final Logger logger = LoggerFactory.getLogger(ListenerE.class);</span><br><span class="line"></span><br><span class="line">    @RabbitHandler</span><br><span class="line">    public void hand(Message message)&#123;</span><br><span class="line">        //logger.info(&quot;Listener E 消费消息 &#123;&#125;&quot;,message);</span><br><span class="line">        System.out.println(&quot;Listener E 消费消息 &quot; + message.getMessageProperties().getHeaders().get(&quot;spring_returned_message_correlation&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p>有几点值得注意：</p>
+<ol>
+<li>消费者配置不要随意配置最大消费数等参数，不然会发生莫名其妙的无法消费的情况。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">spring.rabbitmq.listener.type=direct</span><br><span class="line">    spring.rabbitmq.listener.direct.acknowledge-mode=manual</span><br><span class="line">    spring.rabbitmq.listener.direct.consumers-per-queue=2</span><br><span class="line">    spring.rabbitmq.listener.direct.prefetch=2</span><br><span class="line">    spring.rabbitmq.listener.direct.missing-queues-fatal=true</span><br><span class="line">    spring.rabbitmq.listener.direct.default-requeue-rejected=false</span><br><span class="line">    spring.rabbitmq.listener.direct.auto-startup=false</span><br><span class="line">    spring.rabbitmq.listener.simple.acknowledge-mode=manual</span><br><span class="line">    spring.rabbitmq.listener.simple.prefetch=2</span><br><span class="line">    spring.rabbitmq.listener.simple.concurrency=5</span><br><span class="line">    spring.rabbitmq.listener.simple.max-concurrency=10</span><br><span class="line">    spring.rabbitmq.listener.simple.missing-queues-fatal=true</span><br><span class="line">    spring.rabbitmq.listener.simple.default-requeue-rejected=false</span><br><span class="line">    spring.rabbitmq.listener.simple.auto-startup=false</span><br><span class="line">    spring.rabbitmq.listener.simple.batch-size=5</span><br></pre></td></tr></table></figure></li>
+<li>生产者可以定义消息与queue的交互策略，以及消费者的ACK回调等</li>
+<li>本质上是要根据业务需求来定义消息的流转途径，交换机、队列、路由key等</li>
+<li>最简单的使用方式就是类似于kafka的topic一样定义就可以</li>
+</ol>
+<p>参考：Spring Boot整合RabbitMQ详细教程 <a href="https://blog.csdn.net/qq_38455201/article/details/80308771" target="_blank" rel="noopener">https://blog.csdn.net/qq_38455201/article/details/80308771</a><br>  RabbitMQ笔记(七)-SimpleMessageListenerContainer和DirectMessageListenerContainer  <a href="https://blog.csdn.net/yingziisme/article/details/86418580" target="_blank" rel="noopener">https://blog.csdn.net/yingziisme/article/details/86418580</a><br>  RabbitMQ实战篇：消息确认之消费者局部确认 <a href="https://blog.csdn.net/lovelong8808/article/details/94126059" target="_blank" rel="noopener">https://blog.csdn.net/lovelong8808/article/details/94126059</a><br>  RabbitMQ传输原理、五种模式  <a href="https://www.cnblogs.com/pjjlt/p/10741963.html" target="_blank" rel="noopener">https://www.cnblogs.com/pjjlt/p/10741963.html</a><br>  RabbitMQ整合SpringBoot实战！（全） <a href="https://www.cnblogs.com/coder-programming/p/11602910.html" target="_blank" rel="noopener">https://www.cnblogs.com/coder-programming/p/11602910.html</a><br>  SpringBoot 整合 RabbitMQ（包含三种消息确认机制以及消费端限流） <a href="https://www.cnblogs.com/haixiang/p/10959551.html" target="_blank" rel="noopener">https://www.cnblogs.com/haixiang/p/10959551.html</a><br>  springboot集成rabbitMQ(消费者篇) <a href="https://blog.csdn.net/tmeng521/article/details/90756618" target="_blank" rel="noopener">https://blog.csdn.net/tmeng521/article/details/90756618</a><br>  rabbitMq无法消费发送的q的问题 <a href="https://www.cnblogs.com/aigeileshei/p/10286208.html" target="_blank" rel="noopener">https://www.cnblogs.com/aigeileshei/p/10286208.html</a><br>  Spring Boot RabbitMQ 默认配置 <a href="https://www.cnblogs.com/1x11/p/10919687.html" target="_blank" rel="noopener">https://www.cnblogs.com/1x11/p/10919687.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/54547099.html" data-id="ck2sz9fal000f2ovadymc1nqb"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/3075602188.html" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">Rabbitmq 安装启动中遇到的坑</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 涛的BLOG</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="涛的BLOG"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">分类</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
