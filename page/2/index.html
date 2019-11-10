@@ -63,6 +63,74 @@
       
         
 
+<article id="post-Redis的Key设计原则" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2868983245.html">Redis的Key设计原则</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2868983245.html" class="article-date">
+  <time datetime="2019-11-01T12:44:22.061Z" itemprop="datePublished">2019-11-01</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Redis/">Redis</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h3 id="Redis-的key-设计原则"><a href="#Redis-的key-设计原则" class="headerlink" title="Redis 的key 设计原则"></a>Redis 的key 设计原则</h3><p>Redis是一款基于内存式的key-value的NO-SQL数据库。可以作为数据库、缓存服务或消息服务使等。支持丰富的数据类型。比如: 字符串、哈希表、链表、集合、有序集合、位图、Hyperloglogs等</p>
+<p> Redis具备LRU淘汰、事务实现、以及不同级别的硬盘持久化等能力，并且支持副本集和通过Redis Sentinel实现的高可用方案，同时还支持通过Redis Cluster实现的数据自动分片能力。</p>
+<p> Redis的主要功能都基于单线程模型实现，也就是说Redis使用一个线程来服务所有的客户端请求，<br>同时Redis采用了非阻塞式IO，并精细地优化各种命令的算法时间复杂度，这些信息意味着：<br>Redis是线程安全的（因为只有一个线程），其所有操作都是原子的，不会因并发产生数据异<br>常</p>
+        
+          <a class="article-more-link" href="/2868983245.html">阅读全文...</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2868983245.html" data-id="ck2sfu583000jm4vag4wy0uck"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Redis中设置了过期时间的Key，还需要知道什么" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -113,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3685033284.html" data-id="ck2rexm0t000acova2scv51y0"
+      <a data-url="http://yoursite.com/3685033284.html" data-id="ck2sfu57w000fm4va6zeffvlo"
          class="article-share-link">分享</a>
       
     </footer>
@@ -180,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3694813783.html" data-id="ck2rexm12000mcova20nrac0o"
+      <a data-url="http://yoursite.com/3694813783.html" data-id="ck2sfu584000km4va0jotad84"
          class="article-share-link">分享</a>
       
     </footer>
@@ -247,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3638810588.html" data-id="ck2rexm1k001ecova6rp08kbi"
+      <a data-url="http://yoursite.com/3638810588.html" data-id="ck2sfu58l001fm4va0i72784l"
          class="article-share-link">分享</a>
       
     </footer>
@@ -315,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3670445945.html" data-id="ck2rexm1o001kcovac0x99c70"
+      <a data-url="http://yoursite.com/3670445945.html" data-id="ck2sfu58s001om4va9ktu2q2j"
          class="article-share-link">分享</a>
       
     </footer>
@@ -382,7 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2743582814.html" data-id="ck2rexm1g0017cova2h9majg5"
+      <a data-url="http://yoursite.com/2743582814.html" data-id="ck2sfu58h001am4va5wyu2n1c"
          class="article-share-link">分享</a>
       
     </footer>
@@ -452,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4132421017.html" data-id="ck2rexm14000pcovac5bqc9fu"
+      <a data-url="http://yoursite.com/4132421017.html" data-id="ck2sfu588000sm4vabfrr0moq"
          class="article-share-link">分享</a>
       
     </footer>
@@ -521,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2rexm1l001fcovaga1403zd"
+      <a data-url="http://yoursite.com/2161281511.html" data-id="ck2sfu58n001jm4vahb1vars1"
          class="article-share-link">分享</a>
       
     </footer>
@@ -589,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2rexm1h001acovahi3mab28"
+      <a data-url="http://yoursite.com/3806922126.html" data-id="ck2sfu58j001em4vacqx1337l"
          class="article-share-link">分享</a>
       
     </footer>
@@ -656,73 +724,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2rexm0w000dcova6h8b9j1b"
-         class="article-share-link">分享</a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Java实体类序列化id的作用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/664034925.html">Java实体类序列化id的作用</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/664034925.html" class="article-date">
-  <time datetime="2019-10-31T14:00:17.036Z" itemprop="datePublished">2019-10-31</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h3 id="Java序列化时候序列ID作用"><a href="#Java序列化时候序列ID作用" class="headerlink" title="Java序列化时候序列ID作用"></a>Java序列化时候序列ID作用</h3><p>简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
-        
-          <a class="article-more-link" href="/664034925.html">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/664034925.html" data-id="ck2rexm0k0003cova13lm5bcq"
+      <a data-url="http://yoursite.com/4237283706.html" data-id="ck2sfu57y000gm4vacviyd0zu"
          class="article-share-link">分享</a>
       
     </footer>
